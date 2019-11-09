@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 构造函数
+    // 1.约定首字母大写
+    // 2.原型
+    function Person(name, hobby) {
+        this.name = name
+        this.hobby = function() {
+            console.log(hobby)
+        }
+    }
+
+    let zhangsan = new Person('zhangsan', 'football')
+    let lisi = new Person('lisi', 'basketball')
+    zhangsan.hobby()
+    lisi.hobby()
+    console.log(zhangsan.hobby === lisi.hobby)
+</script>
+</html>

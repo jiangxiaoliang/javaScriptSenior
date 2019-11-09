@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 对象创建方式
+    // 1.字面量创建
+    let str = 'name'
+    let obj1 = {
+        [str]: 'zhangsan',
+        age: 20,
+        action: function() {
+            console.log('action....')
+        }
+    }
+    console.log(obj1)
+
+    // 2.构造函数创建
+    let obj2 = new Object();
+    obj2.name = 'zhangsan'
+    obj2.age = 20
+    obj2.action = function() {
+        console.log(obj1)
+    }
+    console.log(obj2)
+
+    // 3.Object.create()  创建在原型上面
+    let obj3 = Object.create({
+        name: 'zhangsan',
+        age: 20,
+        action() {
+            console.log('action....')
+        }
+    })
+    console.log(obj3)
+
+    // 对象调用方式
+    let myname = 'name'
+    console.log(obj1.myname)
+    console.log(obj1[myname])
+    console.log(obj3.age)
+</script>
+</html>

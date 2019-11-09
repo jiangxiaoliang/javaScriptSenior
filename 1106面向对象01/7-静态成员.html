@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+     function Person(name, hobby) {
+        this.name = name
+        this.hobby = function() {
+            console.log(hobby)
+        }
+    }
+
+    Person.prototype.hobby = function() {
+        // console.log('hobby')
+        // console.log(this)
+        console.log(this.hobby1)
+    }
+    //静态成员或者方法没有this的
+    Person.num = 0
+
+    let zhangsan = new Person('zhangsan', 'football')
+    Person.num++
+    let lisi = new Person('lisi', 'basketball')
+    Person.num++
+    console.log(Person.num)
+</script>
+</html>

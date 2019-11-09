@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 原型：公共空间 节约内存
+    // prototype:对象
+    function Person(name, hobby) {
+        this.name = name
+        this.hobby1 = hobby
+        // this.hobby = function() {
+        //     console.log(hobby)
+        // }
+    }
+
+    // prototype的固有属性constructor---Person
+    // Person.prototype.constructor === Person
+    //方式一：
+    // Person.prototype.hobby = function() {
+    //     // console.log('hobby')
+    //     // console.log(this)
+    //     console.log(this.hobby1)
+    // }
+
+    //方式二：会覆盖固有属性constructor
+    Person.prototype = {
+        constructor: Person,
+        hobby: function() {
+            console.log(this.hobby1)
+        }
+    }
+    let zhangsan = new Person('zhangsan', 'football')
+    let lisi = new Person('lisi', 'basketball')
+    // zhangsan.hobby()
+    // lisi.hobby()
+    // console.log(zhangsan.hobby === lisi.hobby)
+    console.log(zhangsan.constructor === Person)
+    console.log(zhangsan.__proto__ === Person.prototype)
+</script>
+</html>

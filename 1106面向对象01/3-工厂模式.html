@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 如果是100个对象怎么办
+    // 单例模式
+    // let zhangsan = {
+    //     name: 'zhangsan',
+    //     hobby: function() {
+    //         console.log('football')
+    //     }
+    // }
+
+    // let lisi = {
+    //     name: 'lisi',
+    //     hobby: function() {
+    //         console.log('basketball')
+    //     }
+    // }
+
+    // 工厂模式 提高代码的复用性
+    function nvwa(name, hobby) {
+        let obj = {}
+        obj.name = name
+        obj.hobby = function() {
+            console.log(hobby)
+        }
+        return obj
+    }
+    let zhangsan = nvwa('zhangsan', 'football')
+    let lisi = nvwa('lisi', 'basketball')
+    console.log(zhangsan, lisi)
+
+</script>
+</html>

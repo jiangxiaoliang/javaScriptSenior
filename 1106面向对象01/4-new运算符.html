@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // new运算符
+    // 1.执行函数
+    // 2.创建一个对象
+    // 3.把创建的空对象指向另外一个对象
+    // 4.把创建的对象指向this
+    // 5.隐式返回this
+
+    function test() {
+        console.log('test...')
+    }
+    test()
+    new test()
+
+
+    let temp
+    //构造函数
+    function nvwa(name, hobby) {
+        // let obj = {} {}---this
+        this.name = name
+        this.hobby = function() {
+            console.log(hobby)
+        }
+        temp = this
+        // return obj
+    }
+    // new 实例化->对象
+    let zhangsan = new nvwa('zhangsan', 'football')
+    console.log(zhangsan === temp)
+</script>
+</html>
