@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // call apply bind -> 改变this指向
+    // function fn(name, age) {
+    //     console.log(this, name, age)
+    // }
+    // fn()
+    // let obj = {
+    //     objName: 'zhangsan',
+    //     objAge: 20
+    // }
+    // fn.call(obj, 'lisi', '21')
+    // fn.apply(obj, ['wangwu', '22'])
+    // fn.bind(obj, 'jiangliu', '23')()
+
+
+    function Dad(name) {
+        this.name = name
+        this.fn = function() {
+            console.log('fn....')
+        }
+    }
+    function Son(name) {
+        Dad.call(this, name) // 实现继承的效果
+        this.height = '180'
+        this.fn1 = function() {
+            console.log('fn1...')
+        }
+    }
+    let zhangsan = new Son('zhangsan')
+    console.log(zhangsan)
+</script>
+</html>

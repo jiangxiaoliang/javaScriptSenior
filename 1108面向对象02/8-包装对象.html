@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //包装对象；
+    // let str = "adasgdg";
+    // console.log(str);
+    // let arr = str.split("");
+    // console.log(arr);
+    // str.a = 10;
+    // console.log(str.a);
+
+    // let str = new String("fdasfd");
+    // // console.log(str)
+    // str.split("")
+    // 字符串、number、bollean；
+    // function mysplit(str,arg){
+    //     let temp = new String(str);
+    //     let arr =  temp.split(arg);
+    //     // 销毁包装对象；
+    //     return arr;
+    // }
+    // let arr =  mysplit(str,"");
+    // console.log(arr);
+
+
+    // constructor 查看对象的构造函数 可以用来做判断
+    // class Dad {
+    // }
+    // let zhangsan = new Dad()
+    // console.log(zhangsan.constructor === Dad)
+    // console.log(zhangsan.__proto__.constructor === Dad)
+
+
+    // instanceof:对象和构造函数是否在原型链上有关系
+    // let str = []
+    // let obj = {}
+    // console.log(str instanceof Array)
+    // console.log(str instanceof Object)
+
+
+    // typeof:不能精确判断类型
+    let str = []
+    let obj = {}
+    // console.log(typeof str)
+    // console.log(typeof obj)
+    // 精确判断类型
+    console.log(Object.prototype.toString.call(str))
+    console.log(Object.prototype.toString.call(obj))
+</script>
+</html>

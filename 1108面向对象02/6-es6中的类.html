@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // es6
+    // class Person {
+    //     static num = 0 // 静态熟悉
+    //     constructor(name) {
+    //         this.name = name
+    //     }
+    //     fn() {
+    //         console.log('fn....')
+    //     }
+    // }
+    // console.log(typeof Person)
+    // let zhangsan = new Person('zhangsan')
+    // console.log(zhangsan)
+    // console.log(Person.num)
+
+    // es5
+    // function Person(name) {
+    //     this.name = name
+    // }
+    // Person.prototype.fn = function() {
+    //     console.log('fn.....')
+    // }
+
+
+    // 私有成员 1.只能被class内部调用 2.子类不能继承
+    // class Person {
+    //     #height
+    //     #fn
+    //     constructor() {
+    //         this.#height = '170cm'
+    //         this.#fn = function() {
+    //             console.log('fn...')
+    //         }
+    //     }
+    //     getHeight() {
+    //         console.log(this.#height)
+    //     }
+    //     dispatchFn() {
+    //         this.#fn()
+    //     }
+    // }
+    // let zhangsan = new Person()
+    // zhangsan.getHeight()
+    // zhangsan.dispatchFn()
+
+
+    // get/set - 数据观测或劫持
+    class Person {
+        constructor(name) {
+            this.name = name
+            this.height = '190cm'
+        }
+        get height() {
+            console.log('get height')
+            return '178cm'
+        }
+        set height(newValue) {
+            console.log('set newValue is ' + newValue)
+        }
+    }
+    let zhangsan = new Person('zhangsan')
+    console.log(zhangsan.height)
+    zhangsan.height = '180cm'
+</script>
+</html>

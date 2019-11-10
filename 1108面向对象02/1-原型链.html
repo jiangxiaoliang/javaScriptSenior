@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 原型链
+    // function Persion(name) {
+    //     this.name = name
+    // }
+    // Person.prototype -> 对象 __proto__
+
+    // 最顶层
+    // console.log(Object.prototype.__proto__)
+
+
+    // 属性或者方法的查找规则
+    // function Person() {
+    //     // this.name = 'zhangsan'
+    // }
+    // // Person.prototype.name = 'lisi'
+    // // Person.prototype.__proto__.name = 'wangwu'
+    // Object.prototype.name = 'jiangliu'
+    // let zhangsan = new Person()
+    // console.log(zhangsan.name)
+
+    
+    let obj = {
+        name: 'zhangsan',
+        age: 20,
+        action() {
+            console.log('action...')
+        }
+    }
+    obj.__proto__.height = '180'
+    Object.prototype.sex = 'mela'
+
+    // for..in 会循环出原型里面的属性 hasOwnProperty
+    for(let key in obj) {
+        if(obj.hasOwnProperty(key)) {
+            console.log(key)
+        }
+    }
+</script>
+</html>

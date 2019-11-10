@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 原型继承
+    function Dad(name) {
+        this.name = name
+        // this.fn = function() {
+        //     console.log('fn....')
+        // }
+    }
+    Dad.prototype.fn = function() {
+        console.log('fn.....')
+    }
+    function Son(name) {
+        Dad.call(this, name)
+        this.height = '180'
+        this.fn1 = function() {
+            console.log('fn1...')
+        }
+    }
+    Son.prototype = deepCopy(Dad.prototype) // 传址
+    Son.prototype.constructor = Son
+    Son.prototype.fn = function() {
+        console.log('子类构造函数的fn...')
+    }
+    let newSon = new Son('zhangsan')
+    newSon.fn()
+    let newDad = new Dad('zhangyi')
+    newDad.fn()
+
+    function deepCopy(obj) {
+        let newObj = Array.isArray(obj) ? [] : {}
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (typeof obj[key] === 'object') {
+                    newObj[key] = deepCopy(obj[key])
+                } else {
+                    newObj[key] = obj[key]
+                }
+            }
+        }
+        return newObj
+    }
+</script>
+</html>

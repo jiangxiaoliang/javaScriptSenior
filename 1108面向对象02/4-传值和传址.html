@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 传值：简单数据类型 number string boolen null undefined
+    // 传址：复杂数据类型 Array Number Object Function等
+
+    // 避免传址->深拷贝
+    let obj = {
+        name: 'zhangsan',
+        age: 20,
+        fn() {
+            console.log(fn)
+        },
+        test: undefined,
+        obj: {
+            name: 'lisi'
+        }
+    }
+
+    // 方式一：序列化
+    // 缺点：函数和undefined不能拷贝
+    // let obj1 = JSON.parse(JSON.stringify(obj))
+    // obj1.age = 30
+    // console.log(obj.age)
+    // console.log(obj1)
+
+    // 方式二：
+    function deepCopy(obj) {
+        let newObj = Array.isArray(obj) ? [] : {}
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (typeof obj[key] === 'object') {
+                    newObj[key] = deepCopy(obj[key])
+                } else {
+                    newObj[key] = obj[key]
+                }
+            }
+        }
+        return newObj
+    }
+    let obj1 = deepCopy(obj)
+    obj1.age = 30
+    console.log(obj.age)
+    console.log(obj1)
+</script>
+</html>

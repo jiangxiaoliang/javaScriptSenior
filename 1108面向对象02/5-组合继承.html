@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function Dad(name) {
+        this.name = name
+        // this.fn = function() {
+        //     console.log('fn....')
+        // }
+    }
+    Dad.prototype.fn = function() {
+        console.log('fn.....')
+    }
+    function Son(name) {
+        Dad.call(this, name)
+        this.height = '180'
+        this.fn1 = function() {
+            console.log('fn1...')
+        }
+    }
+    let Link = function(){}
+    Link.prototype = Dad.prototype
+    Son.prototype = new Link()
+    Son.prototype.constructor = Son
+    Son.prototype.fn = function() {
+        console.log('子类构造函数的fn...')
+    }
+    let newSon = new Son('zhangsan')
+    newSon.fn()
+    let newDad = new Dad('zhangyi')
+    newDad.fn()
+</script>
+</html>

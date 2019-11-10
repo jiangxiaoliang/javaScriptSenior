@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class Dad {
+        constructor(name) {
+            this.name = name
+        }
+        hobby() {
+            console.log('football')
+        }
+    }
+
+    class Son extends Dad {
+        constructor(name, age) {
+            super(name) // constructor必须要有super
+            this.height = '178cm'
+            this.age = age
+        }
+        fn() {
+            console.log('fn...')
+        }
+        hobby() {
+            super.hobby() // 调用父类的方法
+            console.log('basketball')
+        }
+    }
+    let zhangsan = new Son('zhangsan', 20)
+    console.log(zhangsan.name)
+    console.log(zhangsan.age)
+    zhangsan.hobby()
+</script>
+</html>
