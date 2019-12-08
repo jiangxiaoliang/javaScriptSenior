@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <button id="show">显示</button>
+    <button id="hide">隐藏</button>
+    <div id="box" class="box">
+        <div id="div"></div>
+    </div>
+    <script>
+        /*
+            1.document.getElementById("idName")
+            2.parent.querySelector("css选择器")
+        */
+        console.log(document.querySelector("#box"))
+        // querySelector 如果是一组元素，只获取第0个
+        console.log(document.querySelector("button"))
+        console.log(document.querySelector("#box").querySelector("#div"))
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <button id="show">显示</button>
+    <button id="hide">隐藏</button>
+    <div id="box"></div>
+    <script>
+        /*
+            1.获取元素document.getElementById
+            2.事件
+                el.onclick = function(){
+
+                }
+        */
+        document.getElementById("show").onclick = function() {
+            document.getElementById("box").style.display = "block"
+        }
+        document.getElementById("hide").onclick = function() {
+            document.getElementById("box").style.display = "none"
+        }
+
+        /*
+            特效实现原理：
+            1.操作元素的样式发生改变
+            2.操作html结构发生改变
+        */
+    </script>
+</body>
+</html>

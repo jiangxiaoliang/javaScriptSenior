@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <button id="show">变身</button>
+    <div id="box"></div>
+    <script>
+        /*
+           变量：
+            变量声明 var name;
+                    name = val;
+                    var name = val
+        */
+       var box = document.querySelector("#box")
+        document.querySelector("#show").onclick = function() {
+            box.style.width = "300px";
+            box.style.height = "300px";
+            box.style.background = "blue";
+        }
+        /*
+            命名规范:
+                1. 不能以数字开始
+                2. 只支持字母数字 , _ , $
+                3. 不能使用 保留字 和 关键字
+                4. 驼峰命名(推荐)
+                    1. 大驼峰 (常量)
+                    2. 小驼峰  boxHeader 从第二个单词首字母大写
+*/
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .wrap{
+            width: 700px;
+            height: 500px;
+            background: url(img/bg.jpg) no-repeat;
+            background-size: cover;
+            margin: 150px auto;
+            text-align: center;
+        }
+        textarea{
+            border: 2px solid #534590;
+            width: 360px;
+            height: 130px;
+            background: #fff;
+            border-radius: 8px;
+            resize: none;
+            margin-top: 118px;
+            padding: 5%;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        ul{
+            list-style: none;
+        }
+        button{
+            display: block;
+            width: 100px;
+            height: 30px;
+            border: 2px solid #fff;
+            background: #14afd0;
+            font-size: 14px;
+            line-height: 30px;
+            font-family: "微软雅黑";
+            border-radius: 12px;
+            color: #fff;
+            margin-left: 430px;
+
+        }
+        #list{
+            width: 360px;
+            margin: 17px 0 0 170px;
+        }
+        #list li{
+            height: 40px;
+            margin-bottom: 12px;
+            background: #554892;
+            border-radius: 12px;
+            color: #fff;
+            padding-left: 20px;
+            box-sizing: border-box;
+            line-height: 40px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <textarea id="text">我这内容</textarea>
+    <button id="btn">提交</button>
+    <ul id="list">
+        <li>天气不错</li>
+    </ul>
+</div>
+<script>
+var text = document.querySelector('#text')
+var btn = document.querySelector('#btn')
+var list = document.querySelector('#list')
+btn.onclick = function(){
+    // 要获取表单的输入内容（值），需要获取 value 属性
+    //console.log(text.value);
+    var val = text.value;
+    // 正常元素的内容，需要获取或操作 innerHTML 属性(带标签)
+    //text.value = "";
+    // console.log(list.innerHTML);
+    //list.innerHTML = '<li>' + text.value + '</li>'; // 直接操作 innerHTML 的话，会把直接的内容都覆盖掉
+    //console.log('<li>' + text.value + '</li>');
+    list.innerHTML = '<li>' + val + '</li>' + list.innerHTML
+};   
+</script>
+</body>
+</html>
