@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+var obj = {
+    fn(){
+        console.log(this);
+    }
+};    
+document.onclick = function(){
+    console.log(this);
+};  
+document.onclick();
+// /*
+//     this 指向:
+//         正常情况下 this 指向问题:
+//             1. 函数外的 this 指向 window
+//             2. 函数中的 this 
+//                 1) 作为对象的方法调用指向当前对象
+//                 2) 指向 window
+// */    
+obj.fn();
+let {fn} = obj;
+fn();
+
+// class Obj {
+//     constructor(){
+//         this.name = 1;
+//         console.log(this);
+//     }
+// } 
+// let obj = new Obj;
+// console.log(obj);
+</script>    
+</body>
+</html>
