@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active {
+            background-color: red;
+        }
+        div {
+            font: 200px '宋体';
+            display: none
+        }
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <button class="active">按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+    <div class="show">内容1</div>
+    <div>内容2</div>
+    <div>内容3</div>
+    <div>内容4</div>
+    <script>
+        var btns = document.querySelectorAll('button')
+        var inner = document.querySelectorAll('div')
+        for(var i = 0; i < btns.length; i++) {
+            btns[i].id = i
+            btns[i].onclick = function() {
+                for(var i = 0; i < btns.length; i++) {
+                    btns[i].classList.remove('active')
+                    inner[i].classList.remove('show')
+                }
+                this.classList.add('active')
+                console.log(this.id)
+                inner[this.id].classList.add('show')
+            }
+        }
+    </script>
+</body>
+</html>

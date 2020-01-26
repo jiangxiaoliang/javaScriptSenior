@@ -1,0 +1,28 @@
+.box {
+  width: 555px;
+  margin: 30px auto;
+}
+.option {
+  width: 555px;
+  height: 310px;
+  background: url("./images/bg.png") no-repeat;
+  position: relative;
+}
+a {
+  width: 70px;
+  height: 30px;
+  line-height: 30px;
+  display: inline-block;
+  border: 1px solid #999;
+  text-decoration: none;
+  text-align: center;
+  color: #000;
+  margin-top: 160px;
+}
+.option a:first-child {
+  margin-left: 170px;
+}
+a.checked {
+  border: 1px solid rgb(228, 57, 60);
+  background: url("images/newicon20140910.png") no-repeat right bottom;
+}

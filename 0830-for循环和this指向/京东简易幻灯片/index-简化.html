@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        .wrap{
+            width: 1000px;
+            height: 800px;
+            background: url(img/bg.jpg) no-repeat;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -500px;
+            margin-top: -400px;
+        }
+        #prev,#next{
+            position: absolute;
+            width: 25px;
+            height: 45px;
+            background: url(img/ar.png) no-repeat;
+            
+            top: 155px;
+        }
+        #prev{
+            left: 13px;
+        }
+        #next{
+            transform: rotate(180deg);
+            right: 13px;
+        }
+        .pic{
+            width: 536px;
+            height: 356px;
+            position: absolute;
+            top: 170px;
+            left: 297px;
+        }
+        #img{
+            vertical-align: top;
+            width: 536px;
+            height: 356px;
+        }
+        #txt{
+            width: 536px;
+            height: 71px;
+            position: absolute;
+            left: 297px;
+            bottom: 185px;
+            text-align: center;
+            font: 20px/71px "微软雅黑";
+            color: #666;
+        }
+        #navs {
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+            z-index: 10;
+            width: 100%;
+            text-align: center;
+        }
+        #navs a {
+            margin: 0 3px;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+        }
+        #navs img {
+            position: absolute;
+            left: -17px;
+            top: -35px;
+            width: 40px;
+            display: none;
+            border: 2px solid #fff;
+        }
+        #navs .active {
+            background: #f60;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="pic">
+        <a id="prev" href="javascript:;"></a>
+        <img id="img" src="img/img1.jpg" />
+        <a id="next" href="javascript:;"></a>
+        <nav id="navs">
+            <a class="active">
+                <img class="img" src="img/img1.jpg" alt="">
+            </a>
+            <a>
+                <img class="img" src="img/img2.jpg" alt="">
+            </a>
+            <a>
+                <img class="img" src="img/img3.jpg" alt="">
+            </a>
+            <a>
+                <img class="img" src="img/img4.jpg" alt="">
+            </a>
+            <a>
+                <img class="img" src="img/img5.jpg" alt="">
+            </a>
+        </nav>
+    </div>
+    <p id="txt">这是第 <span>1</span> 张图片</p>
+</div>
+<script>
+var prevBtn = document.querySelector('#prev')
+var img = document.querySelector('#img')
+var nextBtn = document.querySelector('#next')
+var navs = document.querySelectorAll('#navs a')
+var txt = document.querySelector('#txt')
+var now = 0
+var imgs = [
+    'img/img1.jpg',
+    'img/img2.jpg',
+    'img/img3.jpg',
+    'img/img4.jpg',
+    'img/img5.jpg'
+]
+var txts = [
+    '这是第 <span>1</span> 张图片',
+    '这是第 <span>2</span> 张图片',
+    '这是第 <span>3</span> 张图片',
+    '这是第 <span>4</span> 张图片',
+    '这是第 <span>5</span> 张图片',
+]
+prevBtn.onclick = function() {
+    now --
+    if (now < 0) {
+        now = imgs.length - 1
+    }
+    tab()
+}
+nextBtn.onclick = function() {
+    now ++
+    if (now > imgs.length - 1) {
+        now = 0
+    }
+    tab()
+}
+for (var i = 0; i < navs.length; i++) {
+    navs[i].index = i
+    navs[i].onmouseover = function() {
+        var navsImg = this.querySelector('.img')
+        navsImg.style.display = 'block'
+    }
+    navs[i].onmouseout = function() {
+        var navsImg = this.querySelector('.img')
+        navsImg.style.display = 'none'
+    }
+    navs[i].onclick = function() {
+        // 同步上一张下一张
+        now = this.index
+        // for(var i = 0; i < navs.length; i++) {
+        //     navs[i].classList.remove('active')
+        // }
+        // this.classList.add('active')
+        // txt.innerHTML = txts[now]
+        // img.src = imgs[now]
+        tab()
+    }
+}
+function tab() {
+    img.src = imgs[now]
+    txt.innerHTML = txts[now]
+    for(var i = 0; i < navs.length; i++) {
+        navs[i].className = ''
+    }
+    navs[now].className = 'active'
+}
+
+</script>
+</body>
+</html>

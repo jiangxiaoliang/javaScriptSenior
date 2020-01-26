@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .red {
+            color: red
+        }
+    </style>
+</head>
+<body>
+    <button class="btn btn1">but1</button>
+    <button class="btn">but2</button>
+    <button class="btn">but3</button>
+    <button class="btn">but4</button>
+    <script>
+        var btns = document.querySelectorAll('button')
+        btns[0].classList.add('btn2')
+        btns[0].classList.remove('btn')
+        btns[1].onclick = function() {
+            this.classList.toggle('red')
+        }
+        console.log(btns[0].classList.contains('btn1'))
+        console.log(btns[0].classList)
+
+       /*
+          classList 类数组
+               下标 元素第几个class
+                length 元素有几个class
+               value 元素className
+           add('name') 给元素添加class
+           remove('name') 删除元素的calss
+           contains('name') 判断元素是否包含calss true包含||false不包含
+           toggle('name') 切换 如果元素包含这个calss就删除，否则添加
+        */
+    </script>
+</body>
+</html>
