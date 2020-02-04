@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li {
+            height: 30px;
+            line-height: 30px;
+        }
+        .edit {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<ul id="list">
+    <li>
+        <p><span class="inner">这是第一个列表</span><a href="javascript:;" class="btn">修改</a></p>
+        <div class="edit">
+            <input type="text" value="这是第一个列表" class="txt" />
+            <button class="edit-btn">确定</button>
+        </div>
+    </li>
+    <li>
+        <p><span class="inner">这是第一个列表</span><a href="javascript:;" class="btn">修改</a></p>
+        <div class="edit">
+            <input type="text" value="这是第一个列表" class="txt" />
+            <button class="edit-btn">确定</button>
+        </div>
+    </li>
+    <li>
+        <p><span class="inner">这是第一个列表</span><a href="javascript:;" class="btn">修改</a></p>
+        <div class="edit">
+            <input type="text" value="这是第一个列表" class="txt" />
+            <button class="edit-btn">确定</button>
+        </div>
+    </li>
+</ul>
+<script>
+/*
+    1. 找到 btn
+    2. btn 添加点击事件
+        1. 隐藏 p 标签，显示 edit
+        2. 让 txt 的value = inner的内容
+    3. edit-btn 添加点击事件
+        1. 校验 txt 的value 不能为空
+        2. 让 inner的内容 = txt 的value
+        3. 显示 p 标签，隐藏 edit
+*/
+var lis = document.querySelectorAll("#list li");
+for(var i = 0; i < lis.length; i++){
+    fn(lis[i]);
+}
+
+function fn(li){
+    var p = li.querySelector("p");
+    var btn = li.querySelector(".btn");
+    var edit = li.querySelector(".edit");
+    var txt = li.querySelector(".txt");
+    var inner = li.querySelector(".inner");
+    var editBtn = li.querySelector(".edit-btn")
+    btn.onclick = function(){
+        p.style.display = "none";
+        edit.style.display = "block";
+        txt.value = inner.innerHTML;
+    };
+    editBtn.onclick = function(){
+        // 字符串转布尔值 "" false   非空字符串 true
+        if(!txt.value){//校验不能为空
+            alert("请输入内容")
+        } else {
+            inner.innerHTML = txt.value;
+            p.style.display = "block";
+            edit.style.display = "none";
+        }
+    };
+}
+
+</script>    
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        input{
+            width: 100px;
+            height: 30px;
+        }
+        p{
+            width: 200px;
+            height: 200px;
+            background: red;
+            color: #FFF;
+            font-size: 100px;
+            display: none;
+        }
+        .active{
+            display: block;
+        }
+        .now{
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="tab1">
+        <input type="button" value="1" class="now">
+        <input type="button" value="2">
+        <input type="button" value="3">
+        <p class="active">1</p>
+        <p>2</p>
+        <p>3</p>
+    </div>
+
+    <div id="tab2">
+        <input type="button" value="1" class="now">
+        <input type="button" value="2">
+        <input type="button" value="3">
+        <p class="active">1</p>
+        <p>2</p>
+        <p>3</p>
+    </div>
+    <script>
+        // 封装的目的是为了重用
+        function tabFn(el){
+            var parent = document.querySelector(el);
+            var inps = parent.querySelectorAll('input');
+            var ps = parent.querySelectorAll('p');
+            for(var i = 0; i<inps.length ;i++){
+                inps[i].index = i;
+                inps[i].onclick = function(){
+                    for(var i = 0; i<ps.length;i++){
+                        ps[i].className = '';
+                        inps[i].className = '';
+                    }
+                    ps[this.index].className ='active';
+                    this.className = 'now';
+                }
+            }
+        }
+
+        // 传递参数
+        tabFn('#tab1')
+
+        tabFn('#tab2')
+    </script>
+</body>
+</html>

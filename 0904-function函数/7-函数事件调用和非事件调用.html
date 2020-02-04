@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div style="width:200px; height:200px; background: red;"></div>
+    <script>
+        
+        var div = document.querySelector('div');
+
+        function fn1(){
+            alert('点击了')
+        }
+
+        // 事件函数调用
+        div.onclick= fn1;
+
+        // 非事件调用
+        fn1();
+        
+    </script>
+</body>
+</html>

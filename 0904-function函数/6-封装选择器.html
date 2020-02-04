@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body class="body">
+    <div style="width:200px;height:200px;"></div>
+    <script>
+        
+        // var div = document.querySelector('div');
+
+        // $('div')
+
+        function $(el){
+            return document.querySelector(el);
+        }
+
+        function $A(el){
+            return document.querySelectorAll(el);
+        }
+
+        $('div').style.background = 'red';
+        $('.body').style.background ='blue';
+        // $A('li')
+    </script>
+</body>
+</html>

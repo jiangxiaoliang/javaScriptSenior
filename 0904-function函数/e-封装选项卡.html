@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        input {
+            width: 80px;
+            height: 40px;
+        }
+        p {
+            width: 200px;
+            height: 200px;
+            background: red;
+            color: #ffffff;
+            font-size: 50px;
+            text-align: center;
+            display: none;
+        }
+        .now {
+            background: blue;
+        }
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="tab1">
+        <input type="button" value="1" class="now">
+        <input type="button" value="2">
+        <input type="button" value="3">
+        <p class="active">1</p>
+        <p>2</p>
+        <p>3</p>
+    </div>
+    <div id="tab2">
+        <input type="button" value="4" class="now">
+        <input type="button" value="5">
+        <input type="button" value="6">
+        <p class="active">4</p>
+        <p>5</p>
+        <p>6</p>
+    </div>
+    <script>
+        // var inputs = document.querySelectorAll('input')
+        // var ps = document.querySelectorAll('p')
+        // console.log(inputs, ps)
+        // for(var i = 0; i < inputs.length; i++) {
+        //     inputs[i].index = i
+        //     inputs[i].onclick = function() {
+        //         for (var i = 0; i < inputs.length; i++) {
+        //             inputs[i].classList.remove('now')
+        //             ps[i].classList.remove('active')
+        //         }
+        //         this.classList.add('now')
+        //         console.log(this.index)
+        //         ps[this.index].classList.add('active')
+        //     }
+        // }
+        function tab(el) {
+            var parent = document.querySelector(el)
+            var inputs = parent.querySelectorAll('input')
+            var ps = parent.querySelectorAll('p')
+            console.log(inputs, ps)
+            for(var i = 0; i < inputs.length; i++) {
+                inputs[i].index = i
+                inputs[i].onclick = function() {
+                    for (var i = 0; i < inputs.length; i++) {
+                        inputs[i].classList.remove('now')
+                        ps[i].classList.remove('active')
+                    }
+                    this.classList.add('now')
+                    console.log(this.index)
+                    ps[this.index].classList.add('active')
+                }
+            }
+        }
+        tab('#tab1')
+        tab('#tab2')
+    </script>
+</body>
+</html>

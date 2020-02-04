@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: red; 
+        }
+    </style>
+</head>
+<body class="body">
+    <div></div>
+    <script>
+        var div = document.querySelector('div')
+        // console.log(div.style.width); 行间样式
+
+        // 获取非行间样式 - 不兼容
+
+        // chrome 浏览器
+        // var w = getComputedStyle(div)['width'];
+
+        // console.log(w);
+
+        // IE浏览器下
+        // var w = div.currentStyle['width'];
+
+        // console.log(w);
+        // alert(w)
+
+        // 兼容方法
+
+        function getStyle(obj,attr){
+            // 验证浏览器
+            // IE浏览器 三目运算
+            // 条件 ? 条件成立 : 条件不成立
+            return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr];
+        }
+
+
+        alert(getStyle(div,'width'))
+        // console.log(getStyle(div,'width'))
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li {
+            height: 30px;
+            line-height: 30px;
+        }
+        .edit {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<ul id="list">
+    <li>
+        <p><span class="inner">这是第一个列表</span><a href="javascript:;" class="btn">修改</a></p>
+        <div class="edit">
+            <input type="text" value="这是第一个列表" class="txt" />
+            <button class="edit-btn">确定</button>
+        </div>
+    </li>
+    <li>
+        <p><span class="inner">这是第二个列表</span><a href="javascript:;" class="btn">修改</a></p>
+        <div class="edit">
+            <input type="text" value="这是第二个列表" class="txt" />
+            <button class="edit-btn">确定</button>
+        </div>
+    </li>
+    <li>
+        <p><span class="inner">这是第三个列表</span><a href="javascript:;" class="btn">修改</a></p>
+        <div class="edit">
+            <input type="text" value="这是第三个列表" class="txt" />
+            <button class="edit-btn">确定</button>
+        </div>
+    </li>
+</ul>
+<script>
+/*
+    1. 找到 btn
+    2. btn 添加点击事件
+        1. 隐藏 p 标签，显示 edit
+        2. 让 txt 的value = inner的内容
+    3. edit-btn 添加点击事件
+        1. 校验 txt 的value 不能为空
+        2. 让 inner的内容 = txt 的value
+        3. 显示 p 标签，隐藏 edit
+*/
+
+// var btn = document.querySelector('.btn')
+// var p = document.querySelector('p')
+// var edit = document.querySelector('.edit')
+// var editBtn = document.querySelector('.edit-btn')
+// var txt = document.querySelector('.txt')
+// var inner = document.querySelector('.inner')
+// btn.onclick = function() {
+//     p.style.display = 'none'
+//     edit.style.display = 'block'
+// }
+// editBtn.onclick = function() {
+//     console.log(txt.value)
+//     if (!txt.value.trim()) {
+//         alert('请输入内容！！')
+//     } else {
+//         inner.innerHTML = txt.value
+//         p.style.display = 'block'
+//         edit.style.display = 'none'
+//     } 
+// }
+
+var li = document.querySelectorAll('li')
+for (var i = 0; i < li.length; i++) {
+    edit(li[i])
+}
+
+function edit(el) {
+    var btn = el.querySelector('.btn')
+    var p = el.querySelector('p')
+    var edit = el.querySelector('.edit')
+    var editBtn = el.querySelector('.edit-btn')
+    var txt = el.querySelector('.txt')
+    var inner = el.querySelector('.inner')
+    btn.onclick = function() {
+        p.style.display = 'none'
+        edit.style.display = 'block'
+    }
+    editBtn.onclick = function() {
+        console.log(txt.value)
+        if (!txt.value.trim()) {
+            alert('请输入内容！！')
+        } else {
+            inner.innerHTML = txt.value
+            p.style.display = 'block'
+            edit.style.display = 'none'
+        } 
+    }
+}
+
+</script>    
+</body>
+</html>
