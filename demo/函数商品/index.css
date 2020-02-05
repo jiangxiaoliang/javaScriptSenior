@@ -1,0 +1,74 @@
+.box {
+  width: 611px;
+  height: 640px;
+  margin: 30px auto;
+  background: url("./images/bg.png");
+  background-size: contain;
+  position: relative;
+}
+.container {
+  width: 384px;
+  position: absolute;
+  left: 115px;
+  top: 205px;
+}
+ul li {
+  width: 380px;
+  height: 28px;
+  margin: 16px 0;
+  font-size: 12px;
+  list-style: none;
+}
+input[type="button"] {
+  width: 36px;
+  height: 28px;
+  margin: 0 2px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px #fff inset;
+  background: #2f3130;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+.n {
+  width: 36px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 3px;
+  text-align: center;
+  display: inline-block;
+  background: #ebebeb;
+}
+.list-left {
+  width: 124px;
+  height: 28px;
+  float: left;
+}
+.list-right {
+  width: 172px;
+  height: 28px;
+  line-height: 28px;
+  margin-left: 16px;
+  padding-left: 12px;
+  background: #171818;
+  color: #fff;
+  float: left;
+}
+
+p {
+  margin: 30px 35px;
+  color: #fff;
+  font-size: 12px;
+}
+p strong {
+  width: 36px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 3px;
+  margin: 0 5px;
+  text-align: center;
+  display: inline-block;
+  background: #ebebeb;
+  color: #000;
+}
