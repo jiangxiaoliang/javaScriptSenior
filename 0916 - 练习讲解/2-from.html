@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+    数组 
+    类数组: 拥有下标 和 length 的一个对象，但是不具备 数组的方法
+    Array.from(类数组) 根据类数组 返回一个真正的数组
+*/
+var arr = [];
+var el = document.querySelectorAll("*");
+console.log(Array.from(el));
+// console.dir(arr);
+// console.dir(el);
+</script>    
+</body>
+</html>

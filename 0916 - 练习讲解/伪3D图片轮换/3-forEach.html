@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+    forEach 循环
+    filter 过滤
+    map 替换
+    every
+    some
+    reduce
+*/
+var arr = ["a","b","c","d"];
+// arr.forEach(function(item,index,arr){
+//     console.log(item,index,arr,this);
+// },document);// es 5.1
+var arr2 = arr.map(function(item,index){
+    return index + item;// 把返回值，替换入新函数的每一位
+});
+var arr3 = arr.filter(function(item,index){
+    return index%2;// 布尔值，true 保留这一位，false 删除这一位
+});
+console.log(arr,arr2,arr3);
+</script>    
+</body>
+</html>

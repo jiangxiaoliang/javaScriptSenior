@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Title</title>
+  <link rel="stylesheet" href="./index.css" />
+</head>
+<body>
+<div class="box">
+  <div class="container">
+    <ul id="list">
+      <li>
+        <div class="list-left">
+          <input type="button" class="minus" value="-" />
+          <span class="n">0</span>
+          <input type="button" class="plus" value="+" />
+        </div>
+        <div class="list-right">
+          <span>单价：</span>
+          <em class="price">12.5元</em>
+          <span>小计：</span>
+          <em class="count">0元</em>
+        </div>
+      </li>
+      <li>
+        <div class="list-left">
+          <input type="button" class="minus" value="-" />
+          <span class="n">0</span>
+          <input type="button" class="plus" value="+" />
+        </div>
+        <div class="list-right">
+          <span>单价：</span>
+          <em class="price">13.5元</em>
+          <span>小计：</span>
+          <em class="count">0元</em>
+        </div>
+      </li>
+      <li>
+        <div class="list-left">
+          <input type="button" class="minus" value="-" />
+          <span class="n">0</span>
+          <input type="button" class="plus" value="+" />
+        </div>
+        <div class="list-right">
+          <span>单价：</span>
+          <em class="price">14.5元</em>
+          <span>小计：</span>
+          <em class="count">0元</em>
+        </div>
+      </li>
+      <li>
+        <div class="list-left">
+          <input type="button" class="minus" value="-" />
+          <span class="n">0</span>
+          <input type="button" class="plus" value="+" />
+        </div>
+        <div class="list-right">
+          <span>单价：</span>
+          <em class="price">15.5元</em>
+          <span>小计：</span>
+          <em class="count">0元</em>
+        </div>
+      </li>
+      <li>
+        <div class="list-left">
+          <input type="button" class="minus" value="-" />
+          <span class="n">0</span>
+          <input type="button" class="plus" value="+" />
+        </div>
+        <div class="list-right">
+          <span>单价：</span>
+          <em class="price">16.5元</em>
+          <span>小计：</span>
+          <em class="count">0元</em>
+        </div>
+      </li>
+    </ul>
+    <p>商品合计共：<strong id="total">0</strong>件，共花费了：<strong  id="totalPrice">0</strong>元</p>
+    <p>其中最贵的已选商品单价是：<strong id="maxPrice">0</strong>元</p>
+  </div>
+</div>
+<script>
+ // 获取元素(单个或一组)
+function $(cssSelector,parent){
+    //parent = parent==undefined?document:parent;
+    parent = parent||document; // 给 parent 设置了一个默认值是document
+    var els = parent.querySelectorAll(cssSelector);
+    return els.length > 1?els:els[0];
+};     
+(function(){
+  var lists = $("#list li");
+  var total = $("#total");
+  var totalPrice = $("#totalPrice");
+  var maxPrice = $("#maxPrice");
+  for(var i = 0; i < lists.length; i++){
+    fn(lists[i]);
+  }
+  /*
+    一开始写一个程序的时，不要考虑一组该怎么实现, 只要考虑单个怎么实现
+  */
+
+
+  // 单件商品操作
+  function fn(item){
+    var minusEl = $(".minus",item);
+    var plusEl = $(".plus",item);
+    var nEl = $(".n",item);
+    var priceEl = $(".price",item);
+    var countEl = $(".count",item);
+    var nub = nEl.innerHTML - 0;
+    var price = parseFloat(priceEl.innerHTML);
+    
+    // 减一件
+    minusEl.onclick = function(){
+        if(nub<=0)return;
+        nub--;
+        setCount();
+    };
+    
+    // 加一件
+    plusEl.onclick = function(){
+        nub++;
+        setCount();
+    };
+
+    // 根据数量计算总计价格
+    function setCount(){
+        nEl.innerHTML = nub;
+        countEl.innerHTML = price * nub + "元";
+        toTotal();
+    }
+
+  }
+
+  // 所有商品总计
+ // Math.max(nub,nub2)
+
+  function toTotal(){
+    var totalNub = 0;// 总件数
+    var totalP = 0;
+    var maxP = 0;
+    for(var i = 0; i < lists.length; i++){
+       var nub = $(".n",lists[i]).innerHTML - 0;
+       var count = parseFloat($(".count",lists[i]).innerHTML);
+       var price = parseFloat($(".price",lists[i]).innerHTML)
+       totalNub += nub;
+       totalP += count;
+       if(nub > 0 ){
+         maxP = Math.max(maxP,price);//maxP < price?price:maxP;
+       }
+    }
+    // console.log(totalNub,totalPrice,maxP);
+    total.innerHTML = totalNub;
+    totalPrice.innerHTML = totalP;
+    maxPrice.innerHTML = maxP;
+  }
+})();
+/*
+  总件数: 声明一个变量, 依次加上每一个
+  最大值：依次和每一个比较，如果比我当前记录值大，就替换，否则保持记录值 
+*/
+</script>
+</body>
+</html>
