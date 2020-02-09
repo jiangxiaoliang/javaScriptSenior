@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+        div{
+            width:240px;
+            height: 240px;
+            background: url('img/run.jpg');
+            position: absolute;
+            left: 150px;
+            top: 0;
+        }
+        button{
+            position: absolute;
+            top: 300px;
+            left: 75px;
+        }
+        button:nth-of-type(1){
+            left: 75px;
+        }
+        button:nth-of-type(2){
+            left: 175px;
+        }
+        span{
+            position: absolute;
+            width: 600px;
+            height: 20px;
+            text-align: right;
+            color: #fff;
+            background: red;
+            left: 75px;
+            top: 218px;
+            padding-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <button>跑</button>
+    <button>停</button>
+    <span>终点</span>
+
+    <script>
+        var btn = document.querySelectorAll('button');
+        var div = document.querySelector('div');
+        var num = 0;
+        var timer = null;
+        /*决定是否开启第二次或者说更多次的定时器的变量*/
+        var onOff = true;
+
+        /*第一种方法：每次开启定时器之间，都清空上一次开启的定时器*/
+        // btn[0].onclick = function(){
+        //     div.style.background = 'url(img/download.gif)';
+        //     clearInterval(timer);
+        //     timer = setInterval(function(){
+        //         num++;
+        //         div.style.left = num + 'px';
+        //     },16);
+        // }
+
+        /*第二种方法：利用开关*/
+        btn[0].onclick = function () {
+                div.style.background = 'url(img/download.gif)';
+                
+                // if(true){
+                //     timer = setInterval(function () {
+                //         num++;
+                //         div.style.left = num + 'px';
+                //     }, 16);
+                // }
+                if(!onOff){
+                    return;
+                }
+                onOff = false;
+                timer = setInterval(function () {
+                    num++;
+                    div.style.left = num + 'px';
+                }, 16);
+               
+            }
+        btn[1].onclick = function(){
+            clearInterval(timer);
+            onOff = true;
+            div.style.background = 'url(img/run.jpg)';
+        }
+        /*
+            1- 每次开启定时器前，清除上一次的定时器
+            2- 开关
+
+        */
+    </script>
+</body>
+</html>

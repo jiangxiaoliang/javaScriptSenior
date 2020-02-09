@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>开课吧 —— 延迟菜单</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        #nav {
+            width: 500px;
+            height: 36px;
+            padding: 0 10px;
+            background: url(images/nav_bg.gif) repeat-x;
+            margin: 50px auto 0;
+            position: relative;
+        }
+
+        #nav .adorn1 {
+            width: 6px;
+            height: 36px;
+            background: url(images/nav_bg.gif) no-repeat 0 -36px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #nav .adorn2 {
+            width: 6px;
+            height: 36px;
+            background: url(images/nav_bg.gif) no-repeat 0 -72px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        #nav li {
+            float: left;
+            height: 36px;
+            padding: 0 3px 0 7px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        #nav .line {
+            background: url(images/active_bg.gif) no-repeat 0 -90px;
+        }
+
+        #nav .active {
+            float: left;
+            height: 36px;
+            line-height: 36px;
+            font-size: 14px;
+            text-decoration: none;
+            color: #fff;
+            background: url(images/active_bg.gif) no-repeat right -40px;
+        }
+
+        #nav .active span {
+            float: left;
+            height: 36px;
+            line-height: 36px;
+            font-size: 14px;
+            padding: 0 20px;
+            text-decoration: none;
+            color: #fff;
+            background: url(images/active_bg.gif) no-repeat 0 5px;
+        }
+
+        #nav .normal {
+            float: left;
+            height: 36px;
+            line-height: 36px;
+            font-size: 14px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        #nav .normal span {
+            float: left;
+            height: 36px;
+            padding: 0 20px;
+        }
+
+        #nav .normal:hover {
+            background: url(images/active_bg.gif) no-repeat right -40px;
+        }
+
+        #nav .normal:hover span {
+            background: url(images/active_bg.gif) no-repeat 0 5px;
+        }
+
+        #nav .float_layer {
+            height: 27px;
+            color: #235e99;
+            padding: 0 10px;
+            background: url(images/nav_bg.gif) repeat-x 0 -162px;
+            position: absolute;
+            top: 46px;
+            display: none;
+        }
+
+        #nav .arrows {
+            width: 7px;
+            height: 5px;
+            overflow: hidden;
+            background: url(images/active_bg.gif) no-repeat 0 -190px;
+            position: absolute;
+            top: -4px;
+        }
+
+        #nav .decorate1 {
+            width: 6px;
+            height: 27px;
+            background: url(images/nav_bg.gif) no-repeat 0 -108px;
+            position: absolute;
+            top: 0;
+            left: -6px;
+        }
+
+        #nav .decorate2 {
+            width: 6px;
+            height: 27px;
+            background: url(images/nav_bg.gif) no-repeat 0 -135px;
+            position: absolute;
+            top: 0;
+            right: -6px;
+        }
+
+        #nav .float_layer a {
+            float: left;
+            height: 27px;
+            line-height: 22px;
+            font-size: 12px;
+            color: #235e99;
+            text-decoration: none;
+            background: url(images/active_bg.gif) no-repeat right -207px;
+            padding: 0 8px;
+        }
+
+        #nav .float_layer a span {
+            float: left;
+            height: 18px;
+            padding-top: 3px;
+            overflow: hidden;
+            border-bottom: 2px solid #cedce8;
+        }
+
+        #nav .float_layer a:hover span {
+            border-bottom: 2px solid #235e99;
+        }
+
+        #nav p {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        #nav p a {
+            color: #fff;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        #nav p a:hover {
+            text-decoration: underline;
+        }
+
+        .pos1 {
+            left: 0;
+        }
+
+        .pos1 .arrows {
+            left: 36px;
+        }
+
+        .w1 {
+            width: 245px;
+        }
+
+        .pos2 {
+            left: 0;
+        }
+
+        .pos2 .arrows {
+            left: 50px;
+        }
+
+        .w2 {
+            width: 260px;
+        }
+
+        .pos3 {
+            left: -100px;
+        }
+
+        .pos3 .arrows {
+            left: 136px;
+        }
+
+        .w3 {
+            width: 230px;
+        }
+
+        .pos4 {
+            left: -100px;
+        }
+
+        .pos4 .arrows {
+            left: 136px;
+        }
+
+        .w4 {
+            width: 322px;
+        }
+        /* #nav li:hover>span{
+            display: block;
+        } */
+    </style>
+</head>
+
+<body>
+    <div id="nav">
+        <div class="adorn1"></div>
+        <div class="adorn2"></div>
+        <ul>
+            <li>
+                <a class="normal" href="http://www.miaov.com"><span>首页</span></a>
+                <span class="float_layer w1 pos1">
+                    <span class="arrows"></span>
+                    <span class="decorate1"></span>
+                    <span class="decorate2"></span>
+                    <a href="http://www.miaov.com"><span>最近更新</span></a>
+                    <a href="http://www.miaov.com"><span>活动</span></a>
+                    <a href="http://www.miaov.com"><span>报名试听</span></a>
+                    <a href="http://www.miaov.com"><span>学员反馈</span></a>
+                </span>
+            </li>
+            <li class="line">
+                <a class="normal" href="http://www.miaov.com"><span>关于我们</span></a>
+                <span class="float_layer w2 pos2">
+                    <span class="arrows"></span>
+                    <span class="decorate1"></span>
+                    <span class="decorate2"></span>
+                    <a href="http://www.miaov.com"><span>妙味讲师</span></a>
+                    <a href="http://www.miaov.com"><span>培训方式</span></a>
+                    <a href="http://www.miaov.com"><span>培训理念</span></a>
+                    <a href="http://www.miaov.com"><span>联系我们</span></a>
+                </span>
+            </li>
+            <li class="line">
+                <a class="normal" href="http://www.miaov.com"><span>作品</span></a>
+                <span class="float_layer w3 pos3">
+                    <span class="arrows"></span>
+                    <span class="decorate1"></span>
+                    <span class="decorate2"></span>
+                    <a href="http://www.miaov.com"><span>般固</span></a>
+                    <a href="http://www.miaov.com"><span>MATRIX</span></a>
+                    <a href="http://www.miaov.com"><span>留学e网</span></a>
+                    <a href="http://www.miaov.com"><span>ECMall</span></a>
+                </span>
+            </li>
+            <li class="line">
+                <a class="normal" href="http://www.miaov.com"><span>博客</span></a>
+                <span class="float_layer w4 pos4">
+                    <span class="arrows"></span>
+                    <span class="decorate1"></span>
+                    <span class="decorate2"></span>
+                    <a href="http://www.miaov.com"><span>JS教程</span></a>
+                    <a href="http://www.miaov.com"><span>弹出层效果</span></a>
+                    <a href="http://www.miaov.com"><span>3D球面标签云</span></a>
+                    <a href="http://www.miaov.com"><span>Window计算器</span></a>
+                </span>
+            </li>
+        </ul>
+        <p><a href="http://www.miaov.com">>>更多</a></p>
+    </div>
+    <script src="emenu.js"></script>
+</body>
+
+</html>

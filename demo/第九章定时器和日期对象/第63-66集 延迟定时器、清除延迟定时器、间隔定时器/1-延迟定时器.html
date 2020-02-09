@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            setTimeout(code, time)
+                - code : 延迟一段时间之后，需要做的事情 
+                    - function
+                    - 字符串
+                - time : 延迟的时间(统一单位：毫秒；1s = 1000ms)
+                    - 如果不填，就有一个默认值：0
+                - parma1...parmaN ,定时器完成需要执行code的时候，作为参数传入code中
+                    - IE9及IE9以下是不可以使用的，存在兼容问题
+        */    
+
+        // setTimeout(function(){
+        //     console.log(123);
+            
+        // })
+
+        // setTimeout("alert('123')",1000); 不建议把code设为字符串
+
+        setTimeout(function(x,y){
+            console.log(x);
+            console.log(y);
+            console.log('=============================');       
+            console.log(x+y);   
+        },1000,1,2)
+    </script>
+</body>
+</html>

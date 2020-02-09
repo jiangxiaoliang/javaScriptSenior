@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var date = new Date(2000,0,14,12,30,40,1200);
+        console.log(date)
+        /*
+            获取日期对象的方法
+            getFullYear - 获取年份
+            getMonth - 获取月份  !!月份是0~11的值
+            getDate - 获取日
+            getDay - 星期
+            getHours - 小时
+            getMinutes -  分钟
+            getSeconds - 秒
+            getMilliseconds - 毫秒数
+
+            getTime 获取的是从1970年1月1号00:00:00开始 到当前日期对象的毫秒数
+        */
+        // console.log(date.getFullYear());
+        // console.log(date.getMonth() + 1);
+        // console.log(date.getDate());
+        // console.log(date.getDay());
+
+        // console.log(date.getHours());
+        // console.log(date.getMinutes());
+        // console.log(date.getSeconds());
+        // console.log(date.getMilliseconds());
+
+
+
+        console.log(date.getTime());
+        
+        /*
+            案例：根据输入的日期来判定这天是星期几
+        */
+        
+    </script>
+</body>
+</html>

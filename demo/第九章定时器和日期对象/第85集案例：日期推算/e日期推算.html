@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>日期推算</h1>
+    <input type='text'>年
+    <input type='text'>月
+    <input type='text'>日
+    <p>相差天数<input type='text' value = '1'></p>
+    <button>计算</button>
+    <hr/>
+    <p>计算结果：<strong></strong></p>
+    
+    <script>
+        var inputs = document.querySelectorAll('input')
+        var btn = document.querySelector('button')
+        var strong = document.querySelector('strong')
+        var now = new Date()
+
+        init()
+
+        function init() {
+            inputs[0].value = now.getFullYear()
+            inputs[1].value = now.getMonth() + 1
+            inputs[2].value = now.getDate()
+        }
+       
+
+        btn.onclick = function() {
+            var inputYear = inputs[0].value
+            var inputMonth = inputs[1].value - 1
+            var inputDay = inputs[2].value
+            var dis = inputs[3].value
+            // console.log(inputYear, inputMonth, inputDay, dis)
+            var target = new Date(inputYear, inputMonth, inputDay)
+            var disTime = 1000 * 60 * 60 * 24 * dis
+            
+            target.setFullYear(inputYear)
+            target.setMonth(inputMonth)
+            target.setDate(inputDay)
+            target.setMilliseconds(disTime)
+            // console.log(target)
+            strong.innerHTML = target.getFullYear() + '-' + (target.getMonth() + 1) + '-' +  target.getDate()
+            
+        }
+    </script>
+</body>
+</html>

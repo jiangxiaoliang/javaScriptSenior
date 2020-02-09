@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>
+        开启定时器
+    </button>
+    <button>
+        关闭定时器2
+    </button>
+    <script>
+        var btn = document.querySelectorAll('button');
+        var time1 = 0;
+        var time2 = 0;
+        var time3 = 0;
+        btn[0].onclick = function(){
+            time1 = setTimeout(
+                function () {
+                    console.log('这是延迟定时器1')
+                },
+                1000
+            )
+            time2 = setTimeout(
+                function () {
+                    console.log('这是延迟定时器2')
+                },
+                2000
+            )
+            time3 = setTimeout(
+                function () {
+                    console.log('这是延迟定时器3')
+                },
+                3000
+            ) 
+            // console.log(time1, time2, time3) 
+        }
+        btn[1].onclick = function(){
+            clearTimeout(time3);
+        }
+        
+
+        /*
+            页面中可以开启多个定时器
+
+            每个定时器都会有一个返回值，这个返回值就是它的id
+                - id必须是唯一的
+                - 正整数
+
+            clearTimeout(id)
+                - 清除定时器，注意也是函数，需要通过括号调用
+                - id就是你要清除的定时器的编号
+
+        */  
+    </script>
+</body>
+</html>

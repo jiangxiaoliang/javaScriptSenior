@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            setInterval(code,time,param1...paramN)
+                - code : 间隔一段时间之后，需要做的事情
+                - time (可选) : 间隔的时间，如果不写，默认为0,单位为ms
+                - param1...paramN 在定时器开启后，可以作为参数传递给code
+        */    
+
+        var num = 0;
+        setInterval(function(x,y){
+            num++;
+            console.log('这个是间隔定时器' +  (x + y));
+        },1000,2,3)
+        
+    </script>
+</body>
+</html>

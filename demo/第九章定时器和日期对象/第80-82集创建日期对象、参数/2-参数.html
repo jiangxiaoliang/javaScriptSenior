@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        
+            value - > 毫秒数
+            1s = 1000ms
+            可以是一个正数，也可以是一个负数
+            如果说是正数：从1970年开始往后
+            如果说是负数：从1970年开始往前
+
+            1970.1.1 00:00:00
+
+
+            Thu Jan 01 1970 08:00:01 GMT+0800 (中国标准时间)
+                                      由于时区的问题，在00:00:00的基础上加了8个小时
+
+            1970 01 01 08:00:01
+
+
+        */
+        // var date = new Date(1000000000000);
+        var date  = new Date(-1000);
+
+        /*
+            Thu Jan 01 1970 07:59:59 GMT+0800 (中国标准时间)
+            如果传入一个负数
+
+        */
+        // console.log(date);
+
+        var date1 = new Date('2019-13');
+        // console.log(date1);
+        /*
+            2019-08-20  yyyy - mm - dd  年 月  日 
+            08 20 2019
+
+            一旦输入的日期不合法，不合理
+            Invalid Date无效的日期
+        */
+        
+        // var date2 = new Date(2055,13);
+        var date2 = new Date(2055,1,15,12,00,00);
+        /*
+            Mon Mar 01 2055 00:00:00 GMT+0800 (中国标准时间)
+
+            2055 3 01
+
+            这里的month一定注意，是从0开始
+
+            如果你传入的这个值，不符合时间的标准的话，会进行自动的计算
+
+            00:30:00
+            00:30:60
+            00:31:00
+
+            必填的两个值是year 年 month 月
+        */
+        console.log(date2);
+        
+    </script>
+</body>
+</html>

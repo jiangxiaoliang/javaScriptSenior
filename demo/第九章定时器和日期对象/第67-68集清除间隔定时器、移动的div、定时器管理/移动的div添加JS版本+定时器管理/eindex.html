@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+        div{
+            width:240px;
+            height: 240px;
+            background: url('img/run.jpg');
+            position: absolute;
+            left: 50px;
+            top: 0;
+        }
+        button{
+            position: absolute;
+            top: 300px;
+            left: 75px;
+        }
+        button:nth-of-type(1){
+            left: 75px;
+        }
+        button:nth-of-type(2){
+            left: 175px;
+        }
+        span{
+            position: absolute;
+            width: 600px;
+            height: 20px;
+            text-align: right;
+            color: #fff;
+            background: red;
+            left: 75px;
+            top: 218px;
+            padding-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <button>跑</button>
+    <button>停</button>
+    <span>终点</span>
+
+    <script>
+        function getStyle(el, attr) {
+            return el.currentStyle ? el.currentStyle[attr] : getComputedStyle(el)[attr]
+        }
+        
+        var btns = document.querySelectorAll('button')
+        var img = document.querySelector('div')
+        var step = parseInt(getStyle(img, 'left'))
+        var timer = null
+        btns[0].onclick = function() {
+            if (timer || step > 500) {
+                return
+            }
+            img.style.background = 'url("img/download.gif")'
+            timer = setInterval(function() {
+                step++
+                if (step > 500) {
+                    stop()
+                }
+                img.style.left = step + 'px'
+            }, 30)
+        }
+        btns[1].onclick = function() {
+            stop()
+        }
+
+        function stop() {
+            img.style.background = 'url("img/run.jpg")'
+            clearInterval(timer)
+            timer = null
+        }
+
+    </script>
+</body>
+</html>

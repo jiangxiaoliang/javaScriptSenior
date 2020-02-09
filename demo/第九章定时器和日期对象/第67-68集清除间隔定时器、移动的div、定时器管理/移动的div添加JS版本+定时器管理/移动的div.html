@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+        div{
+            width:240px;
+            height: 240px;
+            background: url('img/run.jpg');
+            position: absolute;
+            left: 150px;
+            top: 0;
+        }
+        button{
+            position: absolute;
+            top: 300px;
+            left: 75px;
+        }
+        button:nth-of-type(1){
+            left: 75px;
+        }
+        button:nth-of-type(2){
+            left: 175px;
+        }
+        span{
+            position: absolute;
+            width: 600px;
+            height: 20px;
+            text-align: right;
+            color: #fff;
+            background: red;
+            left: 75px;
+            top: 218px;
+            padding-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <button>跑</button>
+    <button>停</button>
+    <span>终点</span>
+
+    <script>
+        var btn = document.querySelectorAll('button');
+        var div = document.querySelector('div');
+        var num = 0;
+        var timer = null;
+
+        /*
+            style -> 获取的是行间的样式
+
+            getComputedStyle
+        */
+
+        btn[0].onclick = function(){
+            div.style.background = 'url(img/download.gif)';
+
+            /*获取当前元素所在的位置*/
+            var num = parseInt(getStyle(div).left);
+            // console.log(getStyle(div).left);
+            timer = setInterval(function(){
+                num++;
+                div.style.left = num + 'px';
+            },16);
+
+            timer = setInterval(function () {
+                num++;
+                div.style.left = num + 'px';
+            }, 16);
+            timer = setInterval(function () {
+                num++;
+                div.style.left = num + 'px';
+            }, 16);
+            timer = setInterval(function () {
+                num++;
+                div.style.left = num + 'px';
+            }, 16);
+        }
+
+        function getStyle(obj){
+            if(obj.currentStyle){
+                return obj.currentStyle;
+            }else{
+                return getComputedStyle(obj);
+            } 
+        }
+
+        btn[1].onclick = function(){
+            clearInterval(timer);
+            div.style.background = 'url(img/run.jpg)';
+        }
+        /*
+        
+            清除间隔定时器
+            clearInterval(id)
+                - id:开启定时器后，返回的编号
+        */
+    </script>
+</body>
+</html>
