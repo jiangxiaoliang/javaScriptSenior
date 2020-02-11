@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #box {
+        display: none;
+        width: 100px;
+        height: 100px;
+        background: red;
+        transition: 1s; /* 元素如果没有在页面中渲染完成，动画是不起作用的*/
+    }
+
+    /* #box:hover {
+       width: 800px;
+    } */
+    /*
+        transition 元素的数值类样式发生改变时，添加一个过渡动画
+            transition-delay  延迟时间(ms||s)
+            transition-duration 动画时间(ms||s)
+            transition-property 需要动画的样式
+            transition-timing-function 动画形式
+                - ease 缓冲
+                - ease-in 加速
+                - ease-out 减速
+                - ease-in-out 先加速后减速
+                - linear 匀速
+    */
+
+</style>
+<body>
+    <button>显示</button>
+    <div id="box"></div>
+    <script>
+        var button = document.querySelector('button')
+        var box = document.querySelector('#box')
+        button.addEventListener('click', function() {
+            box.style.display = 'block'
+            setTimeout(function() {
+                box.style.height = '200px'
+                box.style.width = '200px'
+            },50)
+        })
+    </script>
+</body>
+</html>

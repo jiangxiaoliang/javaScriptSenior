@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @keyframes anim {
+        0% {
+            transform: rotate(0)
+        }
+        100% {
+            transform: rotate(360deg)
+        }
+    }
+    #box {
+        margin: 200px auto;
+        padding: 100px;
+        width: 200px;
+        height: 400px;
+        border: 2px solid #000;
+    }
+    #div {
+        width: 200px;
+        height: 200px;
+        background: red;
+        transition: 3s;
+    }
+     #div1 {
+        width: 200px;
+        height: 200px;
+        background: blue;
+        transition: 3s;
+    }
+    #box:hover #div {
+        transform: scale(0.5) translateX(100px)
+    }
+    #box:hover #div1 {
+        transform: translateX(100px) scale(0.5)
+    }
+    /*
+        后写先执行
+    */
+</style>
+<body>
+    <div id="box">
+        <div id="div"></div>
+        <div id="div1"></div>
+    </div>
+</body>
+</html>

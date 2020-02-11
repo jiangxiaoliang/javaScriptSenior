@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @keyframes anim {
+        /* 0% {
+            left: 0;
+            top: 0;
+        } */
+        /* 如果不设置起点，默认为元素计算后样式(getComputed) */
+        25% {
+            left: 200px;
+            top: 0;
+        }
+        50% {
+            left: 200px;
+            top: 200px;
+        }
+        75% {
+            left: 0;
+            top: 200px;
+        }
+        /* 100% {
+            left: 200px;
+            top: 200px;
+        } */
+         /* 如果不设置起点，默认为元素计算后样式(getComputed) */
+    }
+    #box {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: red;
+        left: 0;
+        top: 0;
+        animation: anim 4s linear 3;
+    }
+</style>
+<body>
+    <div id="box"></div>
+    <script>
+        /*
+            - animation-name 动画帧名称
+            - animation-duration 动画时长(ms||s)
+            - animation-timing-function 动画形式 参考 transition
+            - animation-delay 动画首次执行时延迟时间 (ms||s)
+            - animation-iteration-count 动画执行次数 (count|| infinite)
+            - animation-direction 动画偶数次执行顺序 normal alternate
+            - animation-fill-mode 动画起点及结束点设置
+        */
+        var box = document.querySelector('#box')
+        box.addEventListener('animationstart', function() {
+            console.log('动画开始')
+        })
+        box.addEventListener('animationiteration', function() {
+            console.log('动画又一次开始')
+        })
+        box.addEventListener('animationend', function() {
+            console.log('动画结束')
+        })
+    </script>
+</body>
+</html>

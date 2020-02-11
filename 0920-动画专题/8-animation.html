@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @keyframes anim {
+        0% {
+            left: 200px;
+            top: 0;
+        }
+        100% {
+            left: 200px;
+            top: 200px;
+        }
+    }
+    #box {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: red;
+        left: 0;
+        top: 0;
+        animation: anim 3s 2s backwards;
+    }
+</style>
+<body>
+    <div id="box"></div>
+    <script>
+        /*
+            - animation-name 动画帧名称
+            - animation-duration 动画时长(ms||s)
+            - animation-timing-function 动画形式 参考 transition
+            - animation-delay 动画首次执行时延迟时间 (ms||s)
+            - animation-iteration-count 动画执行次数 (count|| infinite)
+            - animation-direction 动画偶数次执行顺序 normal alternate
+            - animation-fill-mode 动画起点及结束点设置
+                - 默认 如果起点和计算后样式不一致，动画开始时直接跳到起点开始执行这个动画
+                - 默认 如果结束点和计算后样式不一致，动画结束时直接跳到结束点
+                - forwards 动画结束时停留在结束点
+                - backwards 动画执行前，始终停留在起点
+                - both = forwards + backwards
+        */
+
+    </script>
+</body>
+</html>

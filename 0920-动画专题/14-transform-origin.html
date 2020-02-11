@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @keyframes anim {
+        0% {
+            transform: rotate(0)
+        }
+        100% {
+            transform: rotate(360deg)
+        }
+    }
+    #box {
+        margin: 200px auto;
+        padding: 100px;
+        width: 200px;
+        height: 200px;
+        border: 2px solid #000;
+    }
+    #div {
+        width: 200px;
+        height: 200px;
+        background: red;
+        transition: 3s;
+        /* animation: anim 2s linear infinite; */
+        transform-origin: -100px -100px;
+    }
+    #box:hover #div {
+      transform: rotate(360deg) scale(0);
+    }
+</style>
+<body>
+    <div id="box">
+        <div id="div"></div>
+    </div>
+</body>
+</html>

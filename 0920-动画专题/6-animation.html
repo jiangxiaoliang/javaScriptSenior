@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @keyframes anim {
+        /* 0% {
+            left: 0;
+            top: 0;
+        } */
+        /* 如果不设置起点，默认为元素计算后样式(getComputed) */
+        50% {
+            left: 200px;
+            top: 0;
+        }
+        /* 100% {
+            left: 200px;
+            top: 200px;
+        } */
+         /* 如果不设置起点，默认为元素计算后样式(getComputed) */
+    }
+    #box {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: red;
+        left: 0;
+        top: 0;
+        animation: anim 3s;
+    }
+</style>
+<body>
+    <div id="box"></div>
+</body>
+</html>
