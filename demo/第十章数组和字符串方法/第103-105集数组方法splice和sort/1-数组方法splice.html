@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [1,2,3,4,5,6];
+
+        //删除
+        // arr.splice(1,2);
+        // console.log(arr);
+
+        //替换
+        // arr.splice(1,2,'b','c');
+        // console.log(arr);
+
+
+        // arr.splice(50);
+        // arr.splice(-2);
+        // arr.splice(1,-10);
+        // console.log(arr);
+
+        //添加，如果不删除元素，但是又存在第三个或者3+的参数，就会有添加的功能
+
+        // arr.splice(1,0,'a','b','c');
+        // console.log(arr);
+        
+        //返回值
+
+        // console.log(arr.splice(1, 3))
+
+        console.log(arr.splice(1, 0, 'a', 'b', 'c'));
+        
+
+        /*
+            splice(start[，num，item1，item2...])
+                - start：删除的起始位置
+                         如果start大于length，就是不删除。
+                         如果是一个负数(负数的绝对值超过了length，则起始位置被设定为length)，从右到左查找对应的起始位置
+                         length + (start)
+
+                - num:可选，默认删除到数组的末尾。表示删除的个数
+                      如果小于0，或者是NaN，则当做0进行处理,不删除任何元素
+
+                - item1，item2... 从删除的位置，添加第二个参数以后的内容
+
+                返回值是所有删除的元素，组成的数组,如果没有删除任何元素，将会得到一个空数组
+        */
+    </script>
+</body>
+</html>

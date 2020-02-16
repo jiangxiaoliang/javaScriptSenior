@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = ['one','two','two','one','three'];
+        var newArr = [];
+
+        function fn1() {
+            for(var i = 0; i < arr.length; i++) {
+                if(newArr.indexOf(arr[i]) === -1) {
+                    newArr.push(arr[i])
+                }
+            }
+        }
+
+        function fn2() {
+            newArr = arr.filter(function(item, index) {
+                return arr.indexOf(item) === index
+            })
+        }
+
+        var obj = {}
+        function fn3() {
+            for(var i = 0; i < arr.length; i++) {
+                obj[arr[i]] = arr[i]
+            }
+        }
+        fn3()
+        console.log(Object.keys(obj))
+        
+        // fn1()
+        fn2()
+        console.log(newArr)
+    </script>
+</body>
+</html>

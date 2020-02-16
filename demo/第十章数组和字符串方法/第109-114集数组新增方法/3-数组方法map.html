@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [10, 20, 4, 50, 60, 75, 3];
+        var num  = [];
+
+        // for(var i=0;i<arr.length;i++){
+        //     num.push(arr[i] * 2);
+        // }
+
+        // console.log(num);
+
+        // arr.forEach(function(ele){
+        //     num.push(ele * 2);
+        // })
+        
+        // console.log(num);
+        var newArr = arr.map(function(ele,index,arr){
+            // console.log(this);
+            
+            // console.log(ele, index,arr);
+            // return ele * 2;
+        },document);
+
+        console.log(newArr);
+        console.log(arr);
+        
+        
+
+        /*
+            map
+                由数组中的每一位元素执行函数后的结果，作为新数组的值
+        */
+        
+
+    </script>
+</body>
+</html>

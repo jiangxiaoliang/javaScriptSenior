@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn1(){
+            console.log('abc');
+        }
+        // function fn2(){
+        //     console.log('123');
+        //     fn1();
+        // }
+        // fn2();
+
+        /*
+            以下形式并非是尾调用
+        */
+        // function fn3(){
+        //     return fn1() + '123';
+        // }
+
+
+        // function fn4(){
+        //     if(true){
+        //         fn1();
+        //     }else{
+        //         fn2();
+        //     }
+        // }
+
+        // function c(){
+            
+        // }
+        // function b(){
+        //     c();
+        // }
+        // function a(){
+        //     var vv = 0;
+        //     b() 
+        // }
+        // a()
+
+        /*
+            1*2*3*4*5 .. 100 
+        */
+
+        //普通递归
+        function fn(n) {
+            if (n === 1) {
+                return 1;
+            }
+            return n * fn(n - 1);
+        }
+
+        //尾递归
+        function fn(n, total) {
+            if (n === 1) {
+                return total;
+            }
+            return fn(n - 1, n * total)
+        }
+
+    </script>
+</body>
+</html>

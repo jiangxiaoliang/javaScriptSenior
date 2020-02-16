@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var num = Math.random();
+        // console.log(num);
+        /*
+            得到一个随机的数字，这个数字是0 ~ 1之间的值，包含0 ，但是不包含1
+        */
+
+        var arr = ['一沓试卷','罚抄20遍','唱歌','跳舞','喝一瓶'];
+
+        /*
+            0 ~ 4
+
+        */
+
+        var num = Math.random() * 4;
+        // console.log(Math.random() * 4)
+        /*
+            问题
+                1. 小数太多了
+                2. 不包含4
+        */
+        // console.log(Math.ceil(num)) //4 0出现概率太低
+        // console.log(Math.floor(num)) // 3 不可能拿到4
+        // console.log(Math.round(num))//3
+
+        var n = Math.round(num);
+        console.log(arr[n]);
+        /*
+            0 ~ n
+                包含n ,使用round
+                不包含n ，推荐使用floor
+
+            5 ~ 10 -5
+                Math.random() * 10 // 0 ~ 10
+            0 ~ 5
+                Math.random() * 5 //0 ~ 5  5 ~ 10
+
+            2 ~ 17 - 2
+            0 ~ 15
+                Math.random() * 15 + 2
+        */
+
+        function getNum(min,max){
+            return Math.round(Math.random() * (max - min) + min);
+        }
+        var a = getNum(2,17);
+        console.log(a);
+        
+    </script>
+</body>
+</html>

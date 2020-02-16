@@ -1,0 +1,119 @@
+<!-- saved from url=(0047)http://www.webhek.com/post/comparison-sort.html -->
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!--<base href="http://www.webhek.com/apps/comparison-sort/">-->
+	<base href=".">
+
+	<meta name="description"
+		content="这是旧金山大学的David Galles教授用HTML5+js制作的数据结构动画课件中算法动画比较部分。教授利用JS+HTML5 Canvas技术分别演示了6中数学排序算法的基本原理，即介绍了数学知识，又让这种教学变得饶有兴趣。你可以看出HTML5技术将会在各个方法起到越来越重要的作用。">
+	<title>
+		用HTML5实现的各种排序算法的动画比较
+	</title>
+
+	<link rel="stylesheet" href="./用HTML5实现的各种排序算法的动画比较_files/visualizationPageStyle.css">
+
+	<link rel="stylesheet" href="./用HTML5实现的各种排序算法的动画比较_files/jquery-ui-1.8.11.custom.css">
+	<script async="" src="./用HTML5实现的各种排序算法的动画比较_files/analytics.js"></script>
+	<script src="./用HTML5实现的各种排序算法的动画比较_files/jquery-1.5.2.min.js"></script>
+	<script src="./用HTML5实现的各种排序算法的动画比较_files/jquery-ui-1.8.11.custom.min.js"></script>
+
+	<script type="application/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/CustomEvents.js"> </script>
+	<script type="application/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/UndoFunctions.js"> </script>
+	<script type="application/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/AnimatedObject.js"> </script>
+	<script type="application/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/AnimatedLabel.js"> </script>
+	<script type="application/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/AnimatedCircle.js"> </script>
+	<script type="application/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/AnimatedRectangle.js"> </script>
+	<script type="application/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/AnimatedLinkedList.js"> </script>
+	<script type="application/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/HighlightCircle.js"> </script>
+	<script type="application/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/Line.js"> </script>
+	<script type="application/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/ObjectManager.js"> </script>
+	<script type="application/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/AnimationMain.js"> </script>
+	<script type="application/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/Algorithm.js"> </script>
+	<script type="application/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/ComparisonSort.js"> </script>
+</head>
+
+<body class="VisualizationMainPage">
+	<div id="container">
+		<div id="header">
+			<!-- <h1 style=" display: inline-block;">用HTML5实现的各种排序算法的动画比较</h1> -->
+			<div style="float:right; margin: 15px;"></div>
+			<div style=" display: block;">
+				<script async="" src="./用HTML5实现的各种排序算法的动画比较_files/adsbygoogle.js"></script>
+
+				<ins class="adsbygoogle" style="display:inline-block;width:728px;height:15px"
+					data-ad-client="ca-pub-9195052014444206" data-ad-slot="7823834197"></ins>
+				<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+		</div>
+		<div=="" id="mainContent">
+			<div id="algoControlSection">
+
+
+				<table id="AlgorithmSpecificControls">
+					<!-- <td><input type="Button" value="混排队列" name="混排队列"></td>
+					<td><input type="Button" value="插入排序" name="插入排序"></td>
+					<td><input type="Button" value="选择排序" name="选择排序"></td>
+					<td><input type="Button" value="冒泡排序" name="冒泡排序"></td>
+					<td><input type="Button" value="快速排序" name="快速排序"></td>
+					<td><input type="Button" value="归并排序" name="归并排序"></td>
+					<td><input type="Button" value="希尔排序" name="希尔排序"></td>
+					<td><input type="Button" value="调整队列大小" name="调整队列大小"></td> -->
+				</table>
+			</div>
+
+			<canvas id="canvas" width="1000" height="500"></canvas>
+			<div id="generalAnimationControlSection">
+
+				<table id="GeneralAnimationControls">
+					<!-- <td><input type="Button" value="跳回最初" disabled=""></td>
+					<td><input type="Button" value="后退一步" disabled=""></td>
+					<td><input type="Button" value="暂停"></td>
+					<td><input type="Button" value="向前一步" disabled=""></td>
+					<td><input type="Button" value="跳到最后" disabled=""></td>
+					<td>
+						<table>
+							<tr>
+								<td>
+									<div display="inline-block" float="left"
+										class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+										style="width:200px"><a href="http://www.webhek.com/apps/comparison-sort/#"
+											class="ui-slider-handle ui-state-default ui-corner-all"
+											style="left: 75%;"></a></div>
+								</td>
+							</tr>
+							<tr>
+								<td align="center">动画速度</td>
+							</tr>
+						</table>
+					</td>
+					<td> 宽:</td>
+					<td><input type="Text" value="1000" size="4"></td>
+					<td> 高:</td>
+					<td><input type="Text" value="500" size="4"></td>
+					<td><input type="Button" value="调整画布大小"></td> -->
+				</table>
+			</div>
+		</div>
+		<div id="footer">
+			<p></p>
+		</div>
+	</div>
+	<script type="text/javascript">init();</script>
+
+
+
+	<script type="text/javascript" src="./用HTML5实现的各种排序算法的动画比较_files/jiathis_r.js" charset="utf-8"></script>
+
+	<script>  (function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-2477810-34', 'auto'); ga('send', 'pageview');</script>
+	<span id="pageendflag"></span>
+	<script type="text/javascript"
+		src="./用HTML5实现的各种排序算法的动画比较_files/dfe44a07fd75308cff3517f6f7226e99noUy1H0Y.js"></script>
+
+
+</body>
+
+</html>

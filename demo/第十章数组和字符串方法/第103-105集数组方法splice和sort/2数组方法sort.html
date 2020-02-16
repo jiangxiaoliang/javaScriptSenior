@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var arr = ['b',"z",'l','a'];
+        // arr.sort();
+        // console.log(arr);
+        var num = [6,50,12,40];
+        // num.sort();
+        // console.log(num);
+
+         num.sort(function(a,b){
+            console.log(a,b);
+            // return b - a;
+            return a - b;
+         })
+         console.log(num);
+         
+        /*
+            sort
+                - 如果说不提供任何的参数，则根据默认规则来进行排序(根据unicode来进行排序)
+                - 如果提供参数（函数），我们可以指定排序的规则
+                    - a 
+                    - b
+                    a 和 b代表两个在比较的值
+
+
+                    如果 a-b 的结果
+
+                    ​	大于0 ：b 排到 a 前面
+
+                    ​	小于0：a 排到 b 前面
+
+                    ​	等于0：a 和 b 的位置不变
+
+                    [6,50,12,40] a:6   b:50
+                    [6,12,50,40] a:50  b:12
+                    [6,12,50,40] a:6   b:12
+                    [6,12,40,50] a:50  b:40
+                    [6,12,40,50] a:12  b:40
+                    
+
+        */
+    </script>
+</body>
+</html>

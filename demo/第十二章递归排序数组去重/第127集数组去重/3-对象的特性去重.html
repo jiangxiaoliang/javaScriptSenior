@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            key值是唯一的
+        */
+        // var obj = {
+        //     name:'Reci',
+        //     age:18
+        // };
+
+        // obj.name = 'zMouse';
+        // obj.age = 30;
+
+        // obj.work = 'vv';
+
+        // console.log(obj);
+        
+        var arr = ['one', 'two', 'two', 'one', 'three'];
+        var obj = {}; 
+
+        for(var i=0;i<arr.length;i++){
+            obj[arr[i]]  = arr[i];
+        }
+        // console.log(obj);
+
+        for(var v in obj){
+            console.log(v);
+            
+        }
+        console.log(Object.keys(obj))
+        
+
+    </script>
+</body>
+</html>

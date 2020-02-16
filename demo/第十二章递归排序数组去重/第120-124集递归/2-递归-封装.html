@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var kkb = ['个人介绍','工作记录',['css','html',[1,2,3]]];
+        // var newArr = ['个人介绍', '工作记录', 'css', 'html',1,2,3];
+        var newArr = [];
+        var num = 0;
+        /*
+            数组扁平化:
+                把多层嵌套的数组中的内容都取出，变成一维的数组
+        */
+
+        // for(var i=0;i<kkb.length;i++){
+        //     if(Array.isArray(kkb[i])){
+        //         // console.log('是数组');
+        //     }else{
+        //         // console.log('不是数组');
+        //         newArr.push(kkb[i]);
+        //     }
+            
+        // }
+
+        falt(kkb);
+
+        function falt(arr){
+            for (var i = 0; i < arr.length; i++) {
+                if (Array.isArray(arr[i])) {
+                    falt(arr[i]);
+                } else {
+                    num++;
+                    newArr.push(arr[i]);
+                }
+            }
+            console.log(num);
+            
+        }
+
+
+
+        // console.log(num);
+        
+
+        /*
+            第一次循环['个人介绍','工作记录',[]]
+            第二次循环['css','html',[]]
+            第三次循环[1,2,3]
+
+            falt(kkb);
+            falt(['css','html',[]])
+            falt([1,2,3])
+
+
+        */
+        // console.log(newArr);
+
+    </script>
+</body>
+</html>

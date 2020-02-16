@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var kkb = ['个人介绍','工作记录',['css','html',[1,2,3]]];
+        var neAarr = []
+        var num = 0
+        
+        flat(kkb)
+        function flat(arr) {
+            for(var i = 0; i < arr.length; i++) {
+                if(Array.isArray(arr[i])) {
+                    flat(arr[i])
+                } else {
+                    num ++
+                    neAarr.push(arr[i])
+                }
+            }
+            console.log(num)
+        }
+        console.log(neAarr)
+
+        /*  分解
+            function flat(['个人介绍','工作记录',['css','html',[1,2,3]]]) {
+                for(var i = 0; i < arr.length; i++) {
+                    if(Array.isArray(arr[i])) {
+                        function flat(['css','html',[1,2,3]]) {
+                            for(var i = 0; i < arr.length; i++) {
+                                if(Array.isArray(arr[i])) {
+                                     function flat([1,2,3]) {
+                                        for(var i = 0; i < arr.length; i++) {
+                                            if(Array.isArray(arr[i])) {
+                                                flat(arr[i])
+                                            } else {
+                                                num ++
+                                                neAarr.push(arr[i])
+                                            }
+                                        }
+                                        console.log(num)
+                                    }
+                                } else {
+                                    num ++
+                                    neAarr.push(arr[i])
+                                }
+                            }
+                            console.log(num)
+                        }
+                    } else {
+                        num ++
+                        neAarr.push(arr[i])
+                    }
+                }
+                console.log(num)
+            }
+        */
+    </script>
+</body>
+</html>

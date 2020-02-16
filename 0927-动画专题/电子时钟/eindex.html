@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @keyframes dot {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        #wrap {
+            display: flex;
+            width: 700px;
+            margin: 100px auto;
+        }
+        .num {
+            width: 80px;
+            height: 120px;
+            margin: 0 10px;
+            overflow: hidden;
+        }
+        .num-inner div {
+            width: 78px;
+            height: 118px;
+            font: 50px/118px "宋体";
+            color: #fff;
+            border: 1px solid #fff;
+            text-align: center;
+            border-radius: 20px;
+            background: #000;
+        }
+        .dot {
+            font: bold 50px/120px "楷体";
+            animation: dot 1s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div class="num">
+            <div class="num-inner">
+                <div>0</div>
+                <div>0</div>
+            </div>
+        </div>
+        <div class="num">
+            <div class="num-inner">
+                <div>0</div>
+                <div>0</div>
+            </div>
+        </div>
+        <div class="dot">:</div>
+        <div class="num">
+            <div class="num-inner">
+                <div>0</div>
+                <div>0</div>
+            </div>
+        </div>
+        <div class="num">
+            <div class="num-inner">
+                <div>0</div>
+                <div>0</div>
+            </div>
+        </div>
+        <div class="dot">:</div>
+        <div class="num">
+            <div class="num-inner">
+                <div>0</div>
+                <div>0</div>
+            </div>
+        </div>
+        <div class="num">
+            <div class="num-inner">
+                <div>0</div>
+                <div>0</div>
+            </div>
+        </div>
+    </div>
+    <script src="mTween.js"></script>
+    <script>
+        (function() {
+            var nums = document.querySelectorAll('.num-inner')
+            var numH = css(document.querySelector('.num'), 'height')
+            var nowTime = '000000'
+
+            getTime()
+            setInterval(getTime, 1000)
+            function getTime() {
+                var nowDate = new Date()
+                var hour = fillZero(nowDate.getHours())
+                var min = fillZero(nowDate.getMinutes())
+                var sec = fillZero(nowDate.getSeconds())
+                console.log(hour, min, sec)
+                nextTime = hour + min + sec
+
+                nums.forEach(function(item, index) {
+                    if(nowTime[index] === nextTime[index]) {
+                        return;
+                    }
+                    var divs = item.querySelectorAll('div')
+                    divs[0].innerHTML = nowTime[index]
+                    divs[1].innerHTML = nextTime[index]
+                    css(item, "translateY", 0)
+                    mTween({
+                        el: item,
+                        attr: {
+                            translateY: -numH
+                        }
+                    })
+                })
+                nowTime = nextTime
+            }
+
+            function fillZero(val) {
+                return val < 10 ? '0' + val : '' + val
+            }
+        })()
+    </script>
+</body>
+</html>

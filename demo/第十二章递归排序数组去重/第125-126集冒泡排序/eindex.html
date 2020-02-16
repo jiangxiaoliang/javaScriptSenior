@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [2,40,93,12,39,11];
+        var turnOff = false
+        
+        // for(var i = 0; i < arr.length; i++) {
+        //     var temp = null
+        //     if(arr[i] > arr[i+1]) {
+        //         temp = arr[i]
+        //         arr[i] = arr[i+1]
+        //         arr[i+1] = temp
+        //     }
+        // }
+
+        for(var i = 0; i < arr.length; i++) {
+            turnOff = false
+            for(var j = 0; j < arr.length - i; j++) {
+                var temp = null
+                if(arr[j] > arr[j+1]) {
+                    temp = arr[j]
+                    arr[j] = arr[j+1]
+                    arr[j+1] = temp
+                    turnOff = true
+                }
+            }
+            if(!turnOff) {
+                break;
+            }            
+            console.log(arr)
+        }
+        // console.log(arr)
+    </script>
+</body>
+</html>

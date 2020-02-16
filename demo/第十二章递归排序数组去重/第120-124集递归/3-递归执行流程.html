@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            准备一个变量，初始值为0，然后再递归中 打印它 0 - 5 的值
+        */
+
+        var num = 0;
+
+        loop(num);
+        // function loop(num){
+        //     if(num<5){
+        //         loop(num + 1);
+        //     }
+        //     console.log(num);
+        // }
+
+
+        function loop(){
+            function loop(){
+                function loop(){
+                    console.log(num);
+                }
+                console.log(num);
+            }
+            console.log(num);
+        }
+
+        /*
+            num的值是多少？？？
+            0 1 .... 5
+        */
+    </script>
+</body>
+</html>

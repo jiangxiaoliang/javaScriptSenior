@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>-</button>
+    <span>0</span>
+    <button>+</button>
+    <script>
+        var btn = document.querySelectorAll('button');
+        var span = document.querySelector('span');
+        btn[0].onclick = function(){
+            var num = Number(span.innerHTML);
+            num--;
+            // if(num<0){
+            //     num = 0;
+            // }
+            num = Math.max(num,0);
+            span.innerHTML = num;
+        }
+        btn[1].onclick = function(){
+            var num = Number(span.innerHTML);
+            num++;
+            // if(num>10){
+            //     num = 10;
+            // }
+            num = Math.min(num, 10);
+            span.innerHTML = num;
+        }
+        /*
+            2-17 = -15
+            17 -2 = 15
+        */
+
+        var num = 2-17;
+
+        var n = Math.abs(num);
+        console.log(n);
+        
+    </script>
+</body>
+</html>

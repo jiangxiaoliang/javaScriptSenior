@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = ['a','c','vv','l'];
+        // for(var i=0;i<arr.length;i++){
+        //     console.log(arr[i],i);
+        // }
+        /*
+            for
+                借用了变量
+                每一次需要判断，要知道arr的length
+                改变变量，去控制循环的次数
+        */
+
+        var a = arr.forEach(function(ele,index,arr){
+            console.log(this); 
+            // console.log(ele,index,arr);
+        },document);
+
+        console.log(a);
+        
+
+        /*
+            arr.forEach(callback[,thisArg])  对数组中的每一个元素，执行一次提供的函数
+                - callback(ele)  函数
+                    - ele :循环过程中的每一位元素
+                    - index: 当前循环的元素对应的下标值
+                    - arr ：调用forEach的当前数组
+                - thisArg： 控制当前callback中的this指向
+
+                该方法返回值是undefined
+
+        */
+    </script>
+</body>
+</html>

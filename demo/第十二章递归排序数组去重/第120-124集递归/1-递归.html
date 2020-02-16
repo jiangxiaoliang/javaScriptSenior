@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var kkb = ['个人介绍','工作记录',['css','html',[1,2,3]]];
+        // var newArr = ['个人介绍', '工作记录', 'css', 'html',1,2,3];
+        var newArr = [];
+        /*
+            数组扁平化:
+                把多层嵌套的数组中的内容都取出，变成一维的数组
+        */
+
+        for(var i=0;i<kkb.length;i++){
+            if(Array.isArray(kkb[i])){
+                // console.log('是数组');
+                for(var k=0;k<kkb[i].length;k++){
+                    if(Array.isArray(kkb[i][k])){
+                    //    console.log('是数组'); 
+                    for(var j=0;j<kkb[i][k].length;j++){
+                        // console.log(kkb[i][k][j]);
+                        if(Array.isArray(kkb[i][k][j])){
+                            console.log('是数组'); 
+                        }else{
+                            console.log('不是数组');
+                            newArr.push(kkb[i][k][j]);
+                        }
+                    }
+                    }else{
+                        // console.log('不是数组');
+                        newArr.push(kkb[i][k]);
+                    }
+                    
+                }
+                
+            }else{
+                // console.log('不是数组');
+                newArr.push(kkb[i]);
+            }
+            
+        }
+        console.log(newArr.length);
+        
+
+
+
+
+
+
+        // console.log(newArr.length);
+        
+
+        // console.log(kkb.length);
+        
+
+
+        // function fn(){
+        //     fn();
+        // }
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = ["a","b","c","d"];
+
+        arr.sort(function(a,b){
+            // return 
+            return Math.random() - 0.5;
+        })
+        console.log(arr);
+        
+
+        /*
+            Math.random()
+                 0 ~ 1，包含0，但是不包含1 
+                 0 - 0.5 ~ 1- 0.5   -0.5 ~ 0.5
+        */ 
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [1,66,36,10,83,35,68,25,20];
+        /*
+            66 36 10 83 35 68 25 20
+
+            66 36 10 20 35 68 25 83
+
+            66 36 10 20 35 25 68 83
+        */
+        var len = arr.length - 1;
+        
+
+        sort(arr,0, len)
+        function sort(arr,start,end){
+            if(start >= end){
+                return;
+            }
+
+            var v = arr[start];
+            var i = start + 1;
+            var j = end;
+            var onOff = true;
+
+            while (i < j) {
+                onOff = false;
+                while (arr[i] <= v && i <= j) {
+                    i++;
+                }
+                while (arr[j] >= v && i <= j) {
+                    j--
+                }
+                if (i < j) {
+                    var n = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = n;
+                    onOff = true;
+                }
+                if (!onOff) {
+                    break;
+                }
+            }
+            if(v>arr[j]){
+                arr[start] = arr[j];
+                arr[j] = v;
+            }
+            sort(arr,start,j-1);
+            sort(arr,j+1,end);
+
+        }
+        console.log(arr);
+        
+        
+
+        
+        
+    </script>
+</body>
+</html>

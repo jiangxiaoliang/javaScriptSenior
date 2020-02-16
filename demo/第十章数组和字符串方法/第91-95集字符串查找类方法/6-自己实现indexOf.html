@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var str = 'kaikeba';
+
+        /*
+            根据我们输入的值，找到对应的index
+                - str 要处理的字符串
+                - searchValue 要找的字符串
+                - fromIndex 查找的起始位置
+        */
+
+        console.log(getIndex(str, 'k',50));
+        function getIndex(str, searchValue, fromIndex){
+            if(fromIndex<0 || fromIndex === undefined){
+                fromIndex = 0;
+            }
+            if(fromIndex>= str.length){
+                return -1;
+            }
+
+            for(var i= fromIndex;i<str.length;i++){
+                if(str.charAt(i) === searchValue){
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = ['one','two','two','one','three'];
+        var newArr = [];
+
+        for(var i=0;i<arr.length;i++){
+            // console.log(arr[i]);
+            /*
+                创建一个新的数组，然后把当前想要去重的这个数组中的每一位
+                都判断一下是否在新数组中有，如果没有，就添加
+            */
+            if(newArr.indexOf(arr[i]) === -1){
+                newArr.push(arr[i]);
+            }
+            
+        }
+        console.log(newArr);
+        
+    </script>
+</body>
+</html>

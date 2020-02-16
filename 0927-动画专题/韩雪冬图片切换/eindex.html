@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="estyle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div id="automatic">
+        <div class="prev_div"></div>
+        <a class="prev" href="###">
+            <span class="ico1"></span>
+            <span class="ico"></span>
+            <span class="txt"></span>
+        </a>
+        <div class="next_div"></div>
+        <a class="next" href="###">
+            <span class="ico1"></span>
+            <span class="ico"></span>
+            <span class="txt"></span>
+        </a>
+        <div class="line"></div>
+        <ul id="pics">
+            <li class="pos_1">
+                <a href="http://www.miaov.com">
+                    <img src="images/1.jpg" width="270" alt="妙味课堂 www.miaov.com" longdesc="http://www.miaov.com" />
+                </a>
+            </li>
+            <li class="pos_2">
+                <a href="http://www.miaov.com">
+                    <img src="images/2.jpg" width="510" alt="妙味课堂 www.miaov.com" longdesc="http://www.miaov.com" />
+                </a>
+            </li>
+            <li class="pos_3">
+                <a href="http://www.miaov.com">
+                    <img src="images/3.jpg" width="680" alt="妙味课堂 www.miaov.com" longdesc="http://www.miaov.com" />
+                </a>
+            </li>
+            <li class="pos_4">
+                <a href="http://www.miaov.com">
+                    <img src="images/4.jpg" width="510" alt="妙味课堂 www.miaov.com" longdesc="http://www.miaov.com" />
+                </a>
+            </li>
+            <li class="pos_5">
+                <a href="http://www.miaov.com">
+                    <img src="images/5.jpg" width="270" alt="妙味课堂 www.miaov.com" longdesc="http://www.miaov.com" />
+                </a>
+            </li>
+            <li class="pos_6">
+                <a href="http://www.miaov.com">
+                    <img src="images/6.jpg" width="270" alt="妙味课堂 www.miaov.com" longdesc="http://www.miaov.com" />
+                </a>
+            </li>
+            <li class="pos_7">
+                <a href="http://www.miaov.com">
+                    <img src="images/7.jpg" width="270" alt="妙味课堂 www.miaov.com" longdesc="http://www.miaov.com" />
+                </a>
+            </li>
+            <li class="pos_8">
+                <a href="http://www.miaov.com">
+                    <img src="images/8.jpg" width="100" alt="妙味课堂 www.miaov.com" longdesc="http://www.miaov.com" />
+                </a>
+            </li>
+        </ul>
+    </div>
+    <script src="mTween.js"></script>
+    <script>
+        // 布局修正
+        (function () {
+            var pics = document.querySelectorAll("#pics li");
+            pics.forEach(function(item, index) {
+                var img = item.querySelector('img')
+                var imgW = img.width
+                css(item, 'width', imgW)
+                img.style.width = '100%'
+                item.style.transition = '1s'
+            })
+        })();
+        (function () {
+            var prev = document.querySelector('.prev_div')
+            var next = document.querySelector('.next_div')
+            var lis = document.querySelectorAll('#pics li')
+            var data = []
+            var attr = ["width","top","left","opacity","zIndex"];
+            // lis.forEach(function (item, index) {
+            //     data.push(item.className)
+            // })
+
+            // prev.onclick = function () {
+            //     data.push(data.shift())
+            //     lis.forEach(function (item, index) {
+            //         item.className = data[index]
+            //     })
+            // }
+            
+            lis.forEach(function(item, index) {
+                var subData = {}
+                attr.forEach(function(attrItem) {
+                    subData[attrItem] = css(item, attrItem)
+                })
+                data.push(subData)
+            })
+            console.log(data)
+            prev.onclick = function() {
+                data.push(data.shift())
+                lis.forEach(function(item, index) {
+                    css(item, data[index])
+                })
+            }
+
+            prev.onmouseover = function () {
+                document.querySelector('.prev .txt').style.opacity = 1
+            }
+            prev.onmouseout = function () {
+                document.querySelector('.prev .txt').style.opacity = 0
+            }
+        })()
+    </script>
+</body>
+
+</html>

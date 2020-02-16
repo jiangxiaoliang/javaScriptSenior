@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [10,20,4,50,60,75,3];
+        var num = [];
+
+        // for(var i=0;i<arr.length;i++){
+        //     if(arr[i]>=50){
+        //         num.push(arr[i]);
+        //     }
+        // }
+        // console.log(num);
+        var newArr = arr.filter(function(ele,index,arr){
+            // console.log(this);
+            
+            // console.log(ele,index,arr);
+            // return false;
+            return ele>=50;
+        },document);
+
+        console.log(arr);
+        
+        console.log(newArr);
+        
+
+        /*
+            filter
+                筛选出符合函数中条件的元素，并作为一个新数组返回
+        */
+
+        /*
+            for循环
+                初始化变量
+                判断条件
+                更改条件
+                if判断
+                ...
+        */
+        
+    </script>
+</body>
+</html>

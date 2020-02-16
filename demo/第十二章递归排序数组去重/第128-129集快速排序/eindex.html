@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [1,66,36,10,83,35,68,25,20];
+        var turnOff = false
+        /*
+            66 36 10 83 35 68 25 20
+            66 36 10 20 35 68 25 83
+            66 36 10 20 35 25 68 83
+            36 10 20 35 25 66 68 83
+        */
+
+        // var mark = arr[0]
+        // var i = 1
+        // var j = arr.length - 1
+        // while(i < j) {
+        //     while(arr[i] < mark) {
+        //         i++
+        //     }
+        //     while(arr[j] > mark) {
+        //         j--
+        //     }
+        //     if(i < j) {
+        //         var temp = null
+        //         temp = arr[i]
+        //         arr[i] = arr[j]
+        //         arr[j] = temp
+        //     }
+        // }
+        // if(mark > arr[j]) {
+        //     arr[0] = arr[j]
+        //     arr[j] = mark
+        // }
+        // console.log(i,j)
+        // console.log(arr)
+
+        sort(arr, 0, arr.length - 1)
+        function sort(arr, start, end) {
+            if(start >= end) {
+                return;
+            }
+            var mark = arr[start]
+            var i = start + 1
+            var j = arr.length - 1
+
+            while(i < j) {
+                trueOff = false
+                while(arr[i] < mark) {
+                    i++
+                }
+                while(arr[j] > mark) {
+                    j--
+                }
+                if(i < j) {
+                    var temp = null
+                    temp = arr[i]
+                    arr[i] = arr[j]
+                    arr[j] = temp
+                    turnOff = true
+                }
+                if(!turnOff) {
+                    break
+                }
+            }
+            if(mark > arr[j]) {
+                arr[start] = arr[j]
+                arr[j] = mark
+            }
+            console.log(arr)
+            sort(arr, start, j - 1)
+            sort(arr, j + 1, end)
+        }
+
+    </script>
+</body>
+</html>
