@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<ul id="list">
+    <li>li1</li>
+    <li>li2</li>
+    <li>li3</li>
+    <li>li4</li>
+</ul>    
+<script>
+(function(){
+    // let list = document.getElementById("list");
+    // let lists = list.getElementsByTagName("li");
+    // //lists = [...lists];
+    // lists = Array.from(lists);
+    // // lists.forEach(item => {
+    // //     console.log(item);
+    // // });
+    // console.log(lists);
+    let datas = {
+        0: "a",
+        1: "b",
+        2: "c",
+        length: 3
+    };
+    // datas = Array.from(datas);
+    datas = Array.from(datas,function(item,index){
+        console.log(item,index,this);
+        return item.toUpperCase();
+    },document);
+    console.log(datas);
+})();
+</script>
+</body>
+</html>
