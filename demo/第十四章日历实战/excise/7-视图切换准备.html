@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>miaov-日历</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<section id="wrap">
+    <div id="date">
+        <div id="clock-wrap">
+            <div id="clock">
+                <ul id="lattice-list"></ul>
+                <div id="box">
+                    <div class="dot"></div>
+                    <div class="hour"></div>
+                    <div class="min"></div>
+                    <div class="sec"></div>
+                </div>
+            </div>
+        </div>
+        <div id="now">
+            <p>2020年2月14日</p>
+            <p>星期二</p>
+        </div>
+    </div>
+    <div id="ctrls">
+        <a href="javascript:;" id="option">2020年2月</a>
+        <div id="arrows">
+            <a href="javascript:;" id="prev"></a>
+            <a href="javascript:;" id="next"></a>
+        </div>
+    </div>
+    <div id="main">
+        <div class="board"></div>
+    </div>
+</section>
+<script src="js/mTween.js"></script>
+<script>
+    // 获取元素
+    function getEl(cssSelector) {
+        var el = document.querySelectorAll(cssSelector)
+        return el.length > 1 ? el : el[0]
+    }
+    //补零
+    function toDB(num) {
+        return num > 10 ? ''+num : '0'+num
+    }
+    // 表盘
+    (function() {
+        var latticeList = getEl('#lattice-list')
+        var hour = getEl('.hour')
+        var min = getEl('.min')
+        var sec = getEl('.sec')
+        //刻度生成
+        latticeList.innerHTML = createLattice()
+        function createLattice() {
+            var inner = ''
+            var deg = 360/12
+            for(var i = 0; i <  12; i++) {
+                inner += '<li class="lattice" style="transform:rotate('+(deg*i)+'deg)"></li>'
+            }
+            return inner
+        }
+        setPointer()
+        setInterval(setPointer, 100)
+        // 修改指针位置
+        function setPointer() {
+            var nowDate = new Date()
+            var seconds = nowDate.getSeconds()
+            var minutes = nowDate.getMinutes() + seconds/60
+            var hours = nowDate.getHours() + minutes/60
+            var secondsDeg = seconds * 360/60
+            var minutesDeg = minutes * 360/60
+            var hoursDeg = hours * 360/12
+            css(hour, 'rotateZ', hoursDeg)
+            css(min, 'rotateZ', minutesDeg)
+            css(sec, 'rotateZ', secondsDeg)
+        }
+    })();
+
+    // 获取当前日期并显示
+    (function(){
+        var now = getEl('#now')
+        var nowDate = new Date()
+        var nowYear = nowDate.getFullYear()
+        var nowMonth = toDB(nowDate.getMonth() + 1)
+        var date = toDB(nowDate.getDate())
+        var nowDay = nowDate.getDay()
+        var week = ['日','一','二','三','四','五','六']
+        now.innerHTML = '<p>'+nowYear+'年'+nowMonth+'月'+date+'日</p><p>星期'+week[nowDay]+'</p>'
+    })();
+
+    // 试图生成及切换
+    (function(){
+        var main = getEl('#main')
+        var board = getEl('.board')
+        var option = getEl('#option')
+        var optionType = 0; // 0-日期视图 1-月视图 3-年视图
+        var date = new Date()
+
+        // 当下年月日
+        var thisYear = date.getFullYear()
+        var thisMonth = date.getMonth()
+        var thisDate = date.getDate()
+
+        // 记录日期切换后的结果
+        var nowYear = thisYear
+        var nowMonth = thisMonth
+        var nowDate = thisDate
+
+        option.onclick = function() {
+            optionType++
+            if(optionType > 2) {
+                optionType = 2
+            } else {
+                createOption()
+                tabView()
+            }
+        }
+        createOption()
+        createDateView(board, nowYear, nowMonth)
+
+        // 根据option切换试图
+        function tabView() {
+            switch(optionType) {
+                case 0:
+                    createDateView(board, nowYear, nowMonth)
+                    break;
+                case 1:
+                    createMonthView(board)
+                    break;
+                case 2:
+                    createYearView(board, nowYear)
+            }
+        }
+
+        // 判断option显示日期格式
+        function createOption() {
+            switch(optionType) {
+                case 0:
+                    option.innerHTML = nowYear + '年'+(nowMonth+1)+'月'
+                    break;
+                case 1:
+                    option.innerHTML = nowYear + '年'
+                    break;
+                case 2:
+                    var startYear = Math.floor(nowYear/10)*10
+                    var endYear = startYear + 9
+                    option.innerHTML = startYear + ' - ' + endYear
+                    break;
+            }
+        }
+
+        // 生成日期试图
+        function createDateView(board, year, month) {
+            var headerView = '<ul class="week"><li class="date-cell">日</li><li class="date-cell">一</li><li class="date-cell">二</li><li class="date-cell">三</li><li class="date-cell">四</li><li class="date-cell">五</li><li class="date-cell">六</li></ul>'
+            var dateUl = '<ul class="date">'
+            var firstDay = new Date(year, month, 1).getDay() // 当月星期几
+            var lastMonth = new Date(year, month, 0).getDate() // 上个月总天数
+            var thisMonth = new Date(year, month + 1, 0).getDate() // 这个月总天数
+            for(var i = 0; i < 42; i++) {
+                if(i < firstDay) {
+                    dateUl += '<li class="date-cell other-date">'+(lastMonth-firstDay+i+1)+'</li>'
+                } else if (i - firstDay < thisMonth) {
+                    dateUl += '<li class="date-cell">'+(i-firstDay+1)+'</li>'
+                } else {
+                    dateUl += '<li class="date-cell other-date">'+(i - thisMonth-firstDay+1)+'</li>'
+                }
+            }
+            dateUl += '</ul>'
+            board.innerHTML = headerView + dateUl
+        }
+        
+        // 生成月份视图
+        function createMonthView(board) {
+            var monthUl = '<ul class="month">'
+            for(var i = 1; i <= 12; i++) {
+                monthUl += '<li class="month-cell">'+(i)+'月</li>'
+            }
+            monthUl += '</ul>'
+            board.innerHTML = monthUl
+        }
+        
+        // 生成年份视图
+        function createYearView(board, year) {
+            var startYear = Math.floor(year/10) * 10
+            var yearUl = '<ul class="year">'
+            for(var i = 0; i < 16; i++) {
+                if(i < 4) {
+                    yearUl += '<li class="year-cell other-yaer">'+(startYear - 4 + i)+'</li>'
+                } else if (i < 14) {
+                    yearUl += '<li class="year-cell">'+(i - 4 + startYear)+'</li>'
+                } else {
+                    yearUl += '<li class="year-cell other-yaer">'+(i + startYear - 4)+'</li>'
+                }
+            }
+            yearUl += '</ul>'
+            board.innerHTML = yearUl
+        }
+    })()
+    
+</script>    
+</body>
+</html>

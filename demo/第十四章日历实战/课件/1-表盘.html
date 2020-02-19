@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>miaov-日历</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<section id="wrap">
+    <div id="date">
+        <div id="clock-wrap">
+            <div id="clock">
+                <ul id="lattice-list"></ul>
+                <div id="box">
+                    <div class="dot"></div>
+                    <div class="hour"></div>
+                    <div class="min"></div>
+                    <div class="sec"></div>
+                </div>
+            </div>
+        </div>
+        <div id="now">
+            <p>2019年3月18日</p>
+            <p>星期一</p>
+        </div>
+    </div>
+    <div id="ctrls">
+        <a href="javascript:;" id="option">2019年3月</a>
+        <div id="arrows">
+            <a href="javscript:;" id="prev"></a>
+            <a href="javascript:;" id="next"></a>
+        </div>
+    </div>
+    <div id="main">
+        <div class="board"></div>
+    </div>
+</section>
+<script src="js/mTween.js"></script>
+<script>
+// 获取元素
+
+function getEl(selector){
+    return document.querySelector(selector);
+}
+// 表盘
+(function(){
+    var latticeList =getEl("#lattice-list");
+    var hour = getEl(".hour");
+    var min = getEl(".min");
+    var sec = getEl(".sec");
+
+    // 刻度生成
+    latticeList.innerHTML = createLattice();
+    function createLattice(){
+        var inner = "";
+        var deg = 360/12;
+        for(var i = 0; i < 12; i++){
+            inner += '<li class="lattice" style="transform:rotate('+deg*i+'deg)"></li>';
+        }
+        return inner;
+    }
+    setInterval(setPointer,1000);
+    setPointer();
+    // 修改指针角度
+    function setPointer(){
+        var nowDate = new Date();
+        var seconds = nowDate.getSeconds();
+        var minutes = nowDate.getMinutes() + seconds/60;
+        var hours = nowDate.getHours() + minutes/60;
+        var secondsDeg = 360/60 * seconds;
+        var minutesDeg = 360/60 * minutes;
+        var hoursDeg = 360/12 * hours;
+        console.log(sec);
+        css(sec,"rotate",secondsDeg);
+        css(min,"rotate",minutesDeg);
+        css(hour,"rotate",hoursDeg);
+    }
+
+})();
+</script>    
+</body>
+</html>

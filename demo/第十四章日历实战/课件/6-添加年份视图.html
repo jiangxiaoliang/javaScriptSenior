@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>miaov-日历</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <section id="wrap">
+        <div id="date">
+            <div id="clock-wrap">
+                <div id="clock">
+                    <ul id="lattice-list"></ul>
+                    <div id="box">
+                        <div class="dot"></div>
+                        <div class="hour"></div>
+                        <div class="min"></div>
+                        <div class="sec"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="now">
+                <p>2019年3月18日</p>
+                <p>星期一</p>
+            </div>
+        </div>
+        <div id="ctrls">
+            <a href="javascript:;" id="option">2019年3月</a>
+            <div id="arrows">
+                <a href="javscript:;" id="prev"></a>
+                <a href="javascript:;" id="next"></a>
+            </div>
+        </div>
+        <div id="main">
+            <div class="board"></div>
+        </div>
+    </section>
+    <script src="js/mTween.js"></script>
+    <script>
+        // 获取元素
+        function getEl(selector) {
+            return document.querySelector(selector);
+        }
+
+        // 补零
+        function toDB(nub) {
+            return nub < 10 ? "0" + nub : "" + nub;
+        }
+
+
+        // 表盘
+        (function () {
+            var latticeList = getEl("#lattice-list");
+            var hour = getEl(".hour");
+            var min = getEl(".min");
+            var sec = getEl(".sec");
+
+            // 刻度生成
+            latticeList.innerHTML = createLattice();
+            function createLattice() {
+                var inner = "";
+                var deg = 360 / 12;
+                for (var i = 0; i < 12; i++) {
+                    inner += '<li class="lattice" style="transform:rotate(' + deg * i + 'deg)"></li>';
+                }
+                return inner;
+            }
+            setInterval(setPointer, 1000);
+            setPointer();
+            // 修改指针角度
+            function setPointer() {
+                var nowDate = new Date();
+                var seconds = nowDate.getSeconds();
+                var minutes = nowDate.getMinutes() + seconds / 60;
+                var hours = nowDate.getHours() + minutes / 60;
+                var secondsDeg = 360 / 60 * seconds;
+                var minutesDeg = 360 / 60 * minutes;
+                var hoursDeg = 360 / 12 * hours;
+                css(sec, "rotate", secondsDeg);
+                css(min, "rotate", minutesDeg);
+                css(hour, "rotate", hoursDeg);
+            }
+        })();
+
+        // 获取当前日期并显示
+        (function () {
+            var now = getEl("#now");
+            var nowDate = new Date;
+            var nowYear = nowDate.getFullYear();
+            var month = toDB(nowDate.getMonth() + 1);
+            var date = toDB(nowDate.getDate());
+            var day = nowDate.getDay(); // 1
+            var week = ["日", "一", "二", "三", "四", "五", "六"];
+            now.innerHTML = '<p>' + nowYear + '年' + month + '月' + date + '日</p><p>星期' + week[day] + '</p>';
+        })();
+
+        var board = document.querySelector(".board");
+        createYearView(board,2019)
+        // 生成 日期视图
+        function createDateView(board,year,month){
+            var headerView = '<ul class="week"><li class="date-cell">日</li><li class="date-cell">一</li><li class="date-cell">二</li><li class="date-cell">三</li><li class="date-cell">四</li><li class="date-cell">五</li><li class="date-cell">六</li></ul>';
+            var dateUl = '<ul class="date">';
+            // 获取当前月第一天是周几
+            var firstDay = new Date(year,month,1).getDay(); 
+            var lastMonth =  new Date(year,month,0).getDate();
+            var lastDate = new Date(year,month+1,0).getDate();
+            console.log(lastDate);
+            // console.log(firstDay);  
+            // 29 30 31  3
+            for(var i = 0; i < 42; i++){
+                if(i<firstDay){
+                    dateUl += '<li class="date-cell other-date">'+(lastMonth - (firstDay - i - 1))+'</li>'; 
+                } else if (i - firstDay  < lastDate) {
+                    dateUl += '<li class="date-cell">'+(i - firstDay + 1)+'</li>'; 
+                } else {
+                    dateUl += '<li class="date-cell other-date">'+(i - (firstDay+lastDate) + 1)+'</li>'; 
+                }
+            }
+            dateUl += "</ul>";
+            board.innerHTML = headerView + dateUl;
+        }
+        function createMonthView(board){
+            var monthUl = '<ul class="month">';
+            for(var i = 1; i <= 12; i++){
+                monthUl += '<li class="month-cell">'+(i)+'月</li>'; 
+            }
+            monthUl += "</ul>";
+            board.innerHTML = monthUl;
+        }
+        // 2020
+        function createYearView(board,year){
+            var startYear = Math.floor(year/10)*10;
+            var yearUl = '<ul class="year">';
+            // 0 startYear - (4 - 0)
+            // 1 startYear - (4 - 1)
+            // 2 startYear - (4 - 2)
+            // 3 startYear - (4 - 3)
+            for(var i = 0; i < 16; i++){
+                if(i < 4){
+                    yearUl += '<li class="year-cell other-yaer">'+(startYear - (4 - i))+'</li>'; 
+                } else if(i < 14){
+                    yearUl += '<li class="year-cell">'+ (startYear + i - 4) +'</li>'; 
+                } else {
+                    yearUl += '<li class="year-cell other-yaer">'+(startYear - (4 - i))+'</li>'; 
+                }
+            }
+            yearUl += "</ul>";
+            board.innerHTML = yearUl;
+        }
+    </script>
+</body>
+</html>
