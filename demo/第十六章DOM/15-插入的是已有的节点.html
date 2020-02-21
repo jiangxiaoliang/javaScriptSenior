@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box1">
+        <div id="div1">div1</div>
+    </div>
+    <div id="box2">
+        <div id="div2">div2</div>
+    </div>
+    <script>
+        /*
+            如果插入是一个已有的节点，会先把这个节点从原有位置删除，在添加到新的位置
+        */
+        {
+            let box1 = document.querySelector('#box1')
+            let div1 = document.querySelector('#div1')
+            let box2 = document.querySelector('#box2')
+            let div2 = document.querySelector('#div2')
+            box1.insertBefore(div2, div1)
+        }
+    </script>
+</body>
+</html>

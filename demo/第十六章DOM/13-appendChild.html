@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <p>这是</p>
+    </div>
+    <script>
+        /*
+            parent.appendChild(node) 向parent节点插入node, node插入在parent最末尾
+        */
+        {
+            let box = document.querySelector('#box')
+            let h1 = document.createElement('h1')
+            h1.innerHTML = '这是标题'
+            box.appendChild(h1)
+        }
+    </script>
+</body>
+</html>

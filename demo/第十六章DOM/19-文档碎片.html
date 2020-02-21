@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        {
+            let box = document.querySelector('#box')
+            // let inner = ''
+            // console.time(1)
+            // for(let i = 0; i < 10000; i++) {
+            //     inner += `<div>${i}</div>`
+            // }
+            // box.innerHTML = inner
+            // console.timeEnd(1)
+
+            // console.time(1)
+            // let fragment = document.createDocumentFragment()
+            // for(let i = 0; i < 10000; i++) {
+            //     let div = document.createElement('div')
+            //     div.innerHTML = i
+            //     fragment.appendChild(div)
+            // }
+            // box.appendChild(fragment)
+            // console.timeEnd(1)
+
+            console.time(1)
+            for(let i = 0; i < 10000; i++) {
+                let div = document.createElement('div')
+                div.innerHTML = i
+                box.appendChild(div)
+            }
+            console.timeEnd(1)
+        }
+    </script>
+</body>
+</html>

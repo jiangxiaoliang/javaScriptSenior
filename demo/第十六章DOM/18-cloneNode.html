@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background: red;
+            border: 2px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="box1">
+            <div>div</div>
+        </div>
+    </div>
+    <script>
+        {
+            let box = document.querySelector('#box')
+            let box1 = document.querySelector('#box1')
+            box1.onclick = function() {
+                alert(1)
+            }
+            box.appendChild(box1.cloneNode(true))
+        }
+    </script>
+</body>
+</html>
