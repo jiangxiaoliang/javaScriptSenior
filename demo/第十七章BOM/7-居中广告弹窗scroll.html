@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .inner {
+            height: 200px;
+            border: 2px solid #000;
+        }
+        #banner {
+            position: absolute;
+            height: 200px;
+            width: 200px;
+            background: #000;
+            left: 0;
+            top: 0;
+            font: 20px/50px '宋体';
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id='banner'>广告弹窗</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <div class='inner'>页面内容</div>
+    <script>
+        {
+            let banner = document.querySelector('#banner')
+            // banner.style.left = (window.innerWidth - banner.offsetWidth) / 2 + 'px'
+            // banner.style.top = (window.innerHeight - banner.offsetHeight) / 2 + 'px'
+            let resizeBanner = () => {
+                let l = (window.innerWidth - banner.offsetWidth) / 2
+                let t = (window.innerHeight - banner.offsetHeight) / 2
+                let scrollL = document.documentElement.scrollLeft || document.body.scrollLeft
+                let scrollT = document.documentElement.scrollTop || document.body.scrollTop
+                banner.style.left = l + scrollL + 'px'
+                banner.style.top = t + scrollT + 'px'
+            }
+            resizeBanner()
+            
+            window.onresize = function() {
+                // console.log('a')
+                banner.style.transition = '1s'
+                resizeBanner()
+            }
+
+            window.onscroll = function() {
+                banner.style.transition = '1s'
+                resizeBanner()
+            }
+        }
+    </script>
+</body>
+</html>
