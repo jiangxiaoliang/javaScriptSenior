@@ -146,13 +146,13 @@
                         createMonthView(board[0], nowYear)
                         nowYear++
                         getNowDate()
-                        createMonthView(board[0], nowYear)
+                        createMonthView(board[1], nowYear)
                         break;
                     case 2:
                         createYearView(board[0], nowYear)
                         now += 10
                         getNowDate()
-                        createYearView(board[0], nowYear)
+                        createYearView(board[1], nowYear)
                 }
             } else { // 向下移动
                 main.innerHTML = '<div class="topOut board"></div><div class="board toTop"></div>';
@@ -168,13 +168,13 @@
                         createMonthView(board[0], nowYear)
                         nowYear--
                         getNowDate()
-                        createMonthView(board[0], nowYear)
+                        createMonthView(board[1], nowYear)
                         break;
                     case 2:
                         createYearView(board[0], nowYear)
                         now -= 10
                         getNowDate()
-                        createYearView(board[0], nowYear)
+                        createYearView(board[1], nowYear)
                 }
             }
             createOption()
