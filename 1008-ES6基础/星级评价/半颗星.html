@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .nav {
+            margin: 100px auto;
+            width: 200px;
+            position: relative;
+        }
+        .nav nav {
+            display: flex;
+        }
+        .nav a {
+            width: 20px;
+            overflow: hidden;
+        }
+        .nav a:nth-child(2n) span {
+            margin-left: -20px;
+        }
+        .nav span {
+            display: block;
+            width: 40px;
+            font: 36px/40px '宋体';
+            text-align: center;
+        }
+        .nav mark {
+            position: absolute;
+            right: -100px;
+            top: 0;
+            width: 60px;
+            font: 16px/40px "宋体";
+            color: #fff;
+            background: red;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- ☆★ -->
+    <div class='nav'>
+        <nav>
+            <a><span>☆</span></a>
+            <a><span>☆</span></a>
+            <a><span>☆</span></a>
+            <a><span>☆</span></a>
+            <a><span>☆</span></a>
+            <a><span>☆</span></a>
+            <a><span>☆</span></a>
+            <a><span>☆</span></a>
+            <a><span>☆</span></a>
+            <a><span>☆</span></a>
+        </nav>
+        <mark>一般</mark>
+    </div>
+    <script>
+        {
+            let navs = document.querySelectorAll('.nav span')
+            let mark = document.querySelector('.nav mark')
+            let info = ['很差','较差','一般','良好','优秀']
+            let now = -1
+
+            navs.forEach((item, index) => {
+                item.onmouseover = () => {
+                    tab(index)
+                }
+                item.onmouseout = () => {
+                    tab(now)
+                }
+                item.onclick = () => {
+                    now = index
+                }
+            })
+
+            function tab(index) {
+                for(let i = 0; i < navs.length; i++) {
+                    if(i <= index) {
+                        navs[i].innerHTML = '★'
+                    } else {
+                        navs[i].innerHTML = '☆'
+                    }
+                }
+                if(index < 0) {
+                    mark.style.display = 'none'
+                    return
+                }
+                mark.style.display = 'block'
+                mark.innerHTML = (index + 1) / 2
+            }
+        }
+    </script>
+</body>
+</html>
