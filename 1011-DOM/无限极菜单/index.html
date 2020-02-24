@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="data.js"></script>
+    <style>
+        li ul {
+            display: none;
+        }
+        li .show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="list">
+    <!-- <ul>
+        <li>
+            <p>第一级菜单</p>
+            <ul>
+                <li>
+                    <p>第二级菜单</p>
+                    <ul>
+                        <li>
+                            <p>第三级菜单</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>     -->
+</div>
+<script>
+{
+    let list = document.querySelector('#list')
+    let topId = -1
+
+    // 根据id获取子级
+    let getChild = id => {
+        return data.filter(item => item.pid == id)
+    }
+
+    // 视图渲染
+    let render = id => {
+        let childData = getChild(id)
+        if(childData.length < 1) return ''
+        return (`<ul>${childData.map(item => {
+                return (`<li>
+                        <p>${item.title}</p>
+                        ${render(item.id)}
+                    </li>`)
+            }).join('')}
+        </ul>`)
+    }
+    list.innerHTML = render(topId)
+
+    // 添加点击事件
+    // let p = document.querySelectorAll('#list p')
+    // p.forEach((item,index) => {
+    //     let ul = item.nextElementSibling
+    //     item.onclick = () => {
+    //         if(!ul) return
+    //         ul.style.display = 'block'
+    //     }
+    // })
+
+    let p = document.querySelectorAll('#list p')
+    p.forEach((item,index) => {
+        let ul = item.nextElementSibling
+        item.onclick = () => {
+            if(!ul) return
+            let parent = item.parentNode.parentNode
+            let uls = parent.querySelectorAll('ul')
+            uls.forEach(item => {
+                if(item != ul) {
+                    item.style.display = 'none'
+                } else {
+                    if(item.style.display == 'block') {
+                        item.style.display = 'none'
+                    } else {
+                        item.style.display = 'block'
+                    }
+                }
+            })
+        }
+    })
+}    
+</script>
+
+</body>
+</html>
