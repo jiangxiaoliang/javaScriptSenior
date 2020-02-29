@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul {
+            width: 200px;
+            border: 1px solid #000;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+        li {
+            border: 1px solid #000;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body style="height: 3000px;">
+    <ul>
+        <li>笑一笑</li>
+        <li>开怀大笑</li>
+        <li>笑不停</li>
+        <li>停不下来</li>
+        <li>笑一个</li>
+    </ul>
+    <script>
+        {
+            let ul = document.querySelector('ul')
+            document.addEventListener('contextmenu', (e) => {
+                let l = e.pageX
+                let t = e.pageY
+                ul.style.display = 'block'
+                ul.style.left = l + 'px'
+                ul.style.top = t + 'px'
+                e.preventDefault()
+            })
+        }
+    </script>
+</body>
+</html>

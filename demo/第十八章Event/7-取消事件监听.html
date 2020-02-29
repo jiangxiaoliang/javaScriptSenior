@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            height: 100px;
+            width: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <input type='button' value='取消事件监听'>
+    <script>
+        {
+            let div = document.querySelector('div')
+            let btn = document.querySelector('input')
+
+            let fn = () => {
+                alert('dvi')
+            }
+            div.addEventListener('click', fn)
+
+            btn.addEventListener('click', () => {
+                // 绑定的事件函数-必须是命名函数！
+                div.removeEventListener('click', fn)
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            left: 0;
+            top: 0;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        {
+            let div = document.querySelector('div')
+            let scale = 1
+
+            let getCss = (el, attr, val) => {
+                if(val === undefined) {
+                    return el.currentStyle ? el.currentStyle[attr] : getComputedStyle(el)[attr]
+                } else {
+                    el.style[attr] = val
+                }
+            }
+
+
+            document.addEventListener('keydown', (e) => {
+                // console.log(e.keyCode)
+                let keyCode = e.keyCode
+                let l = parseInt(getCss(div, 'left'))
+                let t = parseInt(getCss(div, 'top'))
+                // 上87 38下83 40左65 37右68 39
+                if(keyCode === 87 || keyCode === 38) {
+                    console.log('top')
+                    t -= 5
+                    if(t <=0) {
+                        t = 0
+                    }
+                    getCss(div, 'top', t + 'px')
+                }
+                if(keyCode === 83 || keyCode === 40) {
+                    console.log('up')
+                    t += 5
+                    getCss(div, 'top', t + 'px')
+                }
+                if(keyCode === 65 || keyCode === 37) {
+                    console.log('left')
+                    l -= 5
+                    if(l <= 0) {
+                        l = 0
+                    }
+                    getCss(div, 'left', l + 'px')
+                }
+                if(keyCode === 68 || keyCode === 39) {
+                    console.log('right')
+                    l += 5
+                    console.log(l)
+                    getCss(div, 'left', l + 'px')
+                }
+
+                if(keyCode === 38 && e.ctrlKey) {
+                    scale += 0.5
+                    getCss(div, 'transform', 'scale('+scale+')')
+                }
+                if(keyCode === 40 && e.ctrlKey) {
+                    scale -= 0.5
+                    getCss(div, 'transform', 'scale('+scale+')')
+                }
+            })
+        }
+    </script>
+</body>
+</html>

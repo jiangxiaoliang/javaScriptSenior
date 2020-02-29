@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background: red;
+            margin: 100px auto;
+        }
+        p {
+            width: 100px;
+            height: 100px;
+            background: blue;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p></p>
+    </div>
+    <script>
+        {
+            let div = document.querySelector('div')
+            let p = document.querySelector('p')
+
+            div.addEventListener('click', () => {
+               alert('div')
+            })
+            p.addEventListener('click', (e) => {
+                // 取消冒泡
+                e.stopPropagation()
+                alert('p')
+            })
+        }
+    </script>
+</body>
+</html>

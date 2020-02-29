@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        {
+            let div = document.querySelector('div')
+            let w = 100
+
+            let wheel = (el, upFn, downFn) => {
+                el.addEventListener('mousewheel', (e) => {
+                    // console.log(e)   
+                    // 上：正数 下：负数
+                    console.log(e.wheelDelta)
+                    if(e.wheelDelta > 0) {
+                        upFn && upFn.call(el)
+                    } else {
+                        downFn && downFn.call(el)
+                    }
+                })
+
+                el.addEventListener('DOMMouseScroll', (e) => {
+                    // console.log(e)
+                    // 上：负数 下：正数
+                    console.log(e.detail)
+                    if(e.detail < 0) {
+                        upFn && upFn.call(el)
+                    } else {
+                        downFn && downFn.call(el)
+                    }
+                })
+            }
+
+            wheel(div, function() {
+                w += 5
+                // div.style.height = w + 'px'
+                console.log(this)
+                this.style.height = w + 'px'
+            }, function() {
+                w -= 5
+                // div.style.height = w + 'px'
+                this.style.height = w + 'px'
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin: 50px 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script>
+        {
+            /*
+                需求：点击li使其变黄
+                      1.循环添加点击事件
+                      2.通过事件委托
+            */
+            let ul = document.querySelector('ul')
+            
+            ul.addEventListener('click', (e) => {
+                // console.log(e.target)
+                e.target.style.background = 'yellow'
+            })
+        }
+    </script>
+</body>
+</html>

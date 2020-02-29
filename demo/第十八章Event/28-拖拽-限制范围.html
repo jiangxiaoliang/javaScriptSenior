@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 0;
+            left: 0;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        {
+            // mousedown mousemove mouseup
+            let div = document.querySelector('div')
+            let divPos = {}
+            let startPos = {}
+
+            let getCss = (el, attr, val) => {
+                if(val === undefined) {
+                    return el.currentStyle ? el.currentStyle[attr] : getComputedStyle(el)[attr]
+                } else {
+                    el.style[attr] = val
+                }
+            }
+
+            let move = (e) => {
+                let nowPos = {
+                        x: e.clientX,
+                        y: e.clientY
+                    }
+                    dis = {
+                        x: nowPos.x - startPos.x,
+                        y: nowPos.y - startPos.y
+                    }
+                    let newPos = {
+                        x: dis.x + divPos.x,
+                        y: dis.y + divPos.y
+                    }
+                    if(newPos.x < 0) {
+                        newPos.x = 0
+                    }
+                    if(newPos.x > window.innerWidth - div.offsetWidth) {
+                        newPos.x = window.innerWidth - div.offsetWidth
+                    }
+                    if(newPos.y < 0) {
+                        newPos.y = 0
+                    }
+                    if(newPos.y > window.innerHeight - div.offsetHeight) {
+                        newPos.y = window.innerHeight - div.offsetHeight
+                    }
+                    getCss(div, 'left', newPos.x + 'px')
+                    getCss(div, 'top', newPos.y + 'px')
+            }
+
+            div.addEventListener('mousedown', (e) => {
+                startPos = {
+                    x: e.clientX,
+                    y: e.clientY
+                }
+                divPos = {
+                    x: parseInt(getCss(div, 'left')),
+                    y: parseInt(getCss(div, 'top'))
+                }
+                // 移动
+                document.addEventListener('mousemove', move)
+                document.addEventListener('mouseup', () => {
+                    document.removeEventListener('mousemove', move)
+                }, {
+                    once: true
+                })
+            })
+        }
+    </script>
+</body>
+</html>

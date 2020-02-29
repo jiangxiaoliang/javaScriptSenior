@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background: red;
+            margin: 100px auto;
+        }
+        p {
+            width: 100px;
+            height: 100px;
+            background: blue;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p></p>
+    </div>
+    <script>
+        {
+            let div = document.querySelector('div')
+
+            // 如果鼠标移入或移除子元素，会触发mouseover,mouseout
+            div.addEventListener('mouseover', () => {
+                console.log('over')
+            })
+            div.addEventListener('mouseout', () => {
+                console.log('out')
+            })
+        }
+    </script>
+</body>
+</html>

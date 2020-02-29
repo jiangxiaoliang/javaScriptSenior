@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            height: 200px;
+            width: 200px;
+            background: red;
+        }
+        p {
+            height: 100px;
+            width: 100px;
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p></p>
+    </div>
+    <script>
+        {
+            let div = document.querySelector('div')
+            let p = document.querySelector('p')
+
+            // js当中有一个特性： 事件会冒泡
+            //  DOM树 
+            // html > body > div > p 
+            // p标签 包含在 div/body/html
+            // 执行子元素事件同时，父元素如有同样事件，也会执行
+            // 事件冒泡的执行顺序  ： 由小到大  p > div > body > html 
+            document.body.addEventListener('click', () => {
+                alert('body')
+            })
+            div.addEventListener('click', () => {
+                alert('div')
+            })
+            p.addEventListener('click', () => {
+                alert('p')
+            })
+        }
+    </script>
+</body>
+</html>

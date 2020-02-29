@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        {
+            // google id
+            document.addEventListener('mousewheel', (e) => {
+                // console.log(e)   
+                // 上：正数 下：负数
+                console.log(e.wheelDelta)
+            })
+
+            document.addEventListener('DOMMouseScroll', (e) => {
+                // console.log(e)
+                // 上：负数 下：正数
+                console.log(e.detail)
+            })
+        }
+    </script>
+</body>
+</html>

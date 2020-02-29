@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id='form'>
+        <input type='text' id = 'txt' />
+        <input type='submit' id='submit' />
+        <input type='reset' id='reset' />
+    </form>
+    <script>
+        {
+            let txt = document.querySelector('#txt')
+            let submit = document.querySelector('#submit')
+            let reset = document.querySelector('#reset')
+            let form = document.querySelector('#form')
+
+            txt.addEventListener('focus', () => {
+                console.log('focus')
+            })
+
+            txt.addEventListener('change', () => {
+                console.log('change')
+            })
+
+            txt.addEventListener('input', () => {
+                console.log('input')
+            })
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault()
+                console.log('submit')
+            })
+
+            form.addEventListener('reset', () => {
+                console.log('reset')
+            })
+
+            document.addEventListener('keydown', (e) => {
+                console.log(e.keyCode)
+                if(e.keyCode === 13) {
+                    // 失去焦点
+                    txt.blur()
+                }
+                if(e.keyCode === 32) {
+                    // 获得焦点
+                    txt.focus()
+                }
+                if(e.keyCode === 16) {
+                    txt.select()
+                }
+            })
+        }
+    </script>
+</body>
+</html>

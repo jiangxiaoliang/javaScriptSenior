@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        {
+            let div = document.querySelector('div')
+            let w = 100
+
+            div.addEventListener('mousewheel', (e) => {
+                if(e.wheelDelta > 0) {
+                    w += 5
+                    div.style.height = w + 'px'
+                } else {
+                    w -= 5
+                    div.style.height = w + 'px'
+                }
+            })
+        }
+    </script>
+</body>
+</html>
