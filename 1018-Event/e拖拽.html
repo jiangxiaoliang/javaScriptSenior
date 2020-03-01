@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 0;
+            top: 0;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    文字 <br />
+    文字 <br />
+    文字 <br />
+    文字 <br />
+    文字 <br />
+    文字 <br />
+    文字 <br />
+    <div>文字</div>
+    <script>
+        function css(el, attr, val) {
+            if(val === undefined) {
+                return el.currentSytle ? parseFloat(el.currentSytle[attr]) : parseFloat(getComputedStyle(el)[attr])
+            } else {
+                el.style[attr] = val
+            }
+        }
+        {
+            let div = document.querySelector('div')
+            let startMouse = {}
+            let startDiv = {}
+
+            let move = (e) => {
+                let nowMouse = {
+                    x: e.clientX,
+                    y: e.clientY
+                }
+                let disMouse = {
+                    x: nowMouse.x - startMouse.x,
+                    y: nowMouse.y - startMouse.y
+                }
+                css(div, 'left', disMouse.x + startDiv.x + 'px')
+                css(div, 'top', disMouse.y + startDiv.y + 'px')
+            }
+
+            div.addEventListener('mousedown', (e) => {
+                startMouse = {
+                    x: e.clientX,
+                    y: e.clientY
+                }
+                startDiv = {
+                    x: css(div, 'left'),
+                    y: css(div, 'top')
+                }
+                document.addEventListener('mousemove', move)
+                document.addEventListener('mouseup', () => {
+                    document.removeEventListener('mousemove', move)
+                }, {
+                    once: true
+                })
+                e.preventDefault()
+            })
+        }
+    </script>
+</body>
+</html>

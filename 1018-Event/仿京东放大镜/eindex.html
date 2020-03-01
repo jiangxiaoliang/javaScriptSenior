@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href="eindex.css" />
+</head>
+<body>
+    <div id='box'>
+        <div id='left'>
+            <img src='images/img.png' id='imgs1' />
+            <div id='mask'></div>
+        </div>
+        <div id='right'>
+            <div id='border'>
+                <img src='images/img.png' id='img2' />
+            </div>
+        </div>
+    </div>
+    <script>
+        function css(el, attr, val) {
+            if(val === undefined) {
+                return el.currentSytle ? parseFloat(el.currentSytle[attr]) : parseFloat(getComputedStyle(el)[attr])
+            } else {
+                el.style[attr] = val
+            }
+        }
+        {
+            let left = document.querySelector('#left')
+            let mask = document.querySelector('#mask')
+            let right = document.querySelector('#right')
+            let border = document.querySelector('#border')
+            let imgs1 = document.querySelector('#imgs1')
+            let img2 = document.querySelector('#img2')
+            let scale = 2
+
+            mask.style.height = border.clientHeight / scale + 'px'
+            mask.style.width = border.clientWidth / scale + 'px'
+            img2.style.width = css(imgs1, 'width') * scale + 'px'
+            img2.style.height = css(imgs1, 'height') * scale + 'px'
+
+            right.style.display = 'none'
+            left.addEventListener('mouseenter', (e) => {
+                mask.style.display = 'block'
+                right.style.display = 'block'
+            })
+
+            left.addEventListener('mouseleave', (e) => {
+                mask.style.display = 'none'
+                right.style.display = 'none'
+            })
+
+            left.addEventListener('mousemove', (e) => {
+                // console.log(e.clientX, e.clientY)
+                let {x, y} = left.getBoundingClientRect()
+                let maskHeight = mask.clientHeight
+                x = e.clientX - x - maskHeight/2
+                y = e.clientY - y - maskHeight/2
+
+                x = Math.max(0, x)
+                x = Math.min(left.clientWidth - mask.offsetWidth,x)
+                y = Math.max(0, y)
+                y = Math.min(left.clientHeight - mask.offsetWidth, y)
+
+                mask.style.left = x  + 'px'
+                mask.style.top = y + 'px'
+
+                img2.style.left = -x * scale + 'px'
+                img2.style.top = -y * scale + 'px'
+            })
+
+        }
+    </script>
+</body>
+</html>

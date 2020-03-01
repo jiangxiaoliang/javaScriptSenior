@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 0;
+            top: 0;
+            background: red;
+        }
+        .box1 {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            left: calc(50% - 50px);
+            top: calc(50% - 50px);
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class='box'>文字</div>
+    <div class="box1"></div>
+    <script>
+        function css(el, attr, val) {
+            if(val === undefined) {
+                return el.currentSytle ? parseFloat(el.currentSytle[attr]) : parseFloat(getComputedStyle(el)[attr])
+            } else {
+                el.style[attr] = val
+            }
+        }
+        function boom(e1, e2) {
+            let el1 = e1.getBoundingClientRect()
+            let el2 = e2.getBoundingClientRect()
+            if(el1.right < el2.left
+            || el1.bottom < el2.top
+            || el1.left > el2.right
+            || el1.top > el2.bottom) {
+                return false
+            }
+            return true
+        }
+        {
+            let box = document.querySelector('.box')
+            let box1 = document.querySelector('.box1')
+            // console.log(box1)
+            let startMouse = {}
+            let startDiv = {}
+
+            let move = (e) => {
+                let nowMouse = {
+                    x: e.clientX,
+                    y: e.clientY
+                }
+                let disMouse = {
+                    x: nowMouse.x - startMouse.x,
+                    y: nowMouse.y - startMouse.y
+                }
+                css(box, 'left', disMouse.x + startDiv.x + 'px')
+                css(box, 'top', disMouse.y + startDiv.y + 'px')
+                if(boom(box, box1)) {
+                    box1.style.background = 'yellow'
+                } else {
+                    box1.style.background = 'blue'
+                }
+            }
+
+            box.addEventListener('mousedown', (e) => {
+                startMouse = {
+                    x: e.clientX,
+                    y: e.clientY
+                }
+                startDiv = {
+                    x: css(box, 'left'),
+                    y: css(box, 'top')
+                }
+                document.addEventListener('mousemove', move)
+                document.addEventListener('mouseup', () => {
+                    document.removeEventListener('mousemove', move)
+                }, {
+                    once: true
+                })
+                e.preventDefault()
+            })
+        }
+    </script>
+</body>
+</html>

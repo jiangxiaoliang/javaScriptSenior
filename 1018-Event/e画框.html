@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: fixed;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+   <script>
+       {
+           let div
+           let startMouse = {}
+
+           let move = (e) => {
+               let nowMouse = {
+                   x: e.clientX,
+                   y: e.clientY
+               }
+               let dis = {
+                   x: nowMouse.x - startMouse.x,
+                   y: nowMouse.y - startMouse.y
+               }
+               div.style.left = Math.min(nowMouse.x, startMouse.x) + 'px'
+               div.style.top = Math.min(nowMouse.y, startMouse.y) + 'px'
+               div.style.width = Math.abs(dis.x) + 'px'
+               div.style.height = Math.abs(dis.y) + 'px'
+           }
+
+           document.addEventListener('mousedown', (e) => {
+               startMouse = {
+                   x: e.clientX,
+                   y: e.clientY
+               }
+               div = document.createElement('div')
+               div.className = 'box'
+               document.body.appendChild(div)
+               document.addEventListener('mousemove', move)
+               document.addEventListener('mouseup', () => {
+                   document.removeEventListener('mousemove', move)
+               }, {
+                   once: true
+               })
+               e.preventDefault()
+           })
+       }
+   </script>
+</body>
+</html>

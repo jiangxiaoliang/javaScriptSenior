@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            border: 1px solid #000000;
+            padding-right: 10px;
+            overflow: hidden;
+        }
+        .scrollBar {
+            position: absolute;
+            width: 10px;
+            height: 100%;
+            background: #ccc;
+            right: 0;
+            top: 0;
+        }
+        .scrollBar span {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 10px;
+            /* height: 20px; */
+            min-height: 20px;
+            background: #000;
+            border-radius: 5px;
+        }
+        .list {
+            position: absolute;
+            left: 0;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            width: 400px;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div class='wrap'>
+        <ul class='list'></ul>
+        <div class="scrollBar">
+            <span></span>
+        </div>
+    </div>
+    <script>
+        function css(el, attr, val) {
+            if(val === undefined) {
+                return el.currentSytle ? parseFloat(el.currentSytle[attr]) : parseFloat(getComputedStyle(el)[attr])
+            } else {
+                el.style[attr] = val
+            }
+        }
+        {
+            let wrap = document.querySelector('.wrap')
+            let list = document.querySelector('.list')
+            let scrollBar = document.querySelector('.scrollBar span')
+            let startMouse
+            let startEl
+
+            list.innerHTML = [...('.'.repeat(1000))].map((item, index) => {
+                return (`<li>第${index}个li</li>`)
+            }).join('')
+
+            /*
+                计算滚动条比例
+                滚动条高度/滚动轨道高度 = 显示内容高度/内容总高度
+                滚动条高度 = 显示内容高度/内容总高度*滚动轨道高度
+            */
+           let scrollBarH = wrap.clientHeight / list.offsetHeight * scrollBar.offsetHeight
+           css(scrollBar, 'height', scrollBarH + 'px')
+
+           /*
+                计算内容滚动高度
+                滚动移动距离/滚动条移动最大距离 = 内容移动距离/内容移动最大距离
+                内容移动距离 = 滚动移动距离/滚动条移动最大距离*内容移动最大距离
+                内容移动距离 = 滚动移动距离/(滚动条移动最大距离/内容移动最大距离)
+           */
+            let scrollBarMax = wrap.clientHeight - scrollBar.offsetHeight
+            let innerMax = list.offsetHeight - wrap.clientHeight
+            let scale = scrollBarMax/innerMax
+
+            // 滚动条移动
+            let move = (e) => {
+                let nowMouse = e.clientY
+                let dis = nowMouse - startMouse
+                let y = dis + startEl
+                y = Math.max(0, y)
+                y = Math.min(wrap.clientHeight - scrollBar.clientHeight, y)
+                css(scrollBar, 'top', y + 'px')
+                css(list, 'top', (-y/scale) + 'px')
+            }
+            scrollBar.addEventListener('mousedown', (e) => {
+                startEl = css(scrollBar, 'top')
+                startMouse = e.clientY
+                document.addEventListener('mousemove', move)
+                document.addEventListener('mouseup', () => {
+                    document.removeEventListener('mousemove', move)
+                }, {
+                    once: true
+                })
+                e.preventDefault()
+            })
+        }
+    </script>
+</body>
+</html>
