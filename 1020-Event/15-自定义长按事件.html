@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type='button' id='button' value='0' />
+    <script>
+       function long() {
+            let longTap = new Event('longTap')
+            let timer = 0
+            document.addEventListener('mousedown', (e) => {
+                timer = setTimeout(() => {
+                    e.target.dispatchEvent(longTap)
+                }, 800)
+            })
+            document.addEventListener('mouseup', (e) => {
+                clearTimeout(timer)
+            })
+        }
+        long()
+
+        {
+            let btn = document.querySelector('#button')
+            btn.addEventListener('longTap', (e) => {
+                console.log('longtap')
+            })
+        }
+    </script>
+</body>
+</html>

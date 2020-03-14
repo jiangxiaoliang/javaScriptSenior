@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function mouseScroll({el, up, down}) {
+            document.addEventListener('mousewheel', (e) => {
+                // up 150 down -150
+                if(e.wheelDelta > 0) {
+                    up && up.call(el, e)
+                } else {
+                    down && down.call(el, e)
+                }
+            })
+
+            document.addEventListener('DOMMouseScroll', (e) => {
+                // up -3 down 3
+                if(e.detail > 0) {
+                    down && down.call(el, e)
+                } else {
+                    up && up.call(el, e)
+                }
+            })
+        }
+
+        {
+            mouseScroll({
+                el: document,
+                up() {
+                    console.log(this)
+                    console.log('up')
+                },
+                down() {
+                    console.log('down')
+                }
+            })
+        }
+    </script>
+</body>
+</html>

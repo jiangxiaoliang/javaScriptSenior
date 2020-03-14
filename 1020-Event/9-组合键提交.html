@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type='text' id='txt' value='666' />
+    <ul id='list'>
+
+    </ul>
+    <script>
+        {
+            let txt = document.querySelector('#txt')
+            let list = document.querySelector('#list')
+
+            txt.addEventListener('keydown', (e) => {
+                // console.log(e.shiftKey)
+                // console.log(e.altKey)
+                // console.log(e.ctrlKey)
+                // console.log(e.keyCode)
+                if(e.keyCode === 13 && e.ctrlKey) {
+                    list.innerHTML += `<li>${txt.value}</li>`
+                }
+            })
+        }
+    </script>
+</body>
+</html>

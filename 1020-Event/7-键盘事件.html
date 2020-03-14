@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type='text' id='txt' />
+    <script>
+        {
+            // document.addEventListener('keydown', (e) => {
+            //     console.log(e.keyCode)
+            //     console.log(e.key)
+            // })
+
+            let txt = document.querySelector('#txt')
+            txt.addEventListener('keydown', (e) => {
+                // console.log(e.keyCode)
+                if((e.keyCode < 48 ||
+                e.keyCode > 57) && e.keyCode != 8) {
+                    e.preventDefault()
+                }
+            })
+        }
+    </script>
+</body>
+</html>

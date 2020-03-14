@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action='https://www.baidu.com/s' id='form' target='_blank'>
+        <input type='text' name='wd' id='txt' value="请输入文字" />
+        <input type='submit' value='提交' />
+    </form>
+    <script>
+        {
+            let form = document.querySelector('#form')
+            let txt = document.querySelector('#txt')
+
+            txt.addEventListener('focus', (e) => {
+                if(txt.value === '请输入文字') {
+                    txt.value = ''
+                }
+            })
+            txt.addEventListener('blur', (e) => {
+                if(!txt.value.trim()) {
+                    txt.value = '请输入文字'
+                }
+            })
+            txt.addEventListener('input', (e) => {
+                console.log(txt.value, 'input')
+            })
+            txt.addEventListener('change', (e) => {
+                console.log(txt.value, 'change')
+            })
+            form.addEventListener('submit', (e) => {
+                console.log(e)
+                let val = txt.value
+                if(!val.trim() || val.trim() === '请输入文字') {
+                    alert('inpt something')
+                    e.preventDefault()
+                }
+            })
+        }
+    </script>
+</body>
+</html>

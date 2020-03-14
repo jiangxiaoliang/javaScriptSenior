@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type='text' id='txt' value="0" />
+    <script>
+        {
+            let txt = document.querySelector('#txt')
+            let wheelUp = new Event('wheelUp')
+            let wheelDown = new Event('wheelDown')
+
+            mouseScroll({
+                el: txt,
+                up() {
+                    txt.dispatchEvent(wheelUp)
+                },
+                down() {
+                    txt.dispatchEvent(wheelDown)
+                }
+            })
+
+            function mouseScroll({el, up, down}) {
+                document.addEventListener('mousewheel', (e) => {
+                    // up 150 down -150
+                    if(e.wheelDelta > 0) {
+                        up && up.call(el, e)
+                    } else {
+                        down && down.call(el, e)
+                    }
+                })
+
+                document.addEventListener('DOMMouseScroll', (e) => {
+                    // up -3 down 3
+                    if(e.detail > 0) {
+                        down && down.call(el, e)
+                    } else {
+                        up && up.call(el, e)
+                    }
+                })
+            }
+        }
+
+        {
+            let txt = document.querySelector('#txt')
+            txt.addEventListener('wheelUp', (e) => {
+                value = parseInt(txt.value)
+                txt.value = value + 1
+            })
+            txt.addEventListener('wheelDown', (e) => {
+                value = parseInt(txt.value)
+                txt.value = value - 1
+            })
+        }
+    </script>
+</body>
+</html>

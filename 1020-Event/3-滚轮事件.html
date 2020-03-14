@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        {
+            // document.addEventListener('mousewheel', (e) => {
+            //     // up 150 down -150
+            //     console.log(e.wheelDelta)
+            // })
+
+            document.addEventListener('DOMMouseScroll', (e) => {
+                // up -3 down 3
+                console.log(e.detail)
+            })
+        }
+    </script>
+</body>
+</html>
