@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>图片</title>
+<style>
+    .wrap {
+        width: 600px;
+        height: 300px;
+        margin: 50px auto;
+        position: relative;
+        border: 1px solid #fff;
+        box-shadow: 0 0 10px #000;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .imgs {
+        width: 100%;
+        height: 300px;
+    }
+
+    .imgs img {
+        width: 600px;
+        height: 100%;
+        position: absolute;
+    }
+
+    #left {
+        position: absolute;
+        z-index: 99;
+        top: 110px;
+        left: 10px;
+        cursor: pointer;
+    }
+
+    #right {
+        position: absolute;
+        z-index: 99;
+        top: 110px;
+        right: 10px;
+        cursor: pointer;
+    }
+
+    #left:after {
+        content: '〈';
+        font-size: 50px;
+        color:#000;
+    }
+
+    #right:after {
+        content: '〉';
+        font-size: 50px;
+        color: #000;
+    }
+</style>
+</head>
+<body>
+    <div class="wrap">
+        <div id="left"></div>
+        <div id="right"></div>
+        <div class="imgs">
+            <img src="./imgs/1.jpg" style="z-index: 4" alt="">
+            <img src="./imgs/2.jpg" style="z-index: 3" alt="">
+            <img src="./imgs/3.jpg" style="z-index: 2" alt="">
+            <img src="./imgs/4.jpg" style="z-index: 1" alt="">
+        </div>
+    </div>
+</body>
+<script src="./js/mTween.js"></script>
+<script>
+// 自定义滑屏事件
+{
+    // 左划事件
+    let swipeLeft = new Event("swipeleft",{
+        bubbles: true
+    });
+    // 右划事件
+    let swipeRight = new Event("swiperight",{
+        bubbles: true
+    });
+    // 上划事件
+    let swipeUp = new Event("swipeup",{
+        bubbles: true
+    });
+    // 下划事件
+    let swipeDown = new Event("swipedown",{
+        bubbles: true
+    });
+
+    // 记录按下时鼠标坐标
+    let startMouse = {};
+    let targetEl = null;
+
+    document.addEventListener("mousedown",(e)=>{
+        startMouse = {
+            x: e.clientX,
+            y: e.clientY
+        };
+        targetEl = e.target;
+        // console.log(e.target);
+    });
+
+    document.addEventListener("mouseup",(e)=>{
+        let nowMouse = {
+            x: e.clientX,
+            y: e.clientY
+        };
+        let dis = {
+            x: nowMouse.x - startMouse.x,
+            y: nowMouse.y - startMouse.y
+        }
+        if(Math.abs(dis.x) > 5 || Math.abs(dis.y) > 5){ // 没有滑动
+            if(Math.abs(dis.x) > Math.abs(dis.y)){
+                targetEl.dispatchEvent(dis.x>0?swipeRight:swipeLeft)
+            } else {
+                targetEl.dispatchEvent(dis.y>0?swipeDown:swipeUp)
+            }
+        }
+    });
+}
+{
+    let wrap = document.querySelector(".wrap");
+    let imgs = document.querySelectorAll(".imgs img");
+    let now = 0;
+    let imgH = css(imgs[0],"height");
+    let imgW = css(imgs[0],"width");
+    let leftBtn = document.querySelector("#left");
+    let rightBtn = document.querySelector("#right");
+    //setSwipe(wrap);
+    let zIndex = [...imgs].map(img=>{
+        // 设置 transform 的初始值: 
+        css(img,"translateX",0);
+        css(img,"translateY",0);
+        return css(img,"zIndex");
+    });
+    let isMove = false;
+    
+    // 4种动画形式
+    let move = (attr)=>{
+        if(isMove){
+            return ;
+        }
+        isMove = true;
+        mTween({
+            el: imgs[now],
+            attr,
+            cb(){
+                zIndex.unshift(zIndex.pop());
+                imgs.forEach((img,index)=>{
+                    css(img,"zIndex",zIndex[index]);
+                });
+                css(imgs[now],"translateX",0);
+                css(imgs[now],"translateY",0);
+                now++;
+                now = now>=imgs.length?0:now;
+                isMove = false;
+            }
+        });
+    };
+
+    // 从顶部移出
+    let moveTop = ()=>{
+        move({translateY: -imgH});
+    };
+    // 从右侧移出
+    
+    let moveRight = ()=>{
+        move({translateX: imgW});
+    };
+
+    // 从底部移出
+    let moveBottom = ()=>{
+        move({translateY: imgH});
+    };
+
+    // 从左侧移出
+    let moveLeft = ()=>{
+        move({translateX: -imgW});
+    };
+
+    // 键盘操作
+    window.addEventListener("keydown",({keyCode})=>{
+        switch(keyCode){
+            case 37:
+                moveLeft();
+                break;
+            case 38:
+                moveTop();
+                break;
+            case 39:
+                moveRight();
+                break;
+            case 40:
+                moveBottom();
+                break;            
+        }
+    });
+
+    // 点击操作
+    leftBtn.addEventListener("click",moveLeft);
+    rightBtn.addEventListener("click",moveRight);
+
+    // 滑动操作
+    wrap.addEventListener("mousedown",(e)=>{
+        e.preventDefault();
+    });
+    wrap.addEventListener("swipeleft",moveLeft);
+    wrap.addEventListener("swipeup",moveTop);
+    wrap.addEventListener("swiperight",moveRight);
+    wrap.addEventListener("swipedown",moveBottom);
+    document.addEventListener("swipeleft",()=>{
+        console.log("文档左滑");
+    });
+    
+}
+</script>
+</html>
