@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        #box {
+            margin-top: 20vh;
+            height: 50vh;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+        #list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div id='box'>
+        <ul id='list'></ul>
+    </div>
+</body>
+<script src='mTween.js'></script>
+<script>
+    // 生成内容
+    {
+        let list = document.querySelector('#list')
+        list.innerHTML = [...(('.').repeat(100))].map((item, index) => {
+            return `<li>这是第${index+1}</li>`
+        }).join('')
+    }
+    {
+        let box = document.querySelector('#box')
+        let list = document.querySelector('#list')
+        let startPointY = 0;
+        let startElPoint = 0;
+        css(list, 'translateY', 0)
+        // console.log(list.clientHeight)
+        box.addEventListener('touchstart', (e) => {
+            let touch = e.changedTouches[0]
+            startPointY = touch.clientY
+            startElPoint = css(list, 'translateY')
+            e.preventDefault()
+        })
+        box.addEventListener('touchmove', (e) => {
+            let touch = e.changedTouches[0]
+            let nowPointY = touch.clientY
+            let dis = nowPointY - startPointY
+            let moveDis = dis + startElPoint
+            moveDis = Math.min(0, moveDis)
+            moveDis = Math.max(moveDis, -list.offsetHeight + box.clientHeight)
+            css(list, 'translateY', moveDis)
+        })
+    }
+</script>
+</html>

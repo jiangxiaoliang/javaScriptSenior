@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html {
+            font-size: 10vw;
+        }
+        body {
+            margin: 0;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #wrap {
+            position: relative;
+            width: 100vw;
+            overflow: hidden;
+        }
+        #list {
+            float: left;
+            display: flex;
+            display: -webkit-box;
+        }
+        #list li {
+            flex: none;
+            width: 100vw;
+        }
+        #list img {
+            width: 100%;
+            display: block;
+        }
+        .nav {
+            position: absolute;
+            left: 0;
+            bottom: .2rem;
+            width: 100%;
+            text-align: center;
+            vertical-align: top;
+        }
+        .nav a {
+            display: inline-block;
+            width: .3rem;
+            height: .3rem;
+            background: #fff;
+            margin: 0 .1rem;
+            border-radius: .15rem;
+            transition: .3s;
+        }
+        .nav .active {
+            width: .6rem;  
+            color: #fff;  
+        }
+        .textList {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .textList li {
+            font: 14px/40px "宋体";
+            padding-left: 20px;
+            border-bottom: 1px solid #000;
+        }
+    </style>
+</head>
+<body>  
+<div id="wrap">
+    <ul id="list">
+        <li><img src="img/banner01.png" /></li>
+        <li><img src="img/banner02.png" /></li>
+        <li><img src="img/banner03.png" /></li>
+        <li><img src="img/banner04.png" /></li>
+    </ul>
+    <nav class="nav">
+        <a class="active"></a><a></a><a></a><a></a>
+    </nav>
+</div>  
+<ul class="textList">
+
+</ul>
+<script src="../mTween.js"></script>
+<script>
+// // 列表结构生成
+// {
+//     let list = document.querySelector(".textList");
+//     list.innerHTML = [...(".".repeat(200))].map((item,index)=>{
+//         return `<li>这是第${index}个li</li>`;
+//     }).join("");
+// }
+// 滑屏幻灯片
+{
+   let wrap = document.querySelector("#wrap");
+   let list = document.querySelector("#list");
+   let navs = document.querySelectorAll(".nav a");
+   let startPoint = {};
+   let startOffset = 0;
+   css(list,"translateX",0);
+   wrap.addEventListener("touchstart",(e)=>{
+        let touch = e.changedTouches[0];
+        startPoint = {
+            x: touch.pageX,
+            y: touch.pageY
+        };
+        startOffset = css(list,"translateX");
+   });
+   wrap.addEventListener("touchmove",(e)=>{
+        let touch = e.changedTouches[0];
+        let nowPoint = {
+            x: touch.pageX,
+            y: touch.pageY
+        };
+        let dis = {
+            x: nowPoint.x - startPoint.x,
+            y: nowPoint.y - startPoint.y
+        };
+        css(list,"translateX",dis.x + startOffset);
+   });
+
+}
+</script>
+</body>
+</html>
