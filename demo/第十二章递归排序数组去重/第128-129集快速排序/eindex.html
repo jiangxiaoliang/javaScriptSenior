@@ -8,13 +8,13 @@
 </head>
 <body>
     <script>
-        var arr = [1,66,36,10,83,35,68,25,20];
+        var arr = [66,36,10,83,35,68,25,20];
         var turnOff = false
         /*
             66 36 10 83 35 68 25 20
             66 36 10 20 35 68 25 83
             66 36 10 20 35 25 68 83
-            36 10 20 35 25 66 68 83
+            25 36 10 20 35 66 68 83
         */
 
         // var mark = arr[0]
@@ -48,7 +48,7 @@
             }
             var mark = arr[start]
             var i = start + 1
-            var j = arr.length - 1
+            var j = end
 
             while(i < j) {
                 trueOff = false
