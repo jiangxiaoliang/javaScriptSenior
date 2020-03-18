@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        #mask {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background: rgba(0, 0, 0, .8);
+        }
+        #mask span {
+            font: 40px/70px '宋体';
+            margin: auto;
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id='box'></div>
+    <div id='mask'><span>请勿在竖屏浏览</span></div>
+    <script>
+        {
+            // alert(window.orientation)
+            /*
+                window.orientation // js 根据陀螺仪
+                    竖屏： 0 , 180
+                    横屏:  90, -90
+
+                orientationchange 事件：监听手机的横竖屏发生切换    
+            */
+
+            let change = (e) => {
+                let mask = document.querySelector('#mask')
+                console.log(window.orientation)
+                switch(window.orientation) {
+                    case 0:
+                    case 180:
+                        mask.style.display = 'none'
+                        break;
+                    case 90:
+                    case -90:
+                        mask.style.display ='block'
+                        break;
+                }
+            }
+            console.log(window.orientation)
+            window.addEventListener('orientationchange', change)
+        }
+    </script>
+</body>
+</html>

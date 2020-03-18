@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            font-size: 10vw;
+        }
+        body {
+            margin: 0;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #wrap {
+            position: relative;
+            width: 100vw;
+            overflow: hidden;
+        }
+        #list {
+            float: left;
+            display: flex;
+            display: -webkit-box;
+        }
+        #list li {
+            flex: none;
+            width: 100vw;
+        }
+        #list img {
+            width: 100%;
+            display: block;
+        }
+        .nav {
+            position: absolute;
+            left: 0;
+            bottom: .2rem;
+            width: 100%;
+            text-align: center;
+            vertical-align: top;
+        }
+        .nav a {
+           display: inline-block;
+           width: .3rem;
+           height: .3rem;
+           background: #fff;
+           margin: 0 .1rem;
+           border-radius: .15rem;
+           transition: .3s;
+        }
+        .nav .active {
+            width: .6rem;
+            background: #fff;
+        }
+        .textList {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .textList li {
+            font: 14px/40px '宋体';
+            padding-left: 20px;
+            border-bottom: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div id='wrap'>
+        <ul id='list'>
+            <li><img src='img/banner01.png' /></li>
+            <li><img src='img/banner02.png' /></li>
+            <li><img src='img/banner03.png' /></li>
+            <li><img src='img/banner04.png' /></li>
+        </ul>
+        <nav class="nav">
+            <a class='active'></a><a></a><a></a><a></a>
+        </nav>
+    </div>
+    <ul class="textList"></ul>
+    <script src='../mTween.js'></script>
+    <script>
+        {
+            // 内容生成
+            let textList = document.querySelector('.textList')
+            textList.innerHTML = [...(('.').repeat(100))].map((item, index) => {
+                return `<li>这是第${index+1}个li</li>`
+            }).join('')
+        }
+        {
+            let wrap = document.querySelector('#wrap')
+            let imgW = css(wrap, 'width')
+            let list = document.querySelector('#list')
+            let navs = document.querySelectorAll('.nav a')
+            let startPoint = {}
+            let startOffset = 0
+            let now = 0
+            let isMove = true // //用户是否是想滑动幻灯片，默认 true，代表用户想要滑动幻灯片
+            let isFirst = true // 判断是否已经判别出了，用户的滑屏方向。true 没有判别出方向，false 判别出了方向
+
+            css(list, 'translateX', 0)
+            list.innerHTML += list.innerHTML
+            list.addEventListener('touchstart', (e) => {
+                let touch = e.changedTouches[0]
+                startPoint = {
+                    x: touch.clientX,
+                    y: touch.clientY
+                }
+                if(now == 0) {
+                    now = navs.length
+                } else if (now == 2 * navs.length -1) {
+                    now = navs.length - 1
+                }
+                startOffset = -now * imgW
+                css(list, 'translateX', startOffset)
+                isMove = true
+                isFirst = true
+            })
+            list.addEventListener('touchmove', (e) => {
+                let touch = e.changedTouches[0]
+                let nowPoint = {
+                    x: touch.clientX,
+                    y: touch.clientY
+                }
+                let dis = {
+                    x: nowPoint.x- startPoint.x,
+                    y: nowPoint.y - startPoint.y
+                }
+                if(isFirst) {
+                    if(Math.abs(dis.x) - Math.abs(dis.y) > 5) {
+                        isMove = true
+                        isFirst = false
+                    } else if (Math.abs(dis.x) - Math.abs(dis.y) < 5) {
+                        isMove = false
+                        isFirst = false
+                    }
+                }
+                if(isMove) {
+                    !isFirst && css(list, 'translateX', dis.x + startOffset)
+                    e.preventDefault()
+                }
+            })
+            list.addEventListener('touchend', (e) => {
+                let touch = e.changedTouches[0]
+                let nowPoint = {
+                    x: touch.clientX,
+                    y: touch.clientY
+                }
+                let dis = {
+                    x: nowPoint.x - startPoint.x,
+                    y: nowPoint.y - startPoint.y
+                }
+                if(Math.abs(dis.x) > imgW * .3 && isMove) {
+                    now -= dis.x / Math.abs(dis.x)
+                }
+                mTween({
+                    el: list,
+                    attr: {
+                        translateX: -now * imgW
+                    }
+                })
+                navs.forEach(item => {
+                    item.classList.remove('active')
+                })
+                navs[now%navs.length].classList.add('active')
+            })
+        }
+    </script>
+</body>
+</html>

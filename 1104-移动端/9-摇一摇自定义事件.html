@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        // 节流函数
+        function throttle(fn, interval = 500) {
+            let timer = 0
+            return function(...args) {
+                let _self = this
+                if(timer) {
+                    return
+                }
+                fn.call(_self, ...args)
+                timer = setTimeout(() => {
+                    timer = 0
+                }, interval)
+            }
+        }
+
+        function shake(fn) {
+            const MAXRNAGE = 40; // 当用户晃动幅度超过这个值时，认定用户进行了摇一摇
+            const MINRNAGE = 10; // 当用户的晃动幅度停止时，执行摇一摇处理 
+            let lastX = 0
+            let lastY = 0
+            let lastZ = 0
+            let isShake = false
+            let shakeFn = throttle(function(e) {
+                let {x, y, z} = e.acceleration
+                let range = Math.abs(x-lastX) + Math.abs(y-lastY) + Math.abs(z-lastZ)
+                if(range > MAXRNAGE) {
+                    isShake = true
+                } else if (isShake && range < MINRNAGE) {
+                    fn.call(this, e)
+                    isShake = false
+                }
+            }, 200)
+            window.addEventListener('devicemotion',shakeFn)
+        }
+
+        {
+            let shake = new Event('shake')
+            const MAXRNAGE = 40; // 当用户晃动幅度超过这个值时，认定用户进行了摇一摇
+            const MINRNAGE = 10; // 当用户的晃动幅度停止时，执行摇一摇处理 
+            let lastX = 0
+            let lastY = 0
+            let lastZ = 0
+            let isShake = false
+            let shakeFn = throttle(function(e) {
+                let {x, y, z} = e.acceleration
+                let range = Math.abs(x-lastX) + Math.abs(y-lastY) + Math.abs(z-lastZ)
+                if(range > MAXRNAGE) {
+                    isShake = true
+                } else if (isShake && range < MINRNAGE) {
+                    window.dispatchEvent('shake')
+                    isShake = false
+                }
+            }, 200)
+            window.addEventListener('devicemotion',shakeFn)
+        }
+
+       {
+           window.addEventListener('shake', (e) => {
+               console.log('摇一摇')
+           })
+       }
+        
+    </script>
+</body>
+</html>
