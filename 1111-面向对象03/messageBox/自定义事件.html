@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        {
+            function fn1() {
+                console.log('fn1.....')
+            }
+            function fn2() {
+                console.log('fn2.....')
+            }
+            // 触发一个事件执行多个函数
+            let handle = {
+                // 'myEvent': [fn1, fn2, ...]
+            }
+            // 绑定自定义事件
+            function addEvent(eventName, fn) {
+                if(typeof handle[eventName] === 'undefined') {
+                    handle[eventName] = []
+                }
+                handle[eventName].push(fn)
+            }
+            // 触发自定义事件
+            function trigger(eventName) {
+                handle[eventName].forEach(event => {
+                    event && event()
+                })
+            }
+
+            // 删除自定义事件
+            function removeEvent(eventName, fn) {
+                for(let i = 0; i < handle[eventName].length; i++) {
+                    if(handle[eventName][i] === fn) {
+                        handle[eventName].splice(i, 1)
+                    }
+                    break;
+                }
+            }
+
+            addEvent('myEvent', fn1)
+            addEvent('myEvent', fn2)
+            removeEvent('myEvent', fn1)
+            trigger('myEvent')
+        }
+    </script>
+</body>
+</html>

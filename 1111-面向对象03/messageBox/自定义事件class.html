@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        {
+            function fn1() {
+                console.log('fn1.....')
+            }
+            function fn2() {
+                console.log('fn2.....')
+            }
+
+            class MyEvent {
+                constructor() {
+                    this.handle = {}
+                }
+                // 绑定自定义事件
+                addEvent(eventName, fn) {
+                    if(typeof this.handle[eventName] === 'undefined') {
+                        this.handle[eventName] = []
+                    }
+                    this.handle[eventName].push(fn)
+                }
+                // 删除自定义事件
+                removeEvent(eventName, fn) {
+                    for(let i = 0; i < this.handle[eventName].length; i++) {
+                        if(this.handle[eventName][i] === fn) {
+                            this.handle[eventName].splice(i, 1)
+                        }
+                        break
+                    }
+                }
+                // 触发自定义事件
+                trigger(eventName) {
+                    this.handle[eventName].forEach(event => {
+                        event && event()
+                    })
+                }
+            }
+
+            let newEvent = new MyEvent()
+
+            newEvent.addEvent('myEvent', fn1)
+            newEvent.addEvent('myEvent', fn2)
+            newEvent.removeEvent('myEvent', fn1)
+            newEvent.trigger('myEvent')
+        }
+    </script>
+</body>
+</html>
+</body>
+</html>

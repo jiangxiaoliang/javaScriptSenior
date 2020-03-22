@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href="./css/message.css" type='text/css' />
+    <script src='./js/message.js' tyype='text/script'></script>
+</head>
+<body>
+    <!-- <div class='k-wrapper'></div>
+    <div class='k-dialog'>
+        <div class='k-header'>
+            <span class='k-title'>提示</span><span class="k-close">X</span>
+        </div>
+        <div class='k-body'>
+            <span>这是一段文本</span>
+            <input class='input-inner' type='text' />
+        </div>
+        <div class='k-footer'>
+            <span class='k-default'>取消</span>
+            <span class='k-primary'>确定</span>
+        </div>
+    </div> -->
+    <button onclick="showDialog1()">第一个对话框</button>
+    <button onclick="showDialog2()">第一个对话框</button>
+</body>
+<script>
+    {
+        // 开闭原则：对内封闭，对外开放
+        let d1 = new Dialog({
+            width: "30%",
+            height: "250px",
+            title: "测试标题11",
+            content: "测试内容11",
+            dragable: true, //是否可拖拽
+            maskable: false, //是否有遮罩
+            isCancel: true //是否有取消
+        })
+        function showDialog1() {
+            d1.showDialog()
+        }
+
+        let d2 = new InputDailog({
+            width: "30%",
+            height: "250px",
+            title: "测试标题22",
+            content: "测试内容22",
+            dragable: true, //是否可拖拽
+            maskable: false, //是否有遮罩
+            isCancel: true, //是否有取消
+            // success: function(value) {
+            //     console.log('callback.....', value)
+            // }
+        })
+        function showDialog2() {
+            d2.showDialog()
+        }
+    }
+</script>
+</html>
