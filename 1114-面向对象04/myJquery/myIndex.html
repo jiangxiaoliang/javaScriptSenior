@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='./myJquery.js' type='text/javascript'></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">111</div>
+    <div class="box">2222</div>
+</body>
+<script>
+    {
+        // console.log($('.box'))
+        // console.log($(document.querySelectorAll('.box')))
+        // $(function () {
+        //     console.log('start')
+        // })
+
+        // $('.box').click(function() {
+        //     console.log('box click')
+        // })
+
+        // $('.box').on('click mousemove', function() {
+        //     console.log('box on click')
+        // })
+
+        // console.log($('.box').eq(1))
+        // $('.box').eq(1).click(function() {
+        //     console.log('eq click')
+        // })
+
+        // console.log($('.box').eq(1).end())
+        // $('.box').eq(1).end().click(function() {
+        //     console.log('end click')
+        // })
+
+        // console.log($('.box').css('height'))
+        // $('.box').css('height', '250px')
+        // $('.box').css({"background":"yellow","height":'200px'})
+        // $('.box').css('height', 250)
+        $.cssHooks.wh = {
+            get(ele) {
+                console.log('csshooks get')
+                console.log(ele)
+            },
+            set(el, val) {
+                // console.log(el, val)
+                el.style.width = val
+                el.style.height = val
+            }
+        }
+        // $('.box').css('wh')
+        $('.box').css('wh', '200px')
+    }
+</script>
+</html>

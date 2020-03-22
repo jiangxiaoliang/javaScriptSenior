@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='./jquery-3.4.1.js' type='text/javascript'></script>
+</head>
+<body>
+    <div class='box' style="width: 100px; height: 100px; background: red;"></div>
+    <div class='box' style="width: 100px; height: 100px; background: blue;"></div>
+    <button class="btn1">点击</button>
+</body>
+<script>
+    {
+        // 选择器
+        // console.log($('.box'))
+        // console.log($(document.querySelectorAll('.box')))
+        // $(function() {
+        //     console.log('aaaa')
+        // })
+
+        // // 事件
+        // $('.btn1').click(function() {
+        //     console.log('btn1')
+        // })
+        // $('.btn1').on('mousemove', function() {
+        //     console.log('btn1 mousemove')
+        // })
+
+         $(".box").eq(0).end().click(()=>{
+            console.log(222);
+        })
+        // document.querySelector(".box").style.background = "black";
+        // $(".box").css({"background":"black"});
+
+        // // on 方法；
+        // $(".box").on("mousemove  mousedown" ,function(){
+        //     console.log(1111);
+        // })
+
+
+        // // eq:选择节点；
+        // console.log($(".box").eq(1))
+        // $(".box").eq(1).click(function(){
+        //     console.log(111);
+        // })
+        // console.log( $(".box").eq(1).end() );
+
+
+        // css方法；
+        // 使用方式一：获取样式；（如果有多个元素，只获取第一个元素）；
+        // let res =  $(".box").css("background");
+        // console.log(res);
+        // 方式二： 设置样式
+        // $(".box").css("background","yellow");
+        // 方式三：设置样式；
+        // $(".box").css({"background":"yellow","width":200});
+    }
+</script>
+</html>
