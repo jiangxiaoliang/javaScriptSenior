@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    {
+        // promise三种状态   then2个参数  then会有三种返回
+        
+        // pending resolve reject
+        // pending
+        // let p1 = new Promise(() => {
+        //     console.log('cb')
+        // })
+        // console.log(p1)
+        // // resolve
+        // let p2 = new Promise((resolve, reject) => {
+        //     resolve('p2')
+        // })
+        // console.log(p2)
+        // // reject
+        // let p3= new Promise((resolve, reject) => {
+        //     reject('p3')
+        // })
+        // console.log(p3)
+
+        // // then onresolve,onreject
+        // let p4 = new Promise((resolve, reject) => {
+        //     // resolve('p4')
+        //     reject('p4')
+        // })
+        // p4.then((val) => {
+        //     console.log(val)
+        // }, (err) => {
+        //     console.log(err)
+        // })
+
+        // then三种返回
+        let p5 = new Promise((resolve, reject) => {
+            resolve('p5')
+        })
+        let res1 = p5.then(() => {
+            console.log('res1')
+        })
+        console.log(res1)
+        let res2 = p5.then(() => {
+            return 'res2'
+        }).then((val) => {
+            console.log('---' + val)
+        })
+        console.log(res2)
+        let res3 = p5.then(() => {
+            return new Promise(resolve => {
+                resolve('res3')
+            })
+        })
+        console.log(res3)
+    }
+</script>
+</html>

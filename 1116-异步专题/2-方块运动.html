@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+<script>
+    function move(el, dir, target, cb) {
+        let startP = parseFloat(getComputedStyle(el)[dir])
+        let moveDir = (target - startP) / Math.abs(target - startP)
+        let speed = moveDir * 5
+        function fn() {
+            let nowP = parseFloat(getComputedStyle(el)[dir])
+            if(Math.abs(nowP - target) < 3) {
+                cb && cb()
+            } else {
+                el.style[dir] = nowP + speed + 'px'
+                requestAnimationFrame(fn)
+            }
+        }
+        fn()
+    }
+    {
+        let box = document.querySelector('.box')
+        move(box, 'left', 200, function() {
+            move(box, 'top', 200, function() {
+                move(box, 'left', 0, function() {
+                    move(box, 'top', 0)
+                })
+            })
+        })
+    }
+</script>
+</html>
