@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let obj1 = {
+        name: 'jxl',
+        age: 20
+    }
+
+    let pObj = new Proxy(obj1,  {
+        get(target, key) {
+            console.log('get....')
+            return target[key]
+        },
+        set(target, key, value) {
+            console.log('set....')
+            target[key] = value
+        }
+    })
+
+    // obj1.age = 18
+    // console.log(obj1)
+    // console.log(pObj)
+    // console.log(obj1 === pObj)
+
+    console.log(pObj.age)
+    pObj.age = 18
+    console.log(pObj.age)
+    pObj.height = '178'
+</script>
+</html>

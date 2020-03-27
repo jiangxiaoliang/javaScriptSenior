@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // Promise.all
+    // let p1 = new Promise(resolve => {
+    //     setTimeout(() => {
+    //         resolve('p1')
+    //     }, 5000)
+    // })
+    // let p2 = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve('p2')
+    //     }, 2000)
+    // })
+    // let p3 = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve('p3')
+    //     }, 3000)
+    // })
+    // let all = Promise.all([p1, p2, p3]).then((res) => {
+    //     console.log(res)
+    // })
+    // console.log(all)
+
+    // Promise.race
+    // let race = Promise.race([p1, p2, p3]).then(res => {
+    //     console.log(res)
+    // })
+
+    let p4 = Promise.resolve('p4')
+    let p5 = Promise.reject('p5')
+    console.log(p4)
+    console.log(p5)
+</script>
+</html>

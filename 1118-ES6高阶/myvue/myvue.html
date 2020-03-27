@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="./myvue.js" ></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       111{{message}}222 
+        <div>
+            {{ message }}
+        </div>
+        <span>
+            <span>{{message}}</span>
+        </span>
+        {{modelData}}
+    </div>
+    
+</body>
+<script>
+let vm  = new Vue({
+    el:"#app",
+    data:{
+        message:"测试数据",
+        modelData:"绑定的数据",
+    }
+})
+console.log(vm.$options.data);
+console.log(vm.$options.data.message);
+
+
+</script>
+</html>

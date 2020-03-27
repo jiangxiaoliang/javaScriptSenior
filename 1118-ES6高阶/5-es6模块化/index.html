@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script type='module'>
+    // es6模块化  import/export
+    // export default
+    import mya from './a.js'
+    console.log(mya)
+
+    // 批量导入
+    import { myObj, num, str as myStr} from './a.js'
+    import * as obj from '/a.js'
+
+    // 按需导入
+    document.onclick = function() {
+        // import('./a.js').then(res => {
+        //     console.log(res)
+        // })
+        let res = await import('./a.js')
+        console.log(res)
+    }
+</script>
+</html>

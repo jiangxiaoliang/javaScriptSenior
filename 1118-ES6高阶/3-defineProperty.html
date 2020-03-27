@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // let obj = {
+    //     name: 'jxl',
+    //     age: 20
+    // }
+    // console.log(obj)
+
+    // defineProperty 创建对象   修改对象
+    // 创建对象
+    // let obj1 = Object.defineProperty({}, 'name', {
+    //     configurable: true,
+    //     enumerable: true,
+    //     get() {
+    //         console.log('get name...')
+    //         return 'jxl'
+    //     },
+    //     set(newValue) {
+    //         console.log('set name...', newValue)
+    //     }
+    // })
+    // console.log(obj1)
+    // console.log(obj1.name)
+    // obj1.name = 'jiang'
+    // console.log(obj1.name)
+
+    // 修改对象
+    // let obj2 = {
+    //     name: 'jxl',
+    //     age: 20
+    // }
+    // console.log(obj2)
+    // let obj3 = Object.defineProperty(obj2, 'name', {
+    //     configurable: true,
+    //     enumerable: true,
+    //     get() {
+    //         console.log('get...')
+    //         return 'jiang'
+    //     },
+    //     set(newValue) {
+    //         console.log('set...' + newValue)
+    //     }
+    // })
+    // console.log(obj3.name)
+
+    let obj4 = {
+        name: 'jxl',
+        age: 20
+    }
+    let obj5 = [1,2,3]
+    function defineRect(obj) {
+        let keys = Object.keys(obj)
+        keys.forEach(key => {
+            let value = obj[key]
+            Object.defineProperty(obj, key, {
+                configurable: true,
+                enumerable: true,
+                get() {
+                    console.log('get...')
+                    return value
+                },
+                set(newValue) {
+                    console.log('set...')
+                    if(newValue != obj[key]) {
+                        value = newValue
+                    }
+                }
+            })
+        })
+    }
+    // defineRect(obj4)
+    // obj4.age = 22
+    // console.log(obj4.age)
+    // // 对象添加数据不能劫持；
+    // obj4.height = '178'
+
+    defineRect(obj5)
+    // obj5[0]
+    // obj5[0] = 1
+    // 数组操作不能劫持 view不能触发试图更新$set
+    obj5[3] = 4 
+</script>
+</html>
