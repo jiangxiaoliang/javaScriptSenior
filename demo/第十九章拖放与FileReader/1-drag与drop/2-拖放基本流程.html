@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>你好javascript</p>
+    <div>
+        <a href="https://www.baidu.com" draggable="false">百度</a>
+    </div>
+    <img src='./images/logo-new.png' />
+
+    <!-- 设置被拖放的元素的draggable属性为true -->
+    <div id='box1' draggable="true" style="width: 100px; height: 100px; background: red;"></div>
+</body>
+<script>
+    /*
+        我们可以给默认可以拖拽的元素（选中的文本、链接、图像）设置draggable为false，就可以阻止它们拖拽
+        firefox：如果拖拽的元素没有设置拖放内容，还是不能拖放(新版本firefox并不需要设置拖放内容)
+                - draggable=true
+                - 设置拖放内容
+    */
+   let box1 = document.querySelector('#box1')
+   box1.ondragstart = function(e) {
+       console.log(e)
+       e.dataTransfer.setData('text', 'jxl')
+   }
+</script>
+</html>

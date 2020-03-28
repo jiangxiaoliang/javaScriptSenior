@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+</body>
+<script>
+    // 设置body为可放置元素
+    document.body.ondragover = function(e) {
+        e.preventDefault();
+    }
+    document.body.ondrop = function(e) {
+        e.preventDefault()
+        e.stopPropagation();
+        // console.log(e.dataTransfer.files)
+
+        let file = e.dataTransfer.files[0]
+        let fr = new FileReader()
+        fr.readAsArrayBuffer(file)
+        fr.onload = function() {
+            console.log(this.result)
+            let int8Array = new Int8Array(this.result)
+            console.log(int8Array)
+            int8Array.forEach(data => {
+                console.log(String.fromCharCode(data))
+            })
+        }
+    }
+</script>
+</html>

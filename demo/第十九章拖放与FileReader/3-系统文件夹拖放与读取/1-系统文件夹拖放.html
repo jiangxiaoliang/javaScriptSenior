@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+</body>
+<script>
+    // 设置body为可放置元素
+    document.body.ondragover = function(e) {
+        e.preventDefault();
+    }
+    document.body.ondrop = function(e) {
+        e.preventDefault()
+        e.stopPropagation();
+        // console.log(e.dataTransfer.items)
+
+        [...e.dataTransfer.items].forEach(item => {
+            // console.log(item)
+            
+            // let file = item.getAsFile()
+            // console.log(file)
+
+            // 要获取当前item对象的FileSystemEntry对象，通过该对象我们可以分辨出是文件还是文件夹
+            let entry = item.webkitGetAsEntry()
+            console.log(entry)
+            getFiles(entry)
+        })
+    }
+    function getFiles(entry) {
+        if(entry.isFile) {
+            console.log(entry.getAsFile())
+            entry.file(f => {
+                console.log(f)
+            }, err => {
+                console.log(err)
+            })
+        }
+        if(entry.isDirectory) {
+            let dirReader = entry.createReader()
+            dirReader.readEntries(datas => {
+                console.log(datas)
+                datas.forEach(data => {
+                    getFiles(data)
+                })
+            })
+            // console.log('文件夹')
+        }
+    }
+</script>
+</html>

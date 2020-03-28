@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='box1' draggable="true" style="width: 100px; height: 100px; background: red;"></div>
+    <div id='box2' draggable="true" style="width: 200px; height: 200px; position: absolute; left: 400px; top: 200px; background: green;"></div>
+
+    <!-- <img src='./images/logo-new.png' /> -->
+
+    
+</body>
+<script>
+   let box1 = document.querySelector('#box1')
+   let box2 = document.querySelector('#box2')
+   let img = new Image()
+   img.src = './images/logo-new.png'
+
+   box1.ondragstart = function(e) {
+       // dropEffect白名单
+       e.dataTransfer.effectAllowed = 'copyLink'
+       e.dataTransfer.setDragImage(img, 100, 100)
+   }
+
+   
+   box2.ondragover = function(e) {
+       // 禁止拖放
+       e.dataTransfer.dropEffect = 'copy'
+       e.preventDefault()
+   }
+ 
+   box2.ondrop = function(e) {
+       e.preventDefault()
+       e.stopPropagation();
+   }
+</script>
+</html>
