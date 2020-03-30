@@ -1,0 +1,197 @@
+body,ul {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#video-player {
+    position: relative;
+    margin: 100px auto 0;
+    border: 1px solid #000000;
+    width: 512px;
+    height: 384px;
+    cursor: pointer;
+}
+#video-player video {
+    width: 100%;
+    height: 100%;
+}
+#video-player .control {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    opacity: 0;
+    width: 100%;
+    transition: .5s all;
+}
+#video-player:hover .control {
+    opacity: 1;
+}
+#video-player .progress-container {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    height: 10px;
+}
+#video-player .progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 6px;
+    /* transition: .5s all; */
+}
+#video-player .progress-range {
+    background: rgba(255, 255, 255, 0.2);
+}
+#video-player .progress-loaded {
+    width: 0;
+    background: rgba(255, 255, 255, 0.6);
+    transition: .5s all;
+}
+#video-player .progress-played {
+    width: 0;
+    background: rgba(0, 150, 255, 1);
+}
+#video-player .progress-bar {
+    position: absolute;
+    left: 0;
+    top: 0px;
+    width: 14px;
+    height: 14px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 50%;
+}
+/* #video-player .progress-container:hover .progress {
+    height: 10px;
+} */
+
+
+#video-player .control-wrap {
+    position: relative;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+#video-player .btn {
+    position: absolute;
+    bottom: 10px;
+}
+
+#video-player .btn.play {
+    left: 20px;
+    width: 32px;
+    height: 32px;
+    background: url('../images/play.svg') no-repeat center;
+}
+/* #video-player .btn.play:hover, */
+#video-player .btn.pause {
+    left: 20px;
+    width: 32px;
+    height: 32px;
+    background: url('../images/pause.svg') no-repeat center;
+}
+
+#video-player .time {
+    position: absolute;
+    left: 0;
+    bottom: 15px;
+    left: 70px;
+    color: white;
+}
+
+#video-player .btn.fullscreen {
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: url('../images/fullscreen.svg') no-repeat center;
+}
+#video-player .btn.volume {
+    z-index: 1000;
+    right: 45px;
+    width: 32px;
+    height: 32px;
+    background: url('../images/volume.svg') no-repeat center;
+}
+#video-player .btn.muted {
+    z-index: 1000;
+    right: 45px;
+    width: 32px;
+    height: 32px;
+    background: url('../images/muted.svg') no-repeat center;
+}
+#video-player .btn.speed {
+    z-index: 1000;
+    right: 90px;
+    width: 32px;
+    height: 32px;
+    line-height: 30px;
+    color: white;
+}
+
+#video-player .control-volume-box {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+    padding: 10px 15px 10px 10px;
+    height: 160px;
+    background: rgba(0, 0, 0, .6);
+}
+#video-player .control-volume-range {
+    position: absolute;
+    bottom: 10px;
+    height: 160px;
+    width: 6px;
+    background: rgba(255, 255, 255, .4);
+    border-radius: 10px;
+}
+#video-player .control-volume-slider {
+    position: absolute;
+    bottom: 10px;
+    height: 0;
+    width: 6px;
+    background: rgba(0, 150, 255, 1);
+    border-radius: 10px;
+}
+#video-player .control-volume-bar {
+    position: absolute;
+    left: -4px;
+    top: -7px;
+    width: 14px;
+    height: 14px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 50%;
+}
+
+#video-player .message {
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 10px;
+    background: rgba(0, 0, 0, .6);
+    color: white;
+    border-radius: 10px;
+    transform: translate(-50%,-50%);
+    transition: .5s all;
+}
+
+#video-player .control-speed-box {
+    display: none;
+    position: absolute;
+    left: -15px;
+    bottom: 30px;
+    padding: 10px 15px 10px 10px;
+    height: 160px;
+    background: rgba(0, 0, 0, .6);
+    text-align: center;
+    font-size: 14px;
+}
+#video-player .control-speed-box li:hover, #video-player .control-speed-box .focus {
+    color: rgba(0, 150, 255, 1);
+}

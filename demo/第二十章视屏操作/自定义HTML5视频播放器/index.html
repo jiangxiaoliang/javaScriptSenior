@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css" />
+</head>
+<body>
+
+    <div id="video-player">
+        <video class="video">
+            <source src="../source/v.mp4" type="video/mp4" />
+        </video>
+
+        <div class="message">音量：50%</div>
+
+        <div class="control">
+
+            <div class="progress-container">
+                <div class="progress progress-range"></div>
+                <div class="progress progress-loaded"></div>
+                <div class="progress progress-played"></div>
+                <div class="progress-bar"></div>
+            </div>
+
+            <div class="control-wrap">
+                <div class="btn play"></div>
+                <div class="time">00:00 / 00:00</div>
+
+                <div class="btn speed">
+                    <span>倍速</span>
+                    <ul class="control-speed-box">
+                        <li data-rate="2">2.0X</li>
+                        <li data-rate="1.5">1.5X</li>
+                        <li data-rate="1.25">1.25X</li>
+                        <li data-rate="1" class="focus">1.0X</li>
+                        <li data-rate="0.75">0.75X</li>
+                    </ul>
+                </div>
+                <div class="btn volume">
+                    <div class="control-volume-box">
+                        <div class="control-volume-range"></div>
+                        <div class="control-volume-slider">
+                            <div class="control-volume-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn fullscreen"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="./js/index.js"></script>
+</body>
+</html>
