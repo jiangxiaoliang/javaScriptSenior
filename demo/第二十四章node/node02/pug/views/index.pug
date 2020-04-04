@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        style.
+            .mydiv {
+                height: 200px;
+                width: 200px;
+                background: red
+            }
+    body
+        h1 我是标题
+        div 我是div
+        div(class='mydiv') 我是类名为mydiv的div
+            span 我是span
+        .mydiv2(style={width:'100px',height:'100px',background:'blue'}) mydiv2
+        #mydiv3 我是id为mydiv3的div
+        //- pug注释
+        //-
+            pug多行注释第一行
+            pug多行注释第二行
+        // html注释
+        //
+            html多行注释第一行
+            html多行注释第一行
+        div
+            | hello
+        - let str = '你好'
+        p #{str}
+        p #{data}
+        ul
+            each item, index in users
+                li name: #{item.name}, age: #{item.age}, #{index}
+        - for(let i = 0; i < 3; i++)
+            span 第#{i+1}循环
+        - let num = 1
+            case num
+                when 1
+                    p num = 1
+                when 2
+                    p num = 2
+                default
+                    p num is default
+        mixin mydiv
+            div 我是一个公用的div
+        +mydiv
+        +mydiv
+        mixin pet(name, sex)
+            p name:#{name},sex:#{sex}
+        +pet('dog', 'mela')
+        +pet('cat', 'femal')
+        include common.pug
+        script(type='text/javascript').
+            console.log('aaa')
