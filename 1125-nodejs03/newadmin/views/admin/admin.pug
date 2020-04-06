@@ -1,0 +1,35 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    title Document
+    link(href='./css/admin.css', rel='stylesheet', type='text/css')
+  body
+    .container
+      .menu-left
+        ul
+          li 新闻添加
+          li 新闻列表
+      iframe(src='/admin/addNews', frameborder='0', width='800px')
+    script.
+      let lis = document.querySelectorAll("li");
+      Array.from(lis).forEach(v => {
+      v.onclick = function () {
+      Array.from(lis).forEach(value => {
+      if (this == value) {
+      this.style.color = "rgb(255, 208, 75)";
+      let iframeNode = document.querySelector("iframe");
+      if (this.textContent == "新闻添加") {
+      iframeNode.src = "/admin/addNews";
+      } else {
+      //新闻列表
+      iframeNode.src = "/admin/newList";
+      }
+      } else {
+      value.style.color = "white";
+      }
+      })
+      }
+      })

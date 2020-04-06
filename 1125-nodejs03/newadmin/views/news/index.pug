@@ -1,0 +1,29 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    link(href='./css/index.css', rel='stylesheet', type='text/css')
+    title 文章信息展示
+  body
+    .wrap
+      ul.news-list
+        each item in perPageData
+          li.news
+            a(href='javascript:;')
+              img(src='/upload/'+item.imgUrl, alt='')
+            .newsContainer
+              h3
+                a.title(href='/news/detail?id=' + item.id) #{item.title}
+              .info
+                span.tips
+                  span #{item.type}
+                  span #{item.country}
+                // <span class="line"></span>
+                span.time |   #{item.addTime}
+      .pagination
+        a.prev(href='javascript:;') ⌜
+        - for (let i = 1; i <= pCount; i++)
+          a(href='/news/index?p=' + i) #{i}
+        a.next(href='javascript:;') ⌝

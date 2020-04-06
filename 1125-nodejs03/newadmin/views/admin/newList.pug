@@ -1,0 +1,29 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    title Document
+    link(href='./css/newsList.css', rel='stylesheet', type='text/css')
+  body
+    div
+      table(border='0')
+        tbody
+          tr
+            th 标题
+            th 类型
+            th 国家
+            th 缩略图
+            th 操作
+          each item in perPageData
+            tr
+              td #{item.title}
+              td #{item.type}
+              td #{item.country}
+              td
+                img(width='140px', src='/upload' + item.imgUrl)
+              td
+                a(class='delBtn' href='/admin/delNews?id=' + item.id) 删除
+- for(let i = 1; i <= pCount; i++)
+  a(href='/admin/newList?p=' + i) #{i}

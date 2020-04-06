@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="./css/addNews.css" rel="stylesheet" type="text/css" /> 
+</head>
+
+<body>
+    <div class="menu-content">
+        <h1>添加新闻</h1>
+        <form class="addInput" method="post" action="/addNews" enctype="multipart/form-data">
+            <div>
+                标题：<input class="title" type="text" />
+            </div>
+            <div class="contentContainer">
+                内容：<textarea class="content" name="" id="" cols="30" rows="10"></textarea>
+            </div>
+            <div>
+                类型：<select class="selectStyle" name="" id="">
+                    <option value="逮捕">
+                        逮捕
+                    </option>
+                    <option value="消息">
+                        消息
+                    </option>
+                    <option value="通讯">
+                        通讯
+                    </option>
+                    <option value="文学">
+                        文学
+                    </option>
+                </select>
+            </div>
+            <div>
+                国家：<select class="selectStyle" name="" id="">
+                    <option value="美国">
+                        美国
+                    </option>
+                    <option value="韩国">
+                        韩国
+                    </option>
+                    <option value="日本">
+                        日本
+                    </option>
+                    <option value="英国">
+                        英国
+                    </option>
+                </select>
+            </div>
+            <div class="uploadContainer">
+                缩略图：
+                <span class="fileinput-button">
+                    <span>上传图片</span>
+                    <input class="imgFile" type="file" name="" />
+                </span>
+            </div>
+            <div>
+                <button class="btn" type="submit">提交</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
