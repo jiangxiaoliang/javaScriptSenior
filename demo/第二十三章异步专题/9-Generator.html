@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function* fn() {
+        yield new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('a')
+                resolve(1)
+            }, 2000)
+        })
+        yield new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('b')
+                resolve(2)
+            }, 2000)
+        })
+        yield new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('c')
+                resolve(2)
+            }, 2000)
+        })
+    }
+
+    co(fn)
+    function co(fn) {
+        let f = fn()
+        next()
+        function next(data) {
+            let result = f.next()
+            if (!result.done) {
+                result.value.then((info) => {
+                    console.log(info, data)
+                    next(info)
+                })
+            }
+        }
+    }
+
+    // let f = fn()
+    // for (let val of f) {
+    //     console.log(val)
+    // }
+</script>
+</html>
