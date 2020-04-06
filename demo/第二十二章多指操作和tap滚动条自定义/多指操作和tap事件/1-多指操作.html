@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            margin: 30px auto;
+            width: 200px;
+            height: 200px;
+            background: red;
+            color:#fff;
+            font: 14px/30px "宋体";
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>   
+<script>
+{
+
+    let box = document.querySelector("#box");
+    box.addEventListener("gesturestart",()=>{
+        box.innerHTML = "多指触碰";
+    });/* 当前屏幕手指个数大于等于2 */
+    box.addEventListener("gesturechange",()=>{
+        box.innerHTML = "多指位置改变";
+    });
+    // 检测到手指位置发生改变
+    box.addEventListener("gestureend",()=>{
+        box.innerHTML = "多指抬起";
+    });
+
+    document.addEventListener("touchstart",(e)=>{
+        e.preventDefault();
+    },{
+        passive: false
+    });
+
+}    
+</script> 
+</body>
+</html>

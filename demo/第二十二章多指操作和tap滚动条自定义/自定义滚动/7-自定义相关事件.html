@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        #wrap {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #list li {
+            font: 14px/30px '宋体'
+        }
+    </style>
+</head>
+<body>
+    <div id='wrap'>
+        <ul id='list'>
+
+        </ul>
+    </div>
+</body>
+<script src = 'mTween.js'></script>
+<script>
+    class KKBEvent {
+        constructor() {
+            this.events = {}
+            /*
+                this.events = {
+                    'click': [fn1,fn2,..]
+                    'mouseove': [fn1,fn2,..]
+                }
+            */
+        }
+        // 添加事件监听
+        on(event, fn) {
+            if (!this.events[event]) {
+                this.events[event] = []
+            }
+            this.events[event].push(fn)
+        }
+        // 取消事件监听
+        off(event, fn) {
+            if (!this.events[event]) {
+                return
+            }
+            if (fn) {
+                this.events[event] = this.events[event].filter(item => item !== fn)
+            } else {
+                this.events[event].length = 0
+            }
+        }
+        // 只监听一次
+        once(event, fn) {
+            fn.once = true
+            this.on(event, fn)
+        }
+        // 触发事件
+        dispatch(event) {
+            if (!this.events[event]) {
+                return
+            }
+            this.events[event].forEach(item => {
+                item.call(this)
+                if (item.once) {
+                    this.off(event,item)
+                }
+            })
+        }
+    }
+
+    class KKBScroll extends KKBEvent {
+        constructor(wrap, option) {
+            super()
+            this.wrap = wrap
+            this.list = this.wrap.children[0]
+            this.option = Object.assign({
+                scrollBar: false, // 是否有滚动条
+                isScroll: true // 是否可以滑动
+            }, option)
+            this.startPoint = {} // 按下时的坐标值
+            this.startY = 0 // 按下时的translateY值
+            this.y = 0 // 滚动的距离
+            this.minBarH = 20 // 滚动条最小长度
+            this.maxY = this.list.offsetHeight - css(wrap, 'height')
+            this.lastY = 0 // 上一次滑动位置
+            this.lastDisY = 0 // 上一次滑动距离
+            this.lastTime = 0 // 上一次滑动时间戳
+            this.lastDisTime = 0 // 上一次滑动时间
+            this.n = .99 // 过界之后的拉力系数
+            this.setN = this.setN()
+            this.isY = false // 是否纵向滑动
+            this.isFirst = true // 第一次滑动时判断方向
+            css(this.list, 'translateY', 0)
+            this.start = this.start.bind(this)
+            this.move = this.move.bind(this)
+            this.end = this.end.bind(this)
+            this.wrap.addEventListener('touchstart', this.start)
+            this.wrap.addEventListener('touchmove', this.move)
+            this.wrap.addEventListener('touchend', this.end)
+            if (this.option.scrollBar) {
+                this.scrollBar = document.createElement('div')
+                this.scrollBar.style.cssText = `
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    width: 6px;
+                    height: 10px;
+                    background: rgba(0,0,0,0.3);
+                    border-radius: 3px;
+                    transition: .5s opacity;
+                    opacity: 0
+                `
+                this.setBarH()
+                this.scrollBar.classList.add('scroll-bar')
+                this.wrap.appendChild(this.scrollBar)
+                this.setBarM()
+            }
+        }
+        start(e) {
+            this.dispatch('beforescroll')
+            let touch = e.changedTouches[0]
+            mTween.stop(list)
+            // 内容过小不能滑动
+            this.maxY = this.list.offsetHeight - css(wrap, 'height')
+            this.option.isScroll = this.maxY <= 0 ? false : true
+            if (!this.option.isScroll) {
+                return
+            }
+            if (this.scrollBar) {
+                this.setBarH()
+                this.setBarM()
+                css(this.scrollBar, 'opacity', 1)
+            }
+            this.startPoint = {
+                x: touch.pageX,
+                y: touch.pageY
+            }
+            this.startY = css(this.list, 'translateY')
+            this.lastY = this.startPoint.y
+            this.lastDisY = 0
+            this.lastTime = Date.now()
+            this.lastDisTime = 0
+            this.n = .99
+            this.isFirst = true
+        }
+        move(e) {
+            if (!this.option.isScroll) {
+                return
+            }
+            this.dispatch('move')
+            let touch = e.changedTouches[0]
+            let nowTime = Date.now()
+            let nowPoint = {
+                x: touch.pageX,
+                y: touch.pageY
+            }
+            let dis = {
+                x: nowPoint.x - this.startPoint.x,
+                y: nowPoint.y - this.startPoint.y
+            }
+            e.preventDefault()
+            if (this.isFirst) {
+                if (Math.abs(dis.y) - Math.abs(dis.x) > 5) {
+                    this.isFirst = false
+                    this.isY = true
+                    // if ()
+                } else if (Math.abs(dis.x) - Math.abs(dis.y) > 5) {
+                    this.isFirst = false
+                }
+            }
+            if (!this.isY) {
+                return
+            }
+            this.y = dis.y + this.startY
+            if (this.y > 0) {
+                this.y *= this.n
+                this.setN()
+            } else if (this.y < -this.maxY) {
+                this.y = -this.maxY - (Math.abs(this.y) - this.maxY) * this.n
+                this.setN()
+            }
+            this.setScroll()
+            this.lastDisY = nowPoint.y - this.lastY
+            this.lastY = nowPoint.y
+            this.lastDisTime = nowTime - this.lastTime
+            this.lastTime = nowTime
+        }
+        end(e) {
+            this.dispatch('end')
+            let speed = this.lastDisY / this.lastDisTime
+            let nowTime = Date.now()
+            if (isNaN(speed) || nowTime - this.lastTime >= 100) {
+                this.scrollEnd()
+                return
+            }
+            let target = speed * 120
+            let _this = this
+            let fx = 'easeOutStrong';
+            target = Math.abs(target) < 30 ? 0 : target
+            target = target + this.y
+            if (target > 0) {
+                target = 0
+                fx = 'backOut'
+            } else if (target < -this.maxY) {
+                target = -this.maxY
+                fx = 'backOut'
+            }
+            mTween({
+                el: this.list,
+                attr: {
+                    translateY: target
+                },
+                move() {
+                    _this.y = css(_this.list, 'translateY')
+                    _this.setScroll()
+                },
+                duraiont: {
+                    multiple: 1.8
+                },
+                fx,
+                cb() {
+                    _this.scrollEnd();
+                }
+            })
+        }
+        setScroll() {
+            css(this.list, 'translateY', this.y)
+            if (this.scrollBar) {
+                css(this.scrollBar, 'translateY', -this.y * this.barMoveScale)
+            }
+        }
+        // 设置滚动条高度
+        setBarH() {
+            let wh = css(this.wrap, 'height')
+            let innerH = this.list.offsetHeight
+            let scale = wh / innerH
+            css(this.scrollBar, 'height', Math.max(scale * wh, this.minBarH))
+        }
+        // 设置滚动条滚动
+        setBarM() {
+            let maxBarMove = css(this.wrap, 'height') - css(this.scrollBar, 'height')
+            this.barMoveScale = maxBarMove / this.maxY
+            this.barMoveScale = isNaN(this.barMoveScale) ? 1 : this.barMoveScale
+        }
+        scrollEnd() {
+            if (this.scrollBar) {
+                css(this.scrollBar, 'opacity', 0)
+            }
+        }
+        // 计算拉力系数(截流)
+        setN() {
+            let timer = 0
+            return () => {
+                if (timer) {
+                    return
+                }
+                timer = setTimeout(() => {
+                    this.n *= .98
+                    timer = 0
+                }, 100)
+            }
+        }
+    }
+
+    {
+        let wrap = document.querySelector('#wrap')
+        let scroll = new KKBScroll(wrap, {
+            scrollBar: true
+        })
+        scroll.on('beforescroll', () => {
+            console.log('开始滚动')
+        })
+        scroll.on('move',() => {
+            console.log('滚动')
+        })
+        scroll.on('end',() => {
+            console.log('滚动结束')
+        })
+    }
+
+    {
+        // 布局生成
+        let list = document.querySelector('#list')
+        list.innerHTML = [...('.'.repeat(200))].map((item, index) => {
+            return `<li>这是第${index+1}个li</li>`
+        }).join('')
+    }
+</script>
+</html>

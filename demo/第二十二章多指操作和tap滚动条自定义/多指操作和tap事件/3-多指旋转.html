@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            margin: 100px auto;
+            width: 200px;
+            height: 200px;
+            background: red;
+            color:#fff;
+            font: 14px/30px "宋体";
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>   
+<script src="mTween.js"></script>
+<script>
+{
+
+    let box = document.querySelector("#box");
+    let startDeg = 0;
+    css(box,"rotate",0);
+    box.addEventListener("gesturestart",()=>{
+        box.style.background = "green";
+        startDeg = css(box,"rotate");
+    });
+    box.addEventListener("gesturechange",(e)=>{
+        // e.rotation start 和 change 时 角度差
+        // box.innerHTML = `
+        //     多指间角度差:${e.rotation}
+        // `;
+        css(box,"rotate",e.rotation + startDeg);
+    });
+    // 检测到手指位置发生改变
+    box.addEventListener("gestureend",()=>{
+        box.style.background = "red";
+    });
+
+    document.addEventListener("touchstart",(e)=>{
+        e.preventDefault();
+    },{
+        passive: false
+    });
+
+}    
+</script> 
+</body>
+</html>

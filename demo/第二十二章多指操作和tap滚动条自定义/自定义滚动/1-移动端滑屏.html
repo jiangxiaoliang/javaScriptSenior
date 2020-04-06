@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        #wrap {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #list li {
+            font: 14px/30px '宋体'
+        }
+    </style>
+</head>
+<body>
+    <div id='wrap'>
+        <ul id='list'>
+
+        </ul>
+    </div>
+</body>
+<script src = 'mTween.js'></script>
+<script>
+    {
+        // 布局生成
+        let list = document.querySelector('#list')
+        list.innerHTML = [...('.'.repeat(200))].map((item, index) => {
+            return `<li>这是第${index+1}个li</li>`
+        }).join('')
+    }
+
+    // 自定义滚动条实现
+    {
+        let wrap = document.querySelector('#wrap')
+        let list = document.querySelector('#list')
+        let startPoint = {}
+        let startY = 0
+        css(list, 'translateY', 0)
+        wrap.addEventListener('touchstart', (e) => {
+            let touch = e.changedTouches[0]
+            startPoint = {
+                x: touch.pageX,
+                y: touch.pageY
+            }
+            startY = css(list, 'translateY')
+        })
+        wrap.addEventListener('touchmove', (e) => {
+            let touch = e.changedTouches[0]
+            let nowPoint = {
+                x: touch.pageX,
+                y: touch.pageY
+            }
+            let dis = {
+                x: nowPoint.x - startPoint.x,
+                y: nowPoint.y - startPoint.y
+            }
+            css(list, 'translateY', dis.y + startY)
+        })
+    }
+</script>
+</html>

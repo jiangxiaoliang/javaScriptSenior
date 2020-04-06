@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id='box'></div>
+</body>
+<script>
+    // 自定义tap事件
+    {
+        let tap = new Event('tap', {
+            bubbles: true,
+            cancelable: true
+        })
+        let start = {}
+        document.addEventListener('touchstart', (e) => {
+            let touch = e.changedTouches[0]
+            start = {
+                x: touch.pageX,
+                y: touch.pageY
+            }
+        })
+        document.addEventListener('touchend', (e) => {
+            let touch = e.changedTouches[0]
+            let now = {
+                x: touch.pageX,
+                y: touch.pageY
+            }
+            if (Math.abs(now.x - start.x) + Math.abs(now.y - start.y) < 5) {
+                // console.log('tap')
+                tap.pageX = touch.pageX,
+                tap.pageY = touch.pageY
+                e.target.dispatchEvent(tap)
+            }
+        })
+    }
+
+    {
+        let box = document.querySelector('#box')
+        box.addEventListener('tap', (e) => {
+            console.log('box')
+            console.log(e)
+        })
+    }
+</script>
+</html>

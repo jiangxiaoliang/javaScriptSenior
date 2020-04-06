@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            margin: 100px auto;
+            width: 200px;
+            height: 200px;
+            background: red;
+            color:#fff;
+            font: 14px/30px "宋体";
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>   
+<script src="mTween.js"></script>
+<script>
+{
+
+    let box = document.querySelector("#box");
+    let startScale = 0;
+    let startDeg = 0;
+    css(box,"rotate",0);
+    css(box,"scale",1);
+    gesture(box,{
+        start(){
+            box.style.background = "green";
+        },
+        change(e){
+            box.innerHTML = `
+                多指间缩放值:${e.scale},
+                多指间旋转值:${e.rotation}
+            `;
+        },
+        end(){
+            box.style.background = "red";
+        }
+    });
+    document.addEventListener("touchstart",(e)=>{
+        e.preventDefault();
+    },{
+        passive: false
+    });
+}    
+function gesture(el,ev){
+    let isGesture = false;
+    el.addEventListener("touchstart",(e)=>{
+        let touches = e.touches;
+        if(touches.length >= 2){
+            isGesture = true;
+            ev.start&&ev.start.call(el,e);
+        }
+    });
+    el.addEventListener("touchmove",(e)=>{
+        let touches = e.touches;
+        if(isGesture){
+            let obj = {...e,scale:0,rotation:0};
+            // e.scale = 0;// 缩放值
+            // e.rotation = 0;//旋转值
+
+            ev.change&&ev.change.call(el,obj);
+        }
+    });
+    el.addEventListener("touchend",(e)=>{
+        if(isGesture){
+            isGesture = false;
+            ev.end&&ev.end.call(el,e);
+        }
+    });
+}
+</script> 
+</body>
+</html>

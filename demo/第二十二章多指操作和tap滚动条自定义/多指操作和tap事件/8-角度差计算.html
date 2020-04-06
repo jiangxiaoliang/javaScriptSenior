@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            margin: 100px auto;
+            width: 200px;
+            height: 200px;
+            background: red;
+            color:#fff;
+            font: 14px/30px "宋体";
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>   
+<script src="mTween.js"></script>
+<script>
+{
+
+    let box = document.querySelector("#box");
+    let startScale = 0;
+    let startDeg = 0;
+    css(box,"rotate",0);
+    css(box,"scale",1);
+    gesture(box,{
+        start(){
+            box.style.background = "green";
+            startScale = css(box,"scale");
+            startDeg = css(box,"rotate");
+        },
+        change(e){
+            box.innerHTML = `
+                多指间缩放值:${e.scale},
+                多指间旋转值:${e.rotation}
+            `;
+            css(box,"scale",startScale*e.scale);
+            css(box,"rotate",e.rotation + startDeg);
+        },
+        end(){
+            box.style.background = "red";
+        }
+    });
+    document.addEventListener("touchstart",(e)=>{
+        e.preventDefault();
+    },{
+        passive: false
+    });
+}    
+function gesture(el,ev){
+    let isGesture = false;
+    let startDis = 0;
+    let startDeg = 0;
+    el.addEventListener("touchstart",(e)=>{
+        let touches = e.touches;
+        if(touches.length >= 2){
+            isGesture = true;
+            startDis = Math.sqrt(Math.pow(Math.abs(touches[0].pageX - touches[1].pageX),2) + Math.pow(Math.abs(touches[0].pageY - touches[1].pageY),2));
+            startDeg = Math.atan2(touches[1].pageY - touches[0].pageY,touches[1].pageX - touches[0].pageX)*180/Math.PI;
+            ev.start&&ev.start.call(el,e);
+        }
+    });
+    el.addEventListener("touchmove",(e)=>{
+        let touches = e.touches;
+        if(isGesture){
+            let nowDis = Math.sqrt(Math.pow(Math.abs(touches[0].pageX - touches[1].pageX),2) + Math.pow(Math.abs(touches[0].pageY - touches[1].pageY),2));
+            let nowDeg = Math.atan2(touches[1].pageY - touches[0].pageY,touches[1].pageX - touches[0].pageX)*180/Math.PI;
+            //let obj = {...e,scale:nowDis/startDis,rotation:nowDeg - startDeg};
+            e.scale = nowDis/startDis;// 缩放值
+            e.rotation = nowDeg - startDeg;//旋转值
+            ev.change&&ev.change.call(el,e);
+        }
+    });
+    el.addEventListener("touchend",(e)=>{
+        if(isGesture){
+            isGesture = false;
+            ev.end&&ev.end.call(el,e);
+        }
+    });
+}
+</script> 
+</body>
+</html>

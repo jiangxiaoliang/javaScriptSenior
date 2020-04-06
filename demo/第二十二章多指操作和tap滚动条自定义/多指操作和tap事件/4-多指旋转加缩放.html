@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            margin: 100px auto;
+            width: 200px;
+            height: 200px;
+            background: red;
+            color:#fff;
+            font: 14px/30px "宋体";
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>   
+<script src="mTween.js"></script>
+<script>
+{
+
+    let box = document.querySelector("#box");
+    let startScale = 0;
+    let startDeg = 0;
+    css(box,"rotate",0);
+    css(box,"scale",1);
+    box.addEventListener("gesturestart",()=>{
+        box.style.background = "green";
+        startScale = css(box,"scale");
+        startDeg = css(box,"rotate");
+    });
+    box.addEventListener("gesturechange",(e)=>{
+        // e.scale  change时两个手指间的距离/start时两个手指间的距离
+        // box.innerHTML = `
+        //     多指间缩放值:${e.scale}
+        // `;
+        //startScale*e.scale
+        css(box,"scale",startScale*e.scale);
+        css(box,"rotate",e.rotation + startDeg);
+    });
+    // 检测到手指位置发生改变
+    box.addEventListener("gestureend",()=>{
+        box.style.background = "red";
+    });
+
+    document.addEventListener("touchstart",(e)=>{
+        e.preventDefault();
+    },{
+        passive: false
+    });
+
+}    
+</script> 
+</body>
+</html>

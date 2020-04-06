@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class KKBEvent {
+        constructor() {
+            this.events = {}
+            /*
+                this.events = {
+                    'click': [fn1,fn2,..]
+                    'mouseove': [fn1,fn2,..]
+                }
+            */
+        }
+        // 添加事件监听
+        on(event, fn) {
+            if (!this.events[event]) {
+                this.events[event] = []
+            }
+            this.events[event].push(fn)
+        }
+        // 取消事件监听
+        off(event, fn) {
+            if (!this.events[event]) {
+                return
+            }
+            if (fn) {
+                this.events[event] = this.events[event].filter(item => item !== fn)
+            } else {
+                this.events[event].length = 0
+            }
+        }
+        // 只监听一次
+        once(event, fn) {
+            fn.once = true
+            this.on(event, fn)
+        }
+        // 触发事件
+        dispatch(event) {
+            if (!this.events[event]) {
+                return
+            }
+            this.events[event].forEach(item => {
+                item.call(this)
+                if (item.once) {
+                    this.off(event,item)
+                }
+            })
+        }
+    }
+</script>
+</html>

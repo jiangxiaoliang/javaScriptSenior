@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        #wrap {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #list li {
+            font: 14px/30px '宋体'
+        }
+    </style>
+</head>
+<body>
+    <div id='wrap'>
+        <ul id='list'>
+
+        </ul>
+    </div>
+</body>
+<script src = 'mTween.js'></script>
+<script>
+    {
+        // 布局生成
+        let list = document.querySelector('#list')
+        list.innerHTML = [...('.'.repeat(200))].map((item, index) => {
+            return `<li>这是第${index+1}个li</li>`
+        }).join('')
+    }
+
+    class KKBScroll {
+        constructor(wrap, option) {
+            this.wrap = wrap
+            this.list = this.wrap.children[0]
+            this.option = option
+            this.startPoint = {} // 按下时的坐标值
+            this.startY = 0 // 按下时的translateY值
+            this.y = 0 // 滚动的距离
+            css(this.list, 'translateY', 0)
+            this.start = this.start.bind(this)
+            this.move = this.move.bind(this)
+            this.wrap.addEventListener('touchstart', this.start)
+            this.wrap.addEventListener('touchmove', this.move)
+        }
+        start(e) {
+            let touch = e.changedTouches[0]
+            this.startPoint = {
+                x: touch.pageX,
+                y: touch.pageY
+            }
+            this.startY = css(this.list, 'translateY')
+        }
+        move(e) {
+            let touch = e.changedTouches[0]
+            let nowPoint = {
+                x: touch.pageX,
+                y: touch.pageY
+            }
+            let dis = {
+                x: nowPoint.x - this.startPoint.x,
+                y: nowPoint.y - this.startPoint.y
+            }
+            this.y = dis.y + this.startY
+            this.setScroll()
+        }
+        setScroll() {
+            css(this.list, 'translateY', this.y)
+        }
+    }
+
+    {
+        let wrap = document.querySelector('#wrap')
+        let scroll = new KKBScroll(wrap, {
+            scrollBar: false
+        })
+    }
+</script>
+</html>
