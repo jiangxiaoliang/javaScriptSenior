@@ -1,0 +1,21 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(href='css/login.css', rel='stylesheet')
+    title Document
+  body
+    .loginContainer
+      h1 登陆
+      form(action='/checkUser', method='post')
+        | 姓名：
+        input.inputStyle(type='text', name='username')
+        br
+        |             密码：
+        input.inputStyle(type='password', name='pwd')
+        br
+        input.loginStyle(type='submit', value='登陆')
+        |  |
+        input(type='checkbox', name='rememberMe')
+        |  记住我

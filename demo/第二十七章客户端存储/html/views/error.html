@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    用户名或密码错<br />
+    <span>5</span>秒之后自动跳转...<br />
+    <a href='/login'>点我直接跳转</a>
+</body>
+<script>
+    let timer = document.querySelector('span').innerHTML
+    timer = parseInt(timer)
+    setInterval(() => {
+        timer--
+        document.querySelector('span').innerHTML = timer
+        if (timer < 1) {
+            window.location.href = '/login'
+        }
+    }, 1000)
+</script>
+</html>
