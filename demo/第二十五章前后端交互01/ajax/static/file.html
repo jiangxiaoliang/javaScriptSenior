@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" class="myfile" />
+    进度：<progress value="0" max="100"></progress> <span class="percent">0%</span>
+    速度：<span class="speed">20b/s</span>
+    <button>点击上传</button>
+    <button>取消上传</button>
+</body>
+<script>
+    let xhr = new XMLHttpRequest();
+    let btns = document.querySelectorAll("button");
+    let stime;
+    let sloaded;
+    btns[0].onclick = function () {
+        let file = document.querySelector(".myfile").files[0];
+        let form = new FormData();
+        form.append("myfile", file);
+        xhr.open("post", "/fileUpload", true);
+        xhr.onload = function () {
+            console.log(xhr.responseText);
+        }
+        xhr.upload.onloadstart = function(){
+            console.log("开始上传");
+            stime = new Date().getTime();
+            sloaded = 0;
+        }
+        xhr.upload.onprogress = function(evt){
+            let endTime = new Date().getTime();
+            // 时间差；
+            let dTime = (endTime - stime)/1000;
+            // 当前时间内上传的文件大小
+            let dloaded =  evt.loaded - sloaded;
+            let speed = dloaded/dTime;
+            let unit = "b/s";
+            stime = new Date().getTime();
+            sloaded = evt.loaded;
+            if(speed/1024>1){
+                unit = "kb/s";
+                speed = speed/1024;
+            }
+            if(speed/1024>1){
+                unit = "mb/s";
+                speed = speed/1024;
+            }
+            document.querySelector(".speed").innerHTML = speed.toFixed(2)+unit;
+            // console.log(speed.toFixed(2));
+            // console.log("正在上传");
+            // 当前文件上传的大小evt.loaded
+            // 需要上传文件的大小
+           let percent =  (evt.loaded/evt.total*100).toFixed(0);
+        //    console.log(percent);
+            document.querySelector("progress").value = percent;
+            document.querySelector(".percent").innerHTML = percent+"%";
+        }
+        xhr.upload.onload = function(){
+            console.log("上传成功");
+        }
+        xhr.upload.onloadend = function(){
+            console.log("上传完成");
+        }
+        xhr.upload.onabort = function(){
+            console.log("取消上传");
+        }
+        xhr.send(form);
+    }
+    btns[1].onclick = function(){
+        xhr.abort();
+    }
+
+</script>
+
+</html>

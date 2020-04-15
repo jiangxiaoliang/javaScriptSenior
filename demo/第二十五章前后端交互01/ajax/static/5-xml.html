@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>xml</button>
+</body>
+<script>
+    {
+        document.querySelector('button').onclick = function() {
+            let xhr = new XMLHttpRequest()
+            xhr.open('get', '/xml', true)
+            xhr.overrideMimeType('text/xml')
+            xhr.send()
+            xhr.onload = function() {
+                // console.log(xhr.responseText)
+                console.log(xhr.responseXML)
+                // console.log(xhr.response)
+                let name = xhr.responseXML.getElementsByTagName('name')[1].innerHTML
+                console.log(name)
+            }
+        }
+    }
+</script>
+</html>

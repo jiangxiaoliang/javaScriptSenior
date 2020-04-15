@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type='file' class='myfile' /><br/>
+    进度：<progress value='0' max="100"></progress>
+    <span class='percent'>0%</span><br/>
+    速度：<span class='speed'>0b/s</span><br/>
+    <button>点击上传</button>
+    <button>取消上传</button>
+</body>
+<script>
+    {
+        let btns = document.querySelectorAll('button')
+        let xhr = new XMLHttpRequest()
+        let stime = 0
+        let sloaded = 0
+        btns[0].onclick = function() {
+            let file = document.querySelector('.myfile').files[0]
+            let formData = new FormData()
+            formData.append('myfile', file)
+            xhr.open('post', '/fileUpload', true)
+            
+            xhr.onload = function() {
+                console.log(xhr.responseText)
+            }
+            xhr.upload.onloadstart = function() {
+                console.log('开始上传')
+                stime = Date.now()
+                sloaded = 0
+            }
+            xhr.upload.onprogress = function(e) {
+                console.log('数据上传中')
+                let endTime = Date.now()
+                let disTime = (endTime - stime) / 1000
+                stime = endTime
+                let dloaded = e.loaded - sloaded
+                sloaded = e.loaded
+                console.log(dloaded, disTime)
+                let speed = dloaded / disTime
+                let unit = 'b/s'
+                if (speed / 1024 > 1) {
+                    unit = 'kb/s'
+                    speed = speed / 1024
+                }
+                if (speed / 1024 > 1) {
+                    unit = 'mb/s'
+                    speed = speed / 1024
+                }
+                document.querySelector('.speed').innerHTML = speed.toFixed(2) + unit
+                let percent = (e.loaded/e.total*100).toFixed(0)
+                document.querySelector('progress').value = percent
+                document.querySelector('.percent').innerHTML = percent + '%'
+            }
+            xhr.upload.onload = function() {
+                console.log('上传成功')
+            }
+            xhr.upload.onloadend = function() {
+                console.log('上传完成')
+            }
+            xhr.upload.onabort = function() {
+                console.log('取消上传')
+            }
+            xhr.send(formData)
+        }
+        btns[1].onclick = function() {
+            xhr.abort()
+        }
+    }
+</script>
+</html>

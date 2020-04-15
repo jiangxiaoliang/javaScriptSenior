@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>获取跨域资源</button>
+</body>
+<script>
+    {
+        function fn(res) {
+            console.log('.....fn.....')
+            console.log(res)
+        }
+        let script = document.createElement('script')
+        script.src = 'http://localhost:3000/getAjax?cb=fn'
+        document.querySelector('head').appendChild(script)
+        // console.log(a)
+        // script.onload = () => {
+        //     console.log(a)
+        // }
+    }
+</script>
+</html>

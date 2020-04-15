@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type='file' class='myfile' />
+    <button>点击我上传文件</button>
+</body>
+<script>
+    {
+        document.querySelector('button').onclick = function() {
+            let file = document.querySelector('.myfile').files[0]
+            // console.log(file)
+            let formData = new FormData()
+            formData.append('img', file)
+            formData.append('name', 'jxl')
+            let xhr = new XMLHttpRequest()
+            xhr.open('post', '/upload', true)
+            xhr.send(formData)
+            xhr.onload = function() {
+                console.log(xhr.responseText)
+            }
+        }
+    }
+</script>
+</html>
