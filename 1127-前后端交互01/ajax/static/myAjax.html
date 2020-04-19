@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // ajax({
+    //     url: 'http://localhost:8000/get',
+    //     data: {
+    //         name: 'jxl',
+    //         age: 20
+    //     },
+    //     success: function(res) {
+    //         console.log(res)
+    //     }
+    // })
+    // ajax({
+    //     method: 'post',
+    //     url: 'http://localhost:8000/post',
+    //     data: {
+    //         name: 'jxl',
+    //         age: 20
+    //     },
+    //     success: function(res) {
+    //         console.log(res)
+    //     }
+    // })
+    ajax({
+        url: 'http://localhost:8000/jsonp',
+        data: {
+            name: 'jxl',
+            age: 20
+        },
+        type: 'jsonp',
+        success: function(res) {
+            console.log(res)
+        }
+    })
+    function ajax(options) {
+        let opt = Object.assign({
+            method: 'get',
+            url: '',
+            data: '',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            cb: 'callback',
+            success: function(res) {
+            }
+        }, options)
+
+        if (opt.type === 'jsonp') {
+            jsonpFn(opt.url, opt.data, opt.cb, opt.success)
+            return
+        }
+        function jsonpFn(url, data, cb, success) {
+            let fnName = 'jxl_' + Math.random().toString().substr(2)
+            window[fnName] = success
+            let path = url + '?' + o2u(data) + '&' + cb + '=' + fnName
+            let script = document.createElement('script')
+            script.src = path
+            document.querySelector('head').appendChild(script)
+        }
+
+        if (opt.method === 'get') {
+            opt.url = opt.url + '?' + o2u(opt.data)
+        }
+        let xhr = new XMLHttpRequest()
+        xhr.open(opt.method, opt.url, true)
+        for (let key in opt.header) {
+            xhr.setRequestHeader(key, opt.header[key])
+        }
+        xhr.onload = () => {
+            opt.success(JSON.parse(xhr.responseText))
+        }
+        let sendData
+        if (opt.header['content-type'] === 'application/x-www-form-urlencoded') {
+            sendData = o2u(opt.data)
+        } else if (opt.header['content-type'] === 'application/json') {
+            sendData = JSON.stringify(opt.data)
+        }
+        if (opt.method === 'get') {
+            xhr.send()
+        } else {
+            xhr.send(sendData)
+        }
+
+        function o2u(obj) {
+            if (!obj) return
+            return [...Object.keys(obj)].map((item, index) => {
+                // console.log(item, obj[item])
+                return `${item}=${obj[item]}`
+            }).join('&')
+        }
+    }
+</script>
+</html>

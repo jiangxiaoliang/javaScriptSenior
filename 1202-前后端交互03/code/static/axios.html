@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='./axios.js' type='text/javascript'></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <title>Document</title>
+</head>
+<body>
+    <button>点击发送axios的get请求</button>
+    <button>点击发送axios的post请求</button>
+</body>
+<script>
+    {
+       let btns = document.querySelectorAll('button')
+
+       // 拦截器
+       axios.interceptors.request.use((config) => {
+           // 鉴权；  ---》 头部加上鉴权信息带给后端做验证；
+           console.log('所有请求前执行11111')
+        //    console.log(config)
+           return config
+       }, err => {
+           console.log(err)
+       })
+       axios.interceptors.request.use((config) => {
+           // 鉴权；  ---》 头部加上鉴权信息带给后端做验证；
+           console.log('所有请求前执行222222')
+        //    console.log(config)
+           return config
+       }, err => {
+           console.log(err)
+       })
+       axios.interceptors.response.use(res => {
+           console.log('所有返回之后执行11111')
+        //    console.log(res)
+           res.data = 1
+           return res
+       }, err => {
+           console.log(err)
+       })
+       axios.interceptors.response.use(res => {
+           console.log('所有返回之后执行2222')
+        //    console.log(res)
+           res.data = 1
+           return res
+       }, err => {
+           console.log(err)
+       })
+
+       btns[0].onclick = function() {
+        //    axios({
+        //        method: 'get',
+        //        url: '/axiosGet',
+        //    }).then(res => {
+        //        console.log(res)
+        //    })
+        axios.get("/axios").then(res=>{
+            console.log(res.data);
+        })
+       }
+       btns[1].onclick = function() {
+           let params = new URLSearchParams()
+           params.append('name', 'zhangsan')
+           params.append('age', 22)
+           axios({
+               method: 'post',
+               url: '/axiosPost',
+            //    data: {
+            //        name: 'zhangsan',
+            //        age: 20
+            //    },
+               data: params,
+               headers: {
+                   'content-type': 'application/x-www-form-urlencoded'
+               }
+           }).then(res => {
+               console.log(res.data)
+           })
+       }
+    }
+</script>
+</html>

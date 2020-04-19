@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/login.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    <div class="loginContainer">
+        <h1>登陆</h1>
+        <form action="/checkUser" method="post">
+            姓名：<input class="inputStyle" type="text" name="username" />
+            <span class="exchange"></span><br />
+            密码：<input class="inputStyle" type='password' name='pwd' /><br />
+            <input class="loginStyle" type='submit' value='登录' />
+        </form>
+    </div>
+</body>
+<script>
+    {
+        document.querySelectorAll('.inputStyle')[0].onblur = function() {
+            // console.log(this.value)
+            let xhr = new XMLHttpRequest()
+            xhr.open('get', `checkUserName?username=${this.value}`, true)
+            xhr.onload = function() {
+                let res = JSON.parse(xhr.responseText)
+                console.log(res)
+                if (res.status === 1) {
+                    document.querySelector('.exchange').style.color = 'green'
+                    document.querySelector('.exchange').innerHTML = res.info
+                } else {
+                    document.querySelector('.exchange').style.color = 'red'
+                    document.querySelector('.exchange').innerHTML = res.info
+                }
+            }
+            xhr.send()
+        }
+    }
+</script>
+</html>

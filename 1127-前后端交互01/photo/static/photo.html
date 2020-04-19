@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/photo.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    <div class='container'>
+        <div class='photoHeader'>
+            <div class="imgContainer">
+                <img class="photoName" src='img/1.jpg' />
+            </div>
+            <div class="btnContainer">
+                <span class="photoTitle">相册名称</span>
+                <button class="mybtn">上传照片</button>
+            </div>
+        </div>
+        <div class="photoContainer">
+            <div class="photoItem">
+                <img src="img/Home.png" />
+                <span>
+                    home
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="masking">
+        <div class="addPhotoContainer"></div>
+        <div class="addController">
+            <h3 class="addTitle">上传照片-普通上传(H5)<span class="close">╳</span></h3>
+            <div class="photoTitles">
+                <span class="uploadTo">上传到</span>
+                <div class="photoSelect">
+                    <img class="showPhoto" src="img/1.jpg" />
+                    相册名称
+                </div>
+            </div>
+            <div class="showContainer">
+                <div class="uploadContainer">
+                    <span class="fileinput-button">
+                        <span>上传图片</span>
+                        <input class="imgFile" type="file" name="" multiple="multiple" />
+                    </span>
+                    <span class="hint">
+                        按住Ctrl可多选
+                    </span>
+                </div>
+            </div>
+            <div class="loadContainer">
+                <div class="wantUpload">
+                    <div class="uploadPhotoItem">
+                        <span class="myProgress">
+                            <span class="plan"></span>
+                            30%
+                        </span>
+                        <img src="img/1.jpg" />
+                        <span class="pictureName">
+                            home
+                        </span>
+                    </div>
+                </div>
+                <div class="addStyle">
+                    <span class="fileinput-add">
+                        <span></span>
+                        <input class="imgFile-add" type="file" multiple='multiple' />
+                    </span>
+                </div>
+                <div class="bottomStyle">
+                    <span class="uploadBtn">开始上传</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.querySelector('.close').onclick = () => {
+        document.querySelector('.masking').style.display = 'none'
+    }
+    document.querySelector('.mybtn').onclick = () => {
+        document.querySelector('.masking').style.display = 'block'
+    }
+    document.querySelector('.imgFile').onchange = function() {
+        console.log(this.files)
+        document.querySelector(".showContainer").style.display = "none";
+        document.querySelector(".loadContainer").style.display = "block";
+        [...this.files].forEach((item, index) => {
+            console.log(item)
+            let fileReader =  new FileReader()
+            fileReader.readAsDataURL(item)
+            fileReader.onload = function() {
+                let div = document.createElement('div')
+                div.classList.add('uploadPhotoItem')
+                div.innerHTML = `
+                    <span class="myProgress">
+                        <span class="plan"></span>
+                        30%
+                    </span>
+                    <img src="${fileReader.result}" />
+                    <span class="pictureName">
+                        ${item.name}
+                    </span>
+                `
+                document.querySelector('.wantUpload').appendChild(div)
+            }
+        })
+    }
+
+</script>
+</html>

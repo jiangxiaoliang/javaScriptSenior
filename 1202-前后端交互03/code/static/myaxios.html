@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='./myaxios.js' type='text/javascript'></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <title>Document</title>
+</head>
+<body>
+    <h3>myaxios</h3>
+</body>
+<script>
+    {
+
+       // 拦截器
+       axios.interceptors.request.use((config) => {
+           // 鉴权；  ---》 头部加上鉴权信息带给后端做验证；
+           console.log('所有请求前执行11111')
+        //    console.log(config)
+           return config
+       }, err => {
+           console.log(err)
+       })
+       axios.interceptors.request.use((config) => {
+           // 鉴权；  ---》 头部加上鉴权信息带给后端做验证；
+           console.log('所有请求前执行222222')
+        //    console.log(config)
+           return config
+       }, err => {
+           console.log(err)
+       })
+       axios.interceptors.response.use(res => {
+           console.log('所有返回之后执行11111')
+        //    console.log(res)
+           res.data = 1
+           return res
+       }, err => {
+           console.log(err)
+       })
+       axios.interceptors.response.use(res => {
+           console.log('所有返回之后执行2222')
+        //    console.log(res)
+           res.data = 1
+           return res
+       }, err => {
+           console.log(err)
+       })
+        
+        // axios()
+        // axios({
+        //     method: 'get',
+        //     url: '/myaxios'
+        // }).then(res => {
+        //     console.log(res)
+        // })
+        axios.get({
+            url: '/myaxios'
+        }).then(res => {
+            console.log(res)
+        })
+    }
+</script>
+</html>

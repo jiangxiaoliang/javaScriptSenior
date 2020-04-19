@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>点击发送请求到4000</button>
+    <button>服务端代理请求</button>
+</body>
+<script>
+    {
+        // 跨域是浏览器行为；同源策略；img,script,iframe
+        // 预检请求：非简单的请求；会请求两次；options在cros处理跨域时会出现
+        let btns = document.querySelectorAll('button')
+
+        btns[0].onclick = function() {
+            let xhr = new XMLHttpRequest()
+            // xhr.open('post', '/test', true)
+            xhr.open('post', 'http://localhost:4000/getData', true)
+            xhr.setRequestHeader('content-type', 'application/json')
+            xhr.setRequestHeader('Authorization', 'some thing')
+            // 允许凭证
+            xhr.withCredentials = true
+            xhr.onload = function() {
+                console.log(xhr.responseText)
+                console.log(xhr.getAllResponseHeaders())
+            }
+            xhr.send()
+        }
+
+        btns[1].onclick = function(){
+            let xhr = new XMLHttpRequest()
+            // xhr.open('post', '/getData', true)
+            xhr.open('post', '/api/getDataService', true)
+            xhr.onload = function() {
+                console.log(xhr.responseText)
+            }
+            xhr.send()
+        }
+    }
+</script>
+</html>

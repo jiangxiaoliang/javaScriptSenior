@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>点击发送fetch的get请求</button>
+    <button>点击发送fetch的post请求</button>
+</body>
+<script>
+    {
+        /*
+            fetch是js基于promise封装的ajax请求
+            缺点：不能提供上传进度监听;兼容性
+        */
+        let btns = document.querySelectorAll('button')
+        btns[0].onclick = function() {
+            fetch('/get?name=jxl&age=20').then(res => {
+                // 返回是的Response对象
+                // console.log(res)
+                // console.log(res.text())
+                return res.text()
+            }).then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+        btns[1].onclick = function() {
+            let myHeader = new Headers()
+            myHeader.append('content-type', 'application/json')
+            fetch('/post', {
+                method: 'post',
+                // body: 'name=jxl&age=18',
+                body: JSON.stringify({name: 'jxl', age: 18})
+                // headers: {
+                //     'content-type': 'application/x-www-form-urlencoded',
+                //     'custom': 'some value'
+                // }
+            }).then(res => {
+                let result = res.clone()
+                // console.log(result)
+                // console.log(res.json())
+                return res.json()
+            }).then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+    }
+</script>
+</html>

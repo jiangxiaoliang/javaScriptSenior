@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/photo.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    <div class='container'>
+        <div class='photoHeader'>
+            <div class="imgContainer">
+                <img class="photoName" src='img/1.jpg' />
+            </div>
+            <div class="btnContainer">
+                <span class="photoTitle">相册名称</span>
+                <button class="mybtn">上传照片</button>
+            </div>
+        </div>
+        <div class="photoContainer">
+            <!-- <div class="photoItem">
+                <img src="img/Home.png" />
+                <span>
+                    home
+                </span>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="masking">
+        <div class="addPhotoContainer"></div>
+        <div class="addController">
+            <h3 class="addTitle">上传照片-普通上传(H5)<span class="close">╳</span></h3>
+            <div class="photoTitles">
+                <span class="uploadTo">上传到</span>
+                <div class="photoSelect">
+                    <img class="showPhoto" src="img/1.jpg" />
+                    相册名称
+                </div>
+            </div>
+            <div class="showContainer">
+                <div class="uploadContainer">
+                    <span class="fileinput-button">
+                        <span>上传图片</span>
+                        <input class="imgFile" type="file" name="" multiple="multiple" />
+                    </span>
+                    <span class="hint">
+                        按住Ctrl可多选
+                    </span>
+                </div>
+            </div>
+            <div class="loadContainer">
+                <div class="wantUpload">
+                    <!-- <div class="uploadPhotoItem">
+                        <span class="myProgress">
+                            <span class="plan"></span>
+                            30%
+                        </span>
+                        <img src="img/1.jpg" />
+                        <span class="pictureName">
+                            home
+                        </span>
+                    </div> -->
+                </div>
+                <div class="addStyle">
+                    <span class="fileinput-add">
+                        <span></span>
+                        <input class="imgFile-add" type="file" multiple='multiple' />
+                    </span>
+                </div>
+                <div class="bottomStyle">
+                    <span class="uploadBtn">开始上传</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // function createEle(item) {
+    //     let fileReader =  new FileReader()
+    //         fileReader.readAsDataURL(item)
+    //         fileReader.onload = function() {
+    //             let div = document.createElement('div')
+    //             div.classList.add('uploadPhotoItem')
+    //             div.innerHTML = `
+    //                 <span class="myProgress">
+    //                     <span class="plan"></span>
+    //                     30%
+    //                 </span>
+    //                 <img src="${fileReader.result}" />
+    //                 <span class="pictureName">
+    //                     ${item.name}
+    //                 </span>
+    //             `
+    //             document.querySelector('.wantUpload').appendChild(div)
+    //         }
+    // }
+    let uploadImgs = []
+    document.querySelector('.close').onclick = () => {
+        document.querySelector('.masking').style.display = 'none'
+    }
+    document.querySelector('.mybtn').onclick = () => {
+        document.querySelector('.masking').style.display = 'block'
+    }
+    document.querySelector('.imgFile').onchange = function() {
+        // console.log(this.files)
+        document.querySelector(".showContainer").style.display = "none";
+        document.querySelector(".loadContainer").style.display = "block";
+        [...this.files].forEach((item, index) => {
+            // console.log(item)
+            // createEle(item)
+            let willUploadImg = new WillUploadImg(item)
+            willUploadImg.createEle()
+            uploadImgs.push(willUploadImg)
+        })
+    }
+    document.querySelector('.imgFile-add').onchange = function() {
+        [...this.files].forEach((item,index) => {
+            // createEle(item)
+            let willUploadImg = new WillUploadImg(item)
+            willUploadImg.createEle()
+            uploadImgs.push(willUploadImg)
+        })
+    }
+
+    let num = 0
+    document.querySelector('.uploadBtn').onclick = () => {
+        // console.log(uploadImgs)
+        queue()
+        async function queue() {
+            for (let i = 0; i < uploadImgs.length; i++) {
+                await uploadImgs[i].uploadImg()
+                num ++
+                if (num >= uploadImgs.length) {
+                    document.querySelector('.masking').style.display = 'none'
+                    getImageData()
+                }
+            }
+        }
+    }
+
+    class WillUploadImg {
+        constructor(file) {
+            this.file = file
+            this.div = ''
+        }
+        createEle() {
+            let _this = this
+            let fileReader =  new FileReader()
+            fileReader.readAsDataURL(this.file)
+            fileReader.onload = function() {
+                let div = document.createElement('div')
+                div.classList.add('uploadPhotoItem')
+                div.innerHTML = `
+                    <span class="myProgress">
+                        <span class="plan"></span>
+                        <span class='exchange'>30%</span>
+                    </span>
+                    <img src="${fileReader.result}" />
+                    <span class="pictureName">
+                        ${_this.file.name}
+                    </span>
+                `
+                document.querySelector('.wantUpload').appendChild(div)
+                _this.div = div
+            }
+        }
+        uploadImg() {
+            return new Promise((resolve, reject) => {
+                let form = new FormData()
+                form.set('img', this.file)
+                let xhr = new XMLHttpRequest()
+                xhr.open('post', '/upload', true)
+                xhr.onload = function() {
+                    console.log(xhr.responseText)
+                }
+                xhr.upload.onprogress = (e) => {
+                    // console.log(e.loaded, e.total)
+                    let percent = Math.round(e.loaded / e.total * 100) + '%'
+                    this.div.querySelector('.myProgress').style.display = 'block'
+                    this.div.querySelector('.exchange').innerHTML = percent
+                    this.div.querySelector('.plan').style.width = percent
+                    if (e.loaded === e.total) {
+                        resolve()
+                        document.querySelector('.wantUpload').removeChild(this.div)
+                    }
+                }
+                xhr.send(form)
+            })
+        }
+    }
+
+    function getImageData() {
+        let xhr = new XMLHttpRequest()
+        xhr.open('get', '/getImageData', true)
+        xhr.onload = function() {
+            let imgData = JSON.parse(xhr.responseText)
+            let htmlContent = ''
+            imgData.forEach(item => {
+                htmlContent += `<div class="photoItem">
+                                    <img src="${item.imgUrl}" />
+                                <span>
+                                    ${item.imgName}
+                                </span>
+                            </div>`
+            })
+            document.querySelector('.photoContainer').innerHTML = htmlContent
+        }
+        xhr.send()
+    }
+    getImageData()
+
+</script>
+</html>
