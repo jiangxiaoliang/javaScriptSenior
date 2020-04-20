@@ -40,6 +40,7 @@ router.post('/axiosPost', async(ctx, next) => {
     }
 })
 router.get('/myaxios', async(ctx, next) => {
+    console.log('myaxios')
     ctx.body = {
         status: 1,
         info: 'myaxios get请求'

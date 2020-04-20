@@ -5,10 +5,11 @@ class Axios {
             request: new InterceptorManager(),
             response: new InterceptorManager()
         }
+        this.adapter = new Adapter()
     }
     request(config) {
         // 组装队列
-        let chain = [this.xhr, undefined]
+        let chain = [this.dispatchXhr.bind(this), undefined]
         this.interceptors.request.handles.forEach(interceptor => {
             chain.unshift(interceptor.fulfilled, interceptor.rejected)
         })
@@ -17,24 +18,22 @@ class Axios {
         })
         let promise = Promise.resolve(config)
         while(chain.length > 0) {
-            promise.then(chain.shift(), chain.shift())
+            promise = promise.then(chain.shift(), chain.shift())
         }
         return promise
 
         // [ful1,rej1,ful2,rej2,this.xhr,undefined,ful1,rej1,ful2,rej2]
         // return this.xhr(config)
     }
-    xhr(config) {
-        return new Promise((resolve, reject) => {
-            let xhr = new XMLHttpRequest()
-            // console.log(config)
-            let { url='', data=null, method='get', headers={}} = config
-            xhr.open(method, url, true)
-            xhr.onload = function() {
-                resolve(xhr.responseText)
-            }
-            xhr.send(data)
-        })
+    dispatchXhr(config) {
+        // 判断环境
+        if (typeof process !== 'undefined') {
+            // 服务端
+            return this.adapter.http(config)
+        } else {
+            // 客户端
+            return this.adapter.xhr(config)
+        }
     }
 }
 
@@ -46,6 +45,52 @@ class InterceptorManager {
         this.handles.push({
             fulfilled,
             rejected
+        })
+    }
+}
+
+// 适配器
+class Adapter {
+    http(config) {
+        console.log('nodejs')
+        return new Promise((resolve, reject) => {
+            const http = require('http')
+            const urls = require('url')
+            let { data = null, url, method = 'get', params, headers = {} } = config;
+            let pathObj = urls.parse(url)
+            let options = {
+                host: pathObj.hostname,
+                port: pathObj.port,
+                path: pathObj.path,
+                method: config.method.toUpperCase(),
+                headers: headers
+            };
+            let request = http.request(options, res => {
+                let result = ''
+                res.on('data', chunk => {
+                    result += chunk
+                })
+                res.on('end', () => {
+                    resolve(JSON.parse(result.toString()))
+                })
+            })
+            request.on('error',  err => {
+                reject(err)
+            })
+            request.end()
+        })
+    }
+    xhr(config) {
+        console.log('客户端')
+        return new Promise((resolve, reject) => {
+            let xhr = new XMLHttpRequest()
+            // console.log(config)
+            let { url='', data=null, method='get', headers={}} = config
+            xhr.open(method, url, true)
+            xhr.onload = function() {
+                resolve(xhr.responseText)
+            }
+            xhr.send(data)
         })
     }
 }
@@ -81,7 +126,10 @@ function createInstance() {
     let instance = context.request.bind(context)
     utils.extends(instance, Axios.prototype, context)
     utils.extends(instance, context)
-    console.dir(instance)
+    // console.dir(instance)
     return instance
 }
 let axios = createInstance()
+if (typeof process !== 'undefined') {
+    module.exports= axios
+}
