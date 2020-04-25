@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='app'></div>
+
+    <!-- react.js: react核心库，提供组件，辅助函数等于具体环境无关的核心代码 -->
+    <script src="js/react.development.js"></script>
+    <!-- react-dom: 渲染与浏览器打交道的代码，渲染，事件等 -->
+    <script src="js/react-dom.development.js"></script>
+    <!-- babel:语法转换工具，把特定语法转成js，比如jsx,ts... -->
+    <script src="js/babel.min.js"></script>
+
+    <!-- 让下面的代码不要直接通过浏览器来运行，同时还要指定babel来编译它们 -->
+    <script type="text/babel">
+        /*
+            JSX: Javascript + XM
+            JSX 通过编译器会最终转成一个对象给我们VDOM
+        */
+
+        let div = <div id="div1" style={{ color:'red'}}>
+            <span>我要渲染的内容</span>
+            <strong>内容</strong>
+        </div>
+        console.dir(document.querySelector('div'))
+        console.log(div)
+        ReactDOM.render(
+            div,
+            document.querySelector('#app')
+        )
+    </script>
+</body>
+</html>
