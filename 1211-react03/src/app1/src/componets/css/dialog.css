@@ -1,0 +1,37 @@
+.dialog {
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+    box-sizing: border-box;
+    background: #fff;
+    width: 60%;
+}
+.dialog_header {
+    padding: 20px 20px 0;
+    text-align: left;
+}
+.dialog_title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1f2d3d;
+}
+.dialog_content {
+    padding: 30px 20px;
+    color: #48576a;
+    font-size: 14px;
+    text-align: left;
+}
+.dialog_close_btn {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+.dialog_close_btn:before {
+    content: 'x';
+    color: #999;
+    font-size: 20px;
+    cursor: pointer;
+}

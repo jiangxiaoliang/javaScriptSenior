@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let user = {
+        name: 'jxl',
+        age: 20
+    }
+
+    function onChange(val) {
+        user.name = val
+    }
+
+    //<child></child>
+    child(user, onChange)
+    child2(user)
+
+    console.log(user)
+
+    function child(data, onChange) {
+        // 类似子组件
+        // data.name = 'haha'
+
+        // 如果要修改则调用 onChange，onChange是由父级类定义的
+        onChange('1111')
+    }
+
+    function child2(data) {
+        console.log(data)
+    }
+</script>
+</html>
