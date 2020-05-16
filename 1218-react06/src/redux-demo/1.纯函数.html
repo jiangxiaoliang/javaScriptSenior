@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="./redux.min.js"></script>
+<script>
+
+    /**
+     * store: 仓库，提供数据存储、管理等操作的对象，state、reducer、action 都是 store 其中一个功能
+     *      state : 存储数据的位置，对象
+     *      reducer : 数据分片（构建基础数据的函数）
+     *      action : 提交数据操作请求
+     */
+
+    /**
+     * 纯函数
+     */
+
+
+    let user1 = {
+        id: 1,
+        username: 'zmouse',
+        age: 35
+    };
+
+    function growUp(user) {
+        // user.age++;
+
+        // return {
+        //         ...user,
+        //         {age: user.age+1}
+        // }
+
+        return Object.assign({}, user, {age: user.age + 1});
+    }
+
+    // let user2 = user1;
+
+    let user2 = growUp(user1);
+    let user3 = growUp(user1);
+
+    console.log(user2);
+    console.log(user3);
+
+</script>
+</body>
+</html>

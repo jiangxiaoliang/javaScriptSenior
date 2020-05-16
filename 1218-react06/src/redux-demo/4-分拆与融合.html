@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="redux.min.js"></script>
+</head>
+<body>
+    
+</body>
+<script>
+    let appData = {
+        users: [
+
+        ],
+        items: [
+
+        ],
+        cart: [
+
+        ]
+    }
+    // function reducer(state, action) {
+    //     console.log('执行了', action)
+    //     // return state
+
+    //     switch(action.type) {
+    //         case 'ADD_USER':
+    //             return {
+    //                 items: state.items,
+    //                 cart: state.cart,
+    //                 users: [...state.users, action.payload]
+    //             }
+    //             break;
+    //         default:
+    //             return state
+    //     }
+    // }
+
+    function usersReducer(state=[], action) {
+        switch(action.type) {
+            case 'ADD_USER':
+                return [...state, action.payload]
+                break;
+            default:
+                return state
+        }
+    }
+    function itemsReducer(state=[], action) {
+        switch(action.type) {
+            case 'ADD_ITEM':
+                return [...state, action.payload]
+                break;
+            default:
+                return state
+        }
+    }
+    function cartReducer(state=[], action) {
+        switch(action.type) {
+            case 'ADD_CART':
+                return [...state, action.payload]
+                break;
+            default:
+                return state
+        }
+    }
+    function myReducer(state, action) {
+        return {
+            users: usersReducer(state.users, action),
+            items: itemsReducer(state.items, action),
+            cart: cartReducer(state.cart, action)
+        }
+    }
+
+    let reducer = Redux.combineReducers({
+        users: usersReducer,
+        items: itemsReducer,
+        cart: cartReducer
+    })
+
+    let store = Redux.createStore(reducer, appData)
+
+    console.log(store.getState())
+
+    function addUserAction(payload) {
+        return {
+            type: 'ADD_USER',
+            payload
+        }
+    }
+    store.dispatch(addUserAction({
+        id: 1,
+        username: 'jxl'
+    }))
+    console.log(store.getState())
+</script>
+</html>

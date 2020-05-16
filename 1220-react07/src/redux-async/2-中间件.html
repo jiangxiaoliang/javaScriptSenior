@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="./redux.min.js"></script>
+<script>
+    let initState = {
+      users: []
+    }
+    function reducers(state=initState, {type, payload}) {
+      switch (type) {
+        case 'user/add':
+          return Object.assign(state, {
+            users: [...state.users, payload]
+          })
+        default:
+          return state
+      }
+    }
+    let store = Redux.createStore(reducers)
+
+    // 需求：在每次 `dispatch` 的时候打印修改之前和之后的 `state`
+    // console.log(store.getState())
+    // store.dispatch({
+    //   type: 'user/add',
+    //   payload: 'jxl'
+    // })
+    // console.log(store.getState())
+
+    // 封装logger
+    // function logger(store, action) {
+    //   console.log(store.getState())
+    //   store.dispatch(action)
+    //   console.log(store.getState())
+    // }
+    // logger(store, {
+    //   type: 'user/add',
+    //   payload: 'jxl1'
+    // })
+
+    // 封装dispatch
+    // let next = store.dispatch
+    // store.dispatch = function logger(action) {
+    //   console.log(store.getState())
+    //   next(action)
+    //   console.log(store.getState())
+    // }
+    // store.dispatch({
+    //   type: 'user/add',
+    //   payload: 'jxl2'
+    // })
+    // 需求：每次 `dispatch` 把提交的数据进行持久化
+    // store.dispatch = function storage(action) {
+    //   next(action)
+    //   localStorage.setItem('store', JSON.stringify(store.getState()))
+    //   console.log('持久存储完成')
+    // }
+    // store.dispatch({
+    //   type: 'user/add',
+    //   payload: 'jxl3'
+    // })
+
+
+    // 把上面两个需求合并，封装合并多个中间件
+    // function logger(store) {
+    //   let next = store.dispatch
+    //   return function loggerDispatch(action) {
+    //     console.log('before: ', store.getState())
+    //     next(action)
+    //     console.log('after: ', store.getState())
+    //   }
+    // }
+    // function storage(store) {
+    //   let next = store.dispatch
+    //   return function storageDispatch(action) {
+    //     next(action)
+    //     localStorage.setItem('store', JSON.stringify(store.getState()))
+    //     console.log('持久存储完成')
+    //   }
+    // }
+    // function test(store) {
+    //   let next = store.dispatch
+    //   return function testDispatch(action) {
+    //     next(action)
+    //     console.log('test')
+    //   }
+    // }
+
+    // store.dispatch = logger(store)
+    // store.dispatch = storage(store)
+    // store.dispatch = test(store)
+    // store.dispatch({
+    //   type: 'user/add',
+    //   payload: 'jxl4'
+    // })
+
+
+    // function applyMiddleware(store, middlewares) {
+    //   middlewares.reverse()
+    //   middlewares.forEach(middleware => {
+    //     store.dispatch = middleware(store)
+    //   })
+    // }
+    // applyMiddleware(store, [logger, storage])
+    // store.dispatch({
+    //   type: 'user/add',
+    //   payload: 'jxl5'
+    // })
+
+    // 抽取next
+    function applyMiddleware(store, middlewares) {
+      middlewares.reverse()
+      let dispatch = store.dispatch
+      middlewares.forEach(middleware => {
+        dispatch = middleware(store)(dispatch)
+      })
+      store.dispatch = dispatch
+    }
+    // function logger(store) {
+    //   return function(next) {
+    //     return function loggerDispatch(action) {
+    //       console.log('before: ', store.getState())
+    //       next(action)
+    //       console.log('after: ', store.getState())
+    //     }
+    //   }
+    // }
+    let logger = store => next => action => {
+      console.log('before: ', store.getState())
+      next(action)
+      console.log('after: ', store.getState())
+    }
+    // function storage(store) {
+    //   return function(next) {
+    //     return function storageDispatch(action) {
+    //       next(action)
+    //       localStorage.setItem('store', JSON.stringify(store.getState()))
+    //       console.log('持久存储完成')
+    //     }
+    //   }
+    // }
+    let storage = store => next => action => {
+      next(action)
+      localStorage.setItem('store', JSON.stringify(store.getState()))
+      console.log('持久存储完成')
+    }
+
+    applyMiddleware(store, [storage, logger])
+    store.dispatch({
+      type: 'user/add',
+      payload: 'jxl6'
+    })
+</script>
+</body>
+</html>

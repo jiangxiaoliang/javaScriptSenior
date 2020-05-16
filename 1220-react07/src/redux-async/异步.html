@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="./redux.min.js"></script>
+<script>
+
+
+
+    let users = [
+        {
+            id: 1,
+            username: 'zmouse',
+            age: 35
+        },
+        {
+            id: 2,
+            username: 'mt',
+            age: 30
+        }
+    ];
+
+
+    function reducer(state, action) {
+
+        switch (action.type) {
+            case 'ADD':
+                return [...state, action.payload];
+            default:
+                return state;
+        }
+
+    }
+
+
+
+    function add(payload) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve( {
+                    type: 'ADD',
+                    payload
+                })
+            }, 1000);
+        })
+    }
+
+
+    // store.dispatch( add('abc') );
+
+
+    // let dispatch = store.dispatch;
+    //
+    // store.dispatch = function(reducer) {
+    //     reducer.then( val => {
+    //         // console.log(val);
+    //         dispatch(val);
+    //     } );
+    // };
+
+
+    // 函数式
+    // function kkb(store) {
+    //     return function(next) {
+    //         return function(action) {
+    //
+    //         }
+    //     }
+    // }
+
+
+    let store = Redux.createStore( reducer, applyMiddleware(kkb) );
+
+    store.dispatch( kkb('abc') );
+
+
+    console.log( store.getState() );
+
+
+    function test1() {
+        return function log1(a) {
+            console.log('test1')
+        }
+    }
+    function test2() {
+        return function log2(a) {
+            console.log('test2')
+        }
+    }
+
+    a = test1()
+    a = test2()
+
+    a(1)
+
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="redux.min.js"></script>
+</head>
+<body>
+    
+</body>
+<script>
+    let users = [
+        {
+            id: 1,
+            username: 'zmouse',
+            age: 35
+        },
+        {
+            id: 2,
+            username: 'mt',
+            age: 30
+        }
+    ];
+    /**
+     * 构建一个用来存储数据，提供数据操作的仓库
+     * 
+     * Redux.createStore: 创建仓库
+     *  第一个参数：reducer函数，修改数据的方法，如何操作操作的结果？访问数据的时候，返回什么，数据变化如何进行？该函数的返回值就是仓库中state的最新的数据，该方法会在仓库创建的时候默认调用一次
+     *  第二个参数：仓库中存储的初始化数据，存什么
+     */
+    
+    function reducer(state, action) {
+        console.log('执行了', action)
+        // return state
+
+        switch(action.type) {
+            case 'ADD':
+                // state.push(action.payload) 千万不要
+                // return state
+                return [...state, action.payload]
+                break;
+            default:
+                return state
+        }
+    }
+
+    let store = Redux.createStore(reducer, users)
+
+    // createStore => reducer(users, {type:'@@redux/INITd.b.3.g.l'}) => return state => 现在仓库里面的值
+    // createStore => store.dispatch({type: '@@redux/INITd.b.3.g.l'})
+    console.log(store)
+    console.log(store.getState())
+
+    // dispatch: 当我们调用 dispatch 的时候其实就是执行 reducer 函数
+    store.dispatch({
+        type: 'ADD',
+        payload: {
+            id: 3,
+            username: 'jxl',
+            age: 20
+        }
+    })
+    console.log(store.getState())
+</script>
+</html>
