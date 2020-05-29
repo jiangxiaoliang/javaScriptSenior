@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div style="padding: 50px; background: red" @click.self="fn1" @contextmenu.prevent>
+            <button @click="fn2">111</button>
+            <button>222</button>
+            <button>333</button>
+        </div>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+           
+        },
+        methods: {
+           fn1() {
+               console.log('fn1')
+           },
+           fn2(e) {
+               console.log('fn2')
+            //    e.stopPropagation()
+           }
+        }
+    })
+</script>
+
+</html>

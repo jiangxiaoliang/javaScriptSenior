@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let data = {
+        username: 'jxl',
+        age: 20
+    }
+
+    let arr = ['a', 'b']
+
+    Array.prototype.push = function(val) {
+        let k = this.length
+        dp(this, k)
+        arr[k] = val
+    }
+
+    for (let k in data) {
+        // console.log(k)
+        dp(data, k)
+    }
+
+    for (let k in arr) {
+        // console.log(k)
+        dp(arr, k)
+    }
+
+
+    function dp(obj, key) {
+        Object.defineProperty(obj, key, {
+            get() {
+
+            },
+            set() {
+                console.log('数据被修改了')
+            }
+        })
+    }
+
+    // Object.defineProperty(data, 'username', {
+    //     get() {
+
+    //     },
+    //     set() {
+    //         console.log('数据被修改了')
+    //     }
+    // })
+
+    // data.username = 'jxl1'
+</script>
+</html>

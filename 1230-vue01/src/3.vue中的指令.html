@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>hello,{{title}}</h1>
+        <hr>
+        <p v-text="title">hello</p>
+        <hr>
+        <p v-cloak>{{title}}</p>
+        <hr>
+        <p v-html="content"></p>
+        <hr>
+        <p v-pre>{{title}}</p>
+        <hr>
+        <p v-show="isShow">{{title}}</p>
+        <hr>
+        <p v-if="isShow">{{title}}</p>
+        <hr>
+        <p v-if="isLogin">jxl</p>
+        <p v-else>请登录</p>
+        <hr>
+        <div v-for="(val, key, index) in user">
+            {{val}} - {{key}} - {{index}}
+        </div>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    let app = new Vue({
+        // el: '#app',
+        data: {
+            title: 'vue学习',
+            content: '<h1>vue 指令</h1>', // xss攻击
+            isShow: true,
+            isLogin: false,
+            user: {
+                username: 'jxl',
+                age: 18
+            }
+        }
+    })
+
+    setTimeout(() => {
+        app.$mount('#app')
+    })
+    
+</script>
+</html>

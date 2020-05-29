@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .checked {
+            background: red;
+            color: white
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="++n1">button</button>
+        {{n1}}
+
+        <hr>
+        <button @click="fn">button</button>
+        {{n2}}
+
+        <hr>
+        <ul>
+            <li v-for="user in users" :key="user.id"
+                :class="{'checked': user.checked}"
+                @click="doCheck(user, $event)">
+                {{user.username}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            n1: 1,
+            n2: 1,
+            users: [{
+                    id: 1,
+                    username: 'jxl',
+                    checked: false
+                },
+                {
+                    id: 2,
+                    username: 'zsy',
+                    checked: false
+                },
+                {
+                    id: 3,
+                    username: 'love',
+                    checked: false
+                }
+            ]
+        },
+        methods: {
+            fn() {
+                this.n2++
+            },
+            doCheck(user, e) {
+                console.log(user, e)
+                user.checked = !user.checked
+            }
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='app'>
+        vue
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    /**
+     * 组件
+     * 声明式语法
+     * 
+     * react 直接
+     * vue 方便-语法糖,隐藏了很多细节
+     */
+
+    // let app = new Vue({
+    //     template: `
+    //         <div>
+    //             Vue实践    
+    //         </div>
+    //     `
+    // })
+    // console.log(app)
+    // app.$mount('#app')
+
+    // let app = new Vue({
+    //     el: '#app',
+    //     template: `
+    //         <div>
+    //             Vue实践1
+    //         </div>
+    //     `
+    // })
+
+    // let app = new Vue({
+    //     el: '#app',
+    //     template: `
+    //         <div z="1">
+    //             Vue实践2
+    //         </div>
+    //     `
+    // })
+
+
+    /**
+     * el 不能把 body 和 html 作为装载点
+     * template 每个组件的根节点有且只能有一个
+     * 
+     * html模板 -> VDOM -> DOM元素
+     */
+    let app = new Vue({
+        el: '#app',
+        // template: `<div>111</div><div>222</div>`
+    })
+</script>
+</html>

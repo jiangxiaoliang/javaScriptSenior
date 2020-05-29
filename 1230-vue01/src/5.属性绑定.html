@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-bind:id="val"></div>
+        <div :id="val"></div>
+
+        <div :style="style1"></div>
+        <div style="width: 100px; height: 100px; background: green"></div>
+
+        <div :class="{'box1': isActive,'box2': isChecked}"></div>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+   let app = new Vue({
+       el: '#app',
+       data: {
+           val: 'vue',
+           style1: {
+               width: '100px',
+               height: '100px',
+               background: 'red'
+           },
+           isActive: true,
+           isChecked: true
+       }
+   })
+    
+</script>
+</html>
