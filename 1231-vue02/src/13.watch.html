@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="keyWord" />
+        <hr>
+        <ul>
+            <li v-for="user in showUsers" :key="user.id">
+                {{user.username}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            keyWord: '',
+            users: [
+                {id: 1, username: 'baogege', gender: '男',checked:false},
+                {id: 2, username: 'mt', gender: '男',checked:false},
+                {id: 3, username: 'haigege', gender: '男',checked:false},
+                {id: 4, username: 'zMouse', gender: '男',checked:false},
+                {id: 5, username: 'reci', gender: '女',checked:false},
+                {id: 6, username: 'lisi', gender: '女',checked:false}
+            ]
+        },
+       computed: {
+           showUsers() {
+            // 计算属性不支持 promise 任务，不支持异步任务处理
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    if (this.keyWord != '') {
+                        resolve(this.users.filter(user => user.username.includes(this.keyWord)))
+                    } else {
+                        resolve([])
+                    }
+                })
+            })
+           }
+       },
+    })
+</script>
+</html>

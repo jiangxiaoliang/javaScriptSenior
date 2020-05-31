@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-focus />
+        <button @click="setFocus">设置焦点</button>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+
+    // 指令定义是不需要加 v- , 调用时需要
+    Vue.directive('focus', {
+        bind(el, binding) {
+            console.log(el, binding)
+            // document.createElement()
+            // el.value = "vue"
+            // el.focus()
+        },
+        inserted(el, binding) {
+            console.log('inserted')
+            // appendChild(), insertBefore()
+            el.focus()
+        }
+    })
+
+    let app = new Vue({
+        el: '#app',
+        methods: {
+            setFocus() {
+               
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div id="app">
+        <button @click="changeGender('')">所有</button>
+        <button @click="changeGender('男')">男</button>
+        <button @click="changeGender('女')">女</button>
+
+        <hr>
+        <ul>
+            <li v-for="user in showUsers" :key="user.id">
+                {{user.username}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+     let users = [
+        {id: 1, username: 'baogege', gender: '男'},
+        {id: 2, username: 'mt', gender: '男'},
+        {id: 3, username: 'haigege', gender: '男'},
+        {id: 4, username: 'zMouse', gender: '男'},
+        {id: 5, username: 'reci', gender: '女'},
+        {id: 6, username: 'lisi', gender: '女'}
+    ];
+    let app = new Vue({
+        el: '#app',
+        data: {
+            users,
+            showUsers: users
+        },
+        methods: {
+            changeGender(gender) {
+                // 根据某个数据的变化，过滤得到一组新的数据，如果使用函数调用这样的方式去处理，无论过滤的条件是否发生改变（无论过滤的出来的数据是否改变），该函数都会被调用
+                console.log(gender)
+                if (gender === '') {
+                    this.showUsers = this.users
+                } else {
+                    this.showUsers = this.users.filter(user => user.gender === gender)
+                }
+            }
+        },
+    })
+</script>
+</html>

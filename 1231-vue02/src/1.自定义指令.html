@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input ref="input1" type="text" />
+        <button @click="setFocus">设置焦点</button>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    /**
+    * 组件
+        应用的组织结构
+    * 
+    * 指令
+        用一种特殊的标签属性来对当前的组件（标签）进行功能扩展，影响当前标签的一些行为
+    *
+    * ref
+    *   vue 提供的一种用户获取组件（标签）实例对象的简便方式   
+    */
+
+    // Vue.directive('')
+
+    let app = new Vue({
+        el: '#app',
+        methods: {
+            setFocus() {
+                // let input = document.querySelector('input')
+                // console.log(input)
+                // input.focus()
+
+                console.log(this.$refs)
+                this.$refs.input1.focus()
+            }
+        }
+    })
+</script>
+</html>

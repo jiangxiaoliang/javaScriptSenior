@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="changeDrag">是否开启拖拽-{{isDrag}}</button>
+        <div class="box" v-drag="isDrag"></div>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+
+    Vue.directive('drag', {
+        bind(el, {value: isDrag}) {
+            console.log(isDrag)
+            el._isDrag = isDrag
+            let startPos = {
+                x: 0,
+                y: 0,
+            }
+            function move(e) {
+                el.style.left = e.clientX - startPos.x + 'px'
+                el.style.top = e.clientY - startPos.y + 'px'
+                // console.log(el.style.left, el.style.top)
+            }
+            el.addEventListener('mousedown', function(e) {
+                // console.log('mousedown')
+                if (!el._isDrag) {
+                    return
+                }
+                startPos = {
+                    x: e.clientX - el.offsetLeft,
+                    y: e.clientY - el.offsetTop
+                }
+                document.addEventListener('mousemove', move)
+                document.addEventListener('mouseup', function(e) {
+                    document.removeEventListener('mousemove', move)
+                }, {
+                    once: true
+                })
+            })
+        },
+        update(el, {value: isDrag}) {
+            console.log(isDrag)
+            el._isDrag = isDrag
+        }
+    })
+    let app = new Vue({
+        el: '#app',
+        data: {
+            isDrag: false
+        },
+        methods: {
+            changeDrag() {
+                this.isDrag = !this.isDrag
+            }
+        },
+    })
+</script>
+</html>

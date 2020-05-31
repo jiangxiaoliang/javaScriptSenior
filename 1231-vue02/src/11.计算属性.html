@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div id="app">
+        <button @click="changeGender('')">所有</button>
+        <button @click="changeGender('男')">男</button>
+        <button @click="changeGender('女')">女</button>
+
+        <hr>
+        <ul>
+            <li v-for="user in showUsers" :key="user.id">
+                <input type="checkbox" v-model="user.checked" />
+                {{user.username}}
+            </li>
+        </ul>
+
+        <hr>
+        <input type="checkbox" v-model="checkedAll" /> 全选
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    /**
+    *   派生数据
+    *       有原始数据
+    *       有过滤条件
+    *       需要结果缓存
+    */
+     let users = [
+        {id: 1, username: 'baogege', gender: '男', checked: false},
+        {id: 2, username: 'mt', gender: '男', checked: false},
+        {id: 3, username: 'haigege', gender: '男', checked: false},
+        {id: 4, username: 'zMouse', gender: '男', checked: false},
+        {id: 5, username: 'reci', gender: '女', checked: false},
+        {id: 6, username: 'lisi', gender: '女', checked: false}
+    ];
+    let app = new Vue({
+        el: '#app',
+        data: {
+            // 过滤条件
+            gender: '',
+            // 原始数据
+            users,
+            // 派生数据
+            // checkedAll: users
+        },
+        computed: {
+            showUsers: {
+                get() {
+                    if (this.gender === '') {
+                        return this.users
+                    } else {
+                        return this.users.filter(user => user.gender === this.gender)
+                    }
+                }
+            },
+            checkedAll: {
+                get() {
+                    return this.users.every(user => user.checked)
+                },
+                set(newVal) {
+                    this.users = this.users.map(user => {
+                        return {
+                            ...user,
+                            checked: newVal
+                        }
+                    })
+                }
+            }
+        },
+        methods: {
+            changeGender(gender) {
+                this.gender = gender
+            }
+        },
+    })
+</script>
+</html>
