@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .dialog {
+            position: fixed;
+            left: 50%;
+            top: 30%;
+            border-radius: 2px;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,.3);
+            box-sizing: border-box;
+            width: 30%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+        .dialog_header {
+            padding: 20px 20px 0;
+            text-align: left;
+        }
+        .dialog_title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2d3d;
+        }
+        .dialog_content {
+            padding: 30px 20px;
+            color: #48576a;
+            font-size: 14px;
+            text-align: left;
+        }
+        .dialog_close_btn {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+        }
+        .dialog_close_btn:before {
+            content: 'x';
+            color: #999;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <jxl-dialog title="默认标题">
+            <table width='100%' border='1px'>
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>zmouse</td>
+                        <td>男</td>
+                    </tr>
+                </tbody>
+            </table>
+        </jxl-dialog>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    const Dialog = {
+        props: ['title', 'content'],
+        template: `
+            <div class="dialog">
+                <i class="dialog_close_btn"></i>
+                <div class="dialog_header">
+                    <span class="dialog_title">{{title}}</span>
+                </div>
+                <div class="dialog_content">
+                    <slot></slot>
+                </div>
+            </div>
+        `
+    }
+    let app = new Vue({
+        el: '#app',
+        data: {
+            
+        },
+        components: {
+            jxlDialog: Dialog
+        }
+    })
+</script>
+</html>

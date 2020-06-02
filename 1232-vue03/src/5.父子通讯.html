@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <jxl-list 
+            v-for="item of items"
+            :key="item.id"
+            :data="item"
+            :quantity="item.quantity"
+            @increment="edit">
+        </jxl-list>
+
+        <hr>
+        总数：{{count}}
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    let jxlList = Vue.component('jxl-list', {
+        // vue 是不建议直接修改props传入的数据（但是不代表不能改），因为传入的数据不仅仅是当前这个组件使用，可能其它组件也在用这个数据，为了保证数据操作的安全性
+        // 通知数据持有人去修改
+        props: ['data', 'quantity'],
+        template: `
+            <div>
+                <span>{{data.name}}</span>
+                <button>-</button>
+                <span>{{quantity}}</span>
+                <button @click="increment">+</button>
+            </div>
+        `,
+        methods: {
+            increment() {
+                // console.log(11)
+                this.$emit('increment', this.data.id, this.quantity + 1)
+            }
+        },
+    })
+    let app = new Vue({
+        el: '#app',
+        data: {
+            items: [
+                {id: 1, name: 'iphone', quantity: 1},
+                {id: 2, name: 'imac', quantity: 2},
+                {id: 3, name: 'ipad', quantity: 3}
+            ]
+        },
+        computed: {
+            count() {
+                return this.items.reduce((n, item) => {
+                    return n + item.quantity
+                }, 0)
+            }
+        },
+        methods: {
+            edit(id, quantity) {
+                console.log(id, quantity)
+                this.items = this.items.map(item => {
+                    if (item.id === Number(id)) {
+                        return {
+                            ...item,
+                            quantity
+                        }
+                    } else {
+                        return {
+                            ...item
+                        }
+                    }
+                })
+            }
+        },
+    })
+</script>
+</html>

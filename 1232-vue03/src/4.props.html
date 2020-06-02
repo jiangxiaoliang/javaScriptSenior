@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <jxl-circle :r="r1"></jxl-circle>
+        <jxl-circle :r="r2"></jxl-circle>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    let circleComponent = Vue.component('jxl-circle', {
+        props: ["r"],
+        template: `<div>r: {{r}} -> {{3.14 * r * r}}</div>`
+    })
+    let app = new Vue({
+        el: '#app',
+        data: {
+            r1: 10,
+            r2: 100
+        }
+    })
+</script>
+</html>

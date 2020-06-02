@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <script>
+
+        let Vue = {};
+
+        class VueComponent {
+            constructor(options) {
+                this._opts = options;
+
+                this._data = this._opts.data;
+            }
+        }
+
+        // let kkbComponent1 = new VueComponent({
+        //     name: 'kkb-component1',
+        //     data: {
+        //         a: 1
+        //     }
+        // });
+        //
+        // let kkbComponent2 = new VueComponent({
+        //     name: 'kkb-component2',
+        //     data: {
+        //         a: 1
+        //     }
+        // });
+
+        // kkbComponent1._data 与 kkbComponent2._data 是否是同一个对象？
+        // console.log(kkbComponent1, kkbComponent2);
+        // kkbComponent2._data.a = 100;
+        // console.log(kkbComponent1, kkbComponent2);
+
+
+        Vue.component = function(name, options) {
+            return function() {
+                return new VueComponent({
+                    name,
+                    ...options,
+                    data: options.data()
+                });
+            }
+        };
+
+
+        let kkbComponent1 = Vue.component('kkb-component1', {
+            // data: {
+            //     a: 1
+            // }
+            data() {
+                return {
+                    a: 1
+                }
+            }
+        });
+
+        // console.log( kkbComponent1 )
+
+        let kkb1 = kkbComponent1();
+        let kkb2 = kkbComponent1();
+
+        console.log(kkb1, kkb2);
+
+        kkb1._data.a = 100;
+
+        console.log(kkb1, kkb2);
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <jxl-list 
+            v-for="item of items"
+            :key="item.id"
+            :name="item.name"
+            v-model="item.quantity">
+        </jxl-list>
+
+        <hr>
+        总数：{{count}}
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    let jxlList = Vue.component('jxl-list', {
+        props: ['name', 'quantity'],
+        model: {
+            prop: 'quantity',
+            event: 'increment'
+        },
+        template: `
+            <div>
+                <span>{{name}}</span>
+                <button>-</button>
+                <span>{{quantity}}</span>
+                <button @click="increment">+</button>
+            </div>
+        `,
+        methods: {
+            increment() {
+                // console.log(11)
+                this.$emit('increment', this.quantity + 1)
+            }
+        },
+    })
+    let app = new Vue({
+        el: '#app',
+        data: {
+            items: [
+                {id: 1, name: 'iphone', quantity: 1},
+                {id: 2, name: 'imac', quantity: 2},
+                {id: 3, name: 'ipad', quantity: 3}
+            ]
+        },
+        computed: {
+            count() {
+                return this.items.reduce((n, item) => {
+                    return n + item.quantity
+                }, 0)
+            }
+        }
+    })
+</script>
+</html>

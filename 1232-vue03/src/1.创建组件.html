@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <vue-component></vue-component>
+        <!-- <vue-component1></vue-component1> -->
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    /**
+        创建可复用组件
+            - 全局组件
+            - 局部组件
+    */
+
+    let vueComponent = Vue.component('vue-component', {
+        template: `
+            <div>
+                vue学习
+                <vue-component1></vue-component1>
+                <vue-component2></vue-component2>
+            </div>
+        `,
+        components: {
+            'vue-component1': {
+                template: `<div>111</div>`
+            },
+            'vue-component2': {
+                template: `<div>222</div>`
+            }
+        }
+    })
+    let app = new Vue({
+        el: '#app'
+    })
+
+    console.log(app)
+    console.log(vueComponent)
+</script>
+</html>

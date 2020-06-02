@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-component :n="3" jxl="jxl1" style="color: red; background: yellow;"></my-component>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    const myComponent = {
+        inheritAttrs: false,
+        props: {
+            // n: Number
+            n: {
+                validator(val) {
+                    return val > 0 && val <= 9
+                }
+            }
+        },
+        template: `
+            <div jxl="jxl2" style="background: green; color: blue">{{n+10}}</div>
+        `
+    }
+    let app = new Vue({
+        el: '#app',
+        data: {
+            
+        },
+        components: {
+            myComponent: myComponent
+        }
+    })
+</script>
+</html>

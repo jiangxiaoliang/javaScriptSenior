@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>app组件：{{a}}</div>
+        <vue-component></vue-component>
+        <!-- <vue-component1></vue-component1> -->
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    /**
+        创建可复用组件
+            - 全局组件
+            - 局部组件
+    */
+
+    let vueComponent = Vue.component('vue-component', {
+        template: `
+            <div>
+                vue学习-{{b}}
+            </div>
+        `,
+        // 可复用组件 data 必须是一个函数，且返回必须是一个对象，该对象就是组件最终的data
+        data() {
+            return {
+                b: 2
+            }
+        }
+    })
+    let app = new Vue({
+        el: '#app',
+        data: {
+            a: 1
+        }
+    })
+</script>
+</html>

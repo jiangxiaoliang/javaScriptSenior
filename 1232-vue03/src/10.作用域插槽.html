@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .dialog {
+            position: fixed;
+            left: 50%;
+            top: 30%;
+            border-radius: 2px;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,.3);
+            box-sizing: border-box;
+            width: 30%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+        .dialog_header {
+            padding: 20px 20px 0;
+            text-align: left;
+        }
+        .dialog_title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2d3d;
+        }
+        .dialog_content {
+            padding: 30px 20px;
+            color: #48576a;
+            font-size: 14px;
+            text-align: left;
+        }
+        .dialog_close_btn {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+        }
+        .dialog_close_btn:before {
+            content: 'x';
+            color: #999;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <jxl-dialog :data="datas">
+            <template v-slot="props">
+                <table width='100%' border='1px'>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>姓名</th>
+                            <th>性别</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="user of props.users">
+                            <td>{{user.id}}</td>
+                            <td>{{user.username}}</td>
+                            <td>{{user.gender}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </template>
+        </jxl-dialog>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+    const Dialog = {
+        props: ['data'],
+        template: `
+            <div class="dialog">
+                <i class="dialog_close_btn"></i>
+                <div class="dialog_header dialog_title">
+                    {{data.title}}
+                </div>
+                <div class="dialog_content">
+                    <slot :users="data.users" :v="1"></slot>
+                </div>
+            </div>
+        `
+    }
+    let app = new Vue({
+        el: '#app',
+        data: {
+            datas: {
+                title: '用户列表',
+                users: [
+                    {id: 1, username: 'jxl', gender: '男'},
+                    {id: 2, username: 'zsy', gender: '女'},
+                    {id: 3, username: 'love', gender: '男'}
+                ]
+            }
+        },
+        components: {
+            jxlDialog: Dialog
+        }
+    })
+</script>
+</html>
