@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <button @click="show=!show">show</button>
+        <jxl-component :t="title" v-if="show"></jxl-component> -->
+
+        <!-- <button @click='title="react"'>更新title</button>
+        <jxl-component :t="title"></jxl-component>
+        <jxl-component :t="subTitle"></jxl-component> -->
+
+        <h1>{{title}}</h1>
+        <template v-if="hasError">
+            <h4>有错误发生</h4>
+        </template>
+        <template v-else>
+            <jxl-component :t="title"></jxl-component>
+        </template>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+
+    const jxlComponent = {
+        props: ['t'],
+        template: `
+            <div>
+                <h1>jxlComponent - {{t}}</h1>
+            </div>
+        `,
+        beforeCreate() {
+            console.log('jxlComponent-beforeCreate')
+        },
+        created() {
+            console.log('jxlComponent-created')
+        },
+        beforeMount() {
+            console.log('jxlComponent-beforeMount')
+        },
+        mounted() {
+            console.log('jxlComponent-mounted')
+        },
+        beforeUpdate() {
+            console.log('jxlComponent-beforeUpdate')
+        },
+        updated() {
+            console.log('jxlComponent-updated')
+        },
+        beforeDestroy() {
+            console.log('jxlComponent-beforeDestroy')
+        },
+        destroyed() {
+            console.log('jxlComponent-destroyed')
+        }
+    }
+
+    let app = new Vue({
+        el: '#app',
+        data:  {
+            title: 'vue生命周期',
+            subTitle: 'vue 学习',
+            show: true,
+            hasError: false
+        },
+        components: {
+            jxlComponent
+        },
+        beforeCreate() {
+            console.log('beforeCreate')
+            // console.log('data', this.$data) // undefined
+            // console.log('el', this.$el) // undefined
+        },
+        created() {
+            console.log('created')
+            // console.log('data', this.$data) // 数据劫持
+            // console.log('el', this.$el) // undefined
+        },
+        beforeMount() {
+            console.log('beforeMount')
+            console.log('el', this.$el) // 模板数据
+        },
+        mounted() {
+            console.log('mounted')
+            console.log('el', this.$el) // html结构数据
+        },
+        beforeUpdate() {
+            console.log('beforeUpdate')
+        },
+        updated() {
+            console.log('updated')
+        },
+        beforeDestroy() {
+            console.log('beforeDestroy')
+        },
+        destroyed() {
+            console.log('destroyed')
+        },
+        errorCaptured(err, vm, info) {
+            console.log('errorCaptured')
+            console.log(err, vm, info)
+            this.hasError = true
+            return false
+        },
+    })
+</script>
+</html>

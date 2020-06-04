@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: red;
+            /*transition: all .5s;*/
+        }
+        /*.box:hover {*/
+        /*    width: 200px;*/
+        /*}*/
+
+
+        .slide-fade-enter-active, .slide-fade-leave-active {
+            transition: all 5s ease;
+        }
+        .slide-fade-enter {
+            width: 0;
+            height: 0;
+        }
+        .slide-fade-enter-to {
+            width: 100px;
+            height: 100px;
+        }
+        .slide-fade-leave {
+            /*可以和slide-fade-enter-to合并*/
+            width: 100px;
+            height: 100px;
+        }
+        .slide-fade-leave-to {
+            /*可以和slide-fade-enter合并*/
+            width: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+
+        <button @click="fn">按钮</button>
+        <button @click="isShow=!isShow">{{isShow}}</button>
+
+<!--        <div class="box" :style="{width: w}"></div>-->
+
+<!--        <div class="box" ref="box1"></div>-->
+        <transition name="slide-fade">
+            <div class="box" v-if="isShow"></div>
+        </transition>
+
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+
+
+
+
+        // let app = new Vue({
+        //     el: '#app',
+        //     data: {
+        //         w: '100px'
+        //     },
+        //     methods: {
+        //         fn() {
+        //             this.w = '200px';
+        //         }
+        //     }
+        // });
+
+
+        let app = new Vue({
+            el: '#app',
+            data: {
+                isShow: true,
+                w: '100px'
+            },
+            methods: {
+                // fn() {
+                //     this.w = '200px';
+                // }
+
+                fn() {
+                    // this.$refs.box1.style.width = '200px';
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>

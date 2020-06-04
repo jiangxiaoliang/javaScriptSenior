@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="app">
+        <button @click="fn">按钮</button>
+    </div>        
+    <script src="./js/vue.js"></script>
+    <script src="./js/kkb.js"></script>
+    <script>
+
+        // Vue.prototype.getName = function() {
+        //     console.log('name')
+        // }
+
+        Vue.use(kkb)
+        let app = new Vue({
+            el: '#app',
+            created() {
+                console.log('created')
+            },
+            methods: {
+                fn() {
+                    console.log('fn')
+                    console.log(this)
+                    this.getName()
+                }
+            }
+        })
+
+    </script>
+
+</body>
+</html>

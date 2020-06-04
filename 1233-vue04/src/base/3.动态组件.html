@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .current {
+            background: yellow
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="goto('inBox')" :class="type=='inBox' ? 'current' : ''">收件箱</button>
+        <button @click="goto('postMail')" :class="type=='postMail' ? 'current' : ''">发件箱</button>
+        <button @click="goto('recycleBin')" :class="type=='recycleBin' ? 'current' : ''">垃圾箱</button>
+
+        <hr>
+        <in-box v-if="type=='inBox'"></in-box>
+        <post-mail v-if="type=='postMail'"></post-mail>
+        <recycle-bin v-if="type=='recycleBin'"></recycle-bin>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+
+    const inBox = {
+        data() {
+            return {
+                items: [
+                    'aaaa',
+                    'bbbb',
+                    'cccc',
+                    'dddd'
+                ]
+            }
+        },
+        template: `
+            <div>
+                <ul>
+                    <li v-for="item in items">
+                        <input type="checkbox" />
+                        {{item}}
+                    </li>
+                </ul>
+            </div>
+        `,
+        created() {
+            console.log('inBox: created')
+        },
+        destroyed() {
+            console.log('inBox: destroyed')
+        }
+    }
+
+    const postMail = {
+        template: `
+            <div>
+                postMail
+            </div>
+        `,
+        created() {
+            console.log('postMail: created')
+        },
+        destroyed() {
+            console.log('postMail: destroyed')
+        }
+    }
+
+    const recycleBin = {
+        template: `
+            <div>
+                RecycleBin
+            </div>
+        `,
+        created() {
+            console.log('RecycleBin: created')
+        },
+        destroyed() {
+            console.log('RecycleBin: destroyed')
+        }
+    }
+
+    let app = new Vue({
+        el: '#app',
+        data:  {
+            type: 'inBox'
+        },
+        methods: {
+            goto(type) {
+                this.type = type
+            }
+        },
+        components: {
+            inBox,
+            postMail,
+            recycleBin
+        }
+    })
+</script>
+</html>

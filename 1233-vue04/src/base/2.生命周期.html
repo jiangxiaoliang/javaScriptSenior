@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="show=!show">show-{{show}}</button>
+        <jxl-component :t="title" v-if="show"></jxl-component>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+<script>
+
+    const jxlComponent = {
+        props: ['t'],
+        template: `
+            <div>
+                <h1>jxlComponent - {{t}}</h1>
+            </div>
+        `,
+        created() {
+            this.timer = setInterval(() => {
+                console.log(1)
+            }, 800)
+        },
+        beforeDestroy() {
+            console.log('jxlComponent-beforeDestroy')
+        },
+        destroyed() {
+            clearInterval(this.timer)
+            console.log('jxlComponent-destroyed')
+        }
+    }
+
+    let app = new Vue({
+        el: '#app',
+        data:  {
+            title: 'vue生命周期',
+            subTitle: 'vue 学习',
+            show: true,
+            hasError: false
+        },
+        components: {
+            jxlComponent
+        }
+    })
+</script>
+</html>
