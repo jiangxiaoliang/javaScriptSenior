@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script src="./js/KPromise.js"></script>
+<script>
+    // console.log('start')
+    // new KPromise(function(resolve, reject) {
+    //     console.log('promise')
+    //     setTimeout(function() {
+    //         console.log('setTimeout')
+    //         resolve(1000)
+    //     })
+    // }).then((val) => {
+    //     console.log(123)
+    // })
+    // console.log('end')
+
+    // let p1 = new KPromise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve()
+    //     }, 1000)
+    // })
+    // p1.then(() => {
+    //     console.log(1)
+    // })
+    // p1.then(() => {
+    //     console.log(2)
+    // })
+    // p1.then(() => {
+    //     console.log(3)
+    // })
+
+    setTimeout(() => {
+        console.log('setTimeout1')
+    }, 0)
+    let p1 = new KPromise((resolve, reject) => {
+        console.log('promise')
+        // resolve()
+        setTimeout(() => {
+            resolve()
+        })
+    }).then(() => {
+        console.log('then')
+    })
+
+    // let p1 = new KPromise((resolve, reject) => {
+    //     console.log('promise')
+    //     setTimeout(() => {
+    //         resolve('jxl')
+    //     }, 1000)
+    // }).then((val) => {
+    //     console.log(val)
+    //     // return 'zsy'
+    //     // return new KPromise((resolve, reject) => {
+    //     //     setTimeout(() => {
+    //     //         resolve('zsy')
+    //     //     }, 2000)
+    //     // })
+    //     return {
+    //         then() {
+    //             console.log('thenable')
+    //             return 'zsy'
+    //         }
+    //     }
+    // }).then((val) => {
+    //     console.log(123, val)
+    // })
+
+    // KPromise.resolve(123).then(val => {
+    //     console.log(val)
+    // })
+
+    // let p1 = new KPromise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         console.log('p1')
+    //         resolve('p1')
+    //     }, 1000)
+    // })
+    // let p2 = new KPromise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         console.log('p2')
+    //         resolve('p2')
+    //     }, 2000)
+    // })
+    // let p3 = new KPromise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         console.log('p3')
+    //         resolve('p3')
+    //     }, 3000)
+    // })
+    // KPromise.all([
+    //     p1, p2, p3
+    // ]).then(vals => {
+    //     console.log(vals)
+    // })
+</script>
+</html>

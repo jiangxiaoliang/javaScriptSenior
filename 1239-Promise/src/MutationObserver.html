@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+<script>
+    let div1 = document.querySelector('#div1')
+
+    let observer = new MutationObserver(function(mutations) {
+        for(let mutation of mutations) {
+            let type = mutation.type;
+            switch (type) {
+                case "childList":
+                    console.log("A child node has been added or removed.");
+                    break;
+                case "attributes":
+                    console.log(`The ${mutation.attributeName} attribute was modified.`);
+                    break;
+                case "subtree":
+                    console.log(`The subtree was modified.`);
+                    break;
+                default:
+                    break;
+            }
+        }
+    })
+    observer.observe(div1, {
+        attributes: true,
+        childList: true,
+        subtree: true
+    })
+
+    setTimeout(() => {
+        console.log('setTimeout')
+    })
+    div1.setAttribute('a', 1)
+    console.log('over')
+</script>
+</html>
