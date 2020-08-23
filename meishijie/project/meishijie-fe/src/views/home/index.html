@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="div"></div>
+</body>
+<script>
+    let inner = [...'.'.repeat(100)].map((item, index) => `<p>${index}</p>`).join('')
+    let div = document.querySelector('div')
+    div.innerHTML = inner
+    window.onscroll = () => {
+        console.log(div.getBoundingClientRect().bottom)
+        console.log(document.documentElement.clientHeight)
+    }
+</script>
+</html>
