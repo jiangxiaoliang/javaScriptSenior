@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React App</title>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+</head>
+<body>
+    <div id="root">
+        <div class="App">
+            <div id="todoapp">
+                <header>
+                    <h1>Todos</h1>
+                    <input id="new-todo" type="text" placeholder="What needs to be done?" value="" />
+                </header>
+                <section id="main" style="display: block;">
+                    <input id="toggle-all" type="checkbox" checked="" />
+                    <label for="toggle-all">Mark all as complete</label>
+                    <ul id="todo-list">
+                        <li class="">
+                            <div class="view" style="display: block;">
+                                <input class="toggle" type="checkbox" />
+                                <label>1</label>
+                                <a class="destroy"></a>
+                            </div>
+                            <input class="edit" type="text" value="1" style="display: none;" />
+                        </li>
+                        <li class="">
+                            <div class="view" style="display: none;">
+                                <input class="toggle" type="checkbox" />
+                                <label>12</label>
+                                <a class="destroy"></a>
+                            </div>
+                            <input class="edit" type="text" value="12" style="display: block;" />
+                        </li>
+                    </ul>
+                </section>
+                <footer style="display: block;">
+                    <a id="clear-completed" style="display: none;">Clear 0 completed</a>
+                    <div id="todo-count">10 items left</div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

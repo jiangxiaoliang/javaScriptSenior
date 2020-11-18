@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/class.css" />
+    <title>开课吧-移动端企业站布局实战</title>
+</head>
+<body>
+    <header id="header">
+        <nav class="menu">
+            <a href="javascript:;">导航</a>
+        </nav>
+        <h1 class="logo">miaov.com</h1>
+        <a class="user" href="javascript:;"></a>
+    </header>
+    <div id="main">
+        <div class="class_box">
+            <h2><span>一周学习安排</span></h2>
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th>星期</th>
+                        <th>时间</th>
+                        <th>学习内容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="week1" rowspan="2">周一</td>
+                        <td class="center">上午</td>
+                        <td class="content_td">前端代码初识</td>
+                    </tr>
+                    <tr>
+                        <td class="center">下午</td>
+                        <td class="content_td">基本属性：背景，边框</td>
+                    </tr>
+                    <tr>
+                        <td class="week2" rowspan="2">周二</td>
+                        <td class="center">上午</td>
+                        <td class="content_td">H5标签与css选择器</td>
+                    </tr>
+                    <tr>
+                        <td class="center">下午</td>
+                        <td class="content_td">练习题</td>
+                    </tr>
+                    <tr>
+                        <td class="week3" rowspan="2">周三</td>
+                        <td class="center">上午</td>
+                        <td class="content_td">浮动的深度剖析</td>
+                    </tr>
+                    <tr>
+                        <td class="center">下午</td>
+                        <td class="content_td">定位进阶</td>
+                    </tr>
+                    <tr>
+                        <td class="week4" rowspan="2">周四</td>
+                        <td class="center">上午</td>
+                        <td class="content_td">表单详解</td>
+                    </tr>
+                    <tr>
+                        <td class="center">下午</td>
+                        <td class="content_td">表单的相关属性</td>
+                    </tr>
+                    <tr class="single">
+                        <td class="center week5">周五</td>
+                        <td class="center">全天</td>
+                        <td class="content_td">浏览器兼容性</td>
+                    </tr>
+                    <tr class="single">
+                        <td class="center week6">周末</td>
+                        <td class="center" colspan="2">合理安排自己的时间，记得做联系哦！</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="more_message">
+                更详情的课程安排请点击：<a href="#">www.miaov.com</a>
+            </p>
+        </div>
+    </div>
+    <footer id="footer">
+        <div class="link clearfix">
+            <a href="#">hr_recruit@miaov.com</a>
+            <a href="#">010-57269690</a>
+        </div>
+        <nav class="foot_nav clearfix">
+            <a href="#">网站首页</a>
+            <a href="#">课程安排</a>
+            <a href="#">学员作品</a>
+            <a href="#">视频教程</a>
+            <a href="#">关于我们</a>
+            <a href="#">在线留言</a>
+            <a href="#">常见问题</a>
+        </nav>
+        <p class="copyright">京ICP备08102442号-1 2007-2016 MIAOOV.COM 版权所有</p>
+    </footer>
+    <script>
+        (function(){
+            var html = document.documentElement;
+            var width = html.clientWidth;
+            var size = width / 10;
+            html.style.fontSize = size + 'px';
+        })();
+    </script>
+</body>
+</html>

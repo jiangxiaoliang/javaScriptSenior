@@ -1,0 +1,176 @@
+@import '../less/common.less';
+
+.miiaov_banner{
+    width: 100%;
+    height: 460 / @rem;
+    background: #ec4063;
+}
+.miiaov_box{
+    padding: 14 / @rem 20 / @rem (18 + 86) / @rem;
+    background: #dfe2e4;
+}
+.miiaov_article{
+    background: #fff;
+    padding: 0 10 / @rem 60 / @rem;
+    box-shadow: 0px 0px 10 / @rem rgba(0,0,0,.16);
+    h3{
+        font-family:fzlt;
+        span{
+            display: block;
+            &:nth-of-type(1){
+                font-size: 40 / @rem;
+                line-height: 46 / @rem;
+            }
+            &:nth-of-type(2){
+                font-size: 36 / @rem;
+                text-indent: 105 / @rem;
+                line-height: 43 / @rem;
+            }
+        }
+        padding-top: 32 / @rem;
+        padding-bottom: 35 / @rem;
+    }
+}
+.miiaov_txt{
+    font: (24 / @rem) ~'/' (40 / @rem) "宋体";
+    word-break: break-all;
+    color: #312f2f;
+    .miiaov_img{
+        height: 560 / @rem;
+        background: #f8ad45;
+        margin: 35 / @rem 0;
+    }
+    a{
+        color: #533bfd;
+    }
+}
+.miiaov_comment{
+    padding: 0 10 / @rem;
+    background: #fff;
+    margin-top: 14 / @rem;
+    box-shadow: 0px 0px 10 / @rem rgba(0,0,0,.16);
+
+}
+.miiaov_zan{
+    color:  #e15672;
+    font: (20 / @rem) ~'/' (52 / @rem) "微软雅黑";
+    span{
+        &:nth-of-type(2){
+            float: right;
+            width: 27 / @rem;
+            height: 24 / @rem;
+            text-indent: -999em;
+            overflow: hidden;
+            background: url('../images/zan_black.png') no-repeat 0 0 ~'/' 100% 100%;
+            margin-top: 21 / @rem;
+            margin-right: 20 / @rem;
+        }
+    }
+}
+.output{
+    padding-top: 5 / @rem;
+    
+    input[type="text"]{
+        height: 41 / @rem;
+        background: #f4f4f4;
+        width: 100%;
+        box-shadow:inset 0px 0px 5 / @rem rgba(0,0,0,.3);
+        border-radius: 4 / @rem;
+        text-indent: 10 / @rem;
+        font: (18 / @rem) "宋体";
+        color: #b0adad;
+        &::-webkit-input-placeholder{
+            color: #b0adad;
+        }
+        &::-moz-placeholder{
+            color: #b0adad;
+        }
+        &:-ms-input-placeholder{
+            color: #b0adad;
+        }
+    }
+}
+
+.comment_list{
+    padding: 0 20 / @rem;
+    li{
+        padding-top: 20 / @rem;
+        padding-bottom: 24 / @rem;
+        border-bottom: 1px solid #ebe6e6;
+    }
+}
+.user_comment{
+    img{
+        width: 33 / @rem;
+        height: 33 / @rem;
+        box-shadow: 2 / @rem 2 / @rem 5 / @rem rgba(0,0,0,0.35);
+        border-radius: 50%;
+        float: left;
+    }
+    span{
+        font: (18 / @rem) ~'/' (33 / @rem) "宋体";
+        float: left;
+        padding-left: 16 / @rem;
+    }
+}
+.comment_txt{
+    font: (16 / @rem) ~'/' (40/ @rem) "宋体";
+    color: #676464;
+    padding-top: 2 / @rem;
+    padding-left: 47 / @rem;
+}
+.comment_footer{
+    font: (12 / @rem) ~'/' (27 / @rem) "宋体";
+    color: #9b9a9a;
+    time{
+        padding-left: 47 / @rem;
+    }
+    button{
+        width: 18 / @rem;
+        height: 15 / @rem;
+        border: none;
+        text-indent: -999em;
+        overflow: hidden;
+        background: url('../images/icon_edit.png') no-repeat 0 0 ~'/' 100% 100%;
+        float: right;
+        margin-top: 10 / @rem;
+    }
+}
+
+.recomment{
+    margin-top: 12 / @rem;
+    padding-left: 47 / @rem;
+    background: #f4f4f4;
+    background-clip: content-box;
+    border-radius: 5 / @rem;
+    li{
+        padding: 8 / @rem 15 / @rem 20 / @rem;
+        border: none;
+    }
+    .comment_footer{
+        time{
+            padding-left: 50 / @rem;
+        }
+    }
+}
+.recomment_txt{
+    padding-left: 50 / @rem;
+    font: (16 / @rem) ~'/' (50 / @rem) "宋体";
+    color: #a09a9a;
+    span{
+        &:nth-of-type(1){
+            color: #000;
+        }
+    }
+}
+.miiapv_footer{
+    height: 86 / @rem;
+    background: #e64d6b;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font:bold (30 / @rem) ~'/' (86 / @rem) "微软雅黑";
+    color: #fff;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        li {
+            font: 14px/30px '宋体';
+            border-bottom: 1px solid #000;
+        }
+        #page {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+        #mask {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 50vw;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        #box {
+            position: absolute;
+            top: 25%;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: red;
+            overflow: auto;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- <ul id="list"></ul>
+    <div id="mask">
+        <div id="box">
+            <ul id="list2"></ul>
+        </div>
+    </div> -->
+
+    <!-- 第二种方式 -->
+    <div id="page">
+        <ul id="list"></ul>
+    </div>
+    <div id="mask">
+        <div id="box">
+            <ul id="list2"></ul>
+        </div>
+    </div>
+</body>
+<script>
+    {
+        let list = document.querySelector('#list')
+        let list2 = document.querySelector('#list2')
+        let mask = document.querySelector('#mask')
+        let render = () => {
+            let inner =''
+            for(let i = 0; i < 50; i++) {
+                inner += `<li>这是第${i}个li</li>`
+            }
+            return inner
+        }
+        list.innerHTML = render()
+        list2.innerHTML = render()
+        // 第一种解决方式是阻止mask默认事件，自定义mask滚动条
+        // mask.addEventListener('touchstart', (e) => {
+        //     e.preventDefault()
+        // })
+
+        // 第二种方式结果上分割开
+    }
+</script>
+</html>

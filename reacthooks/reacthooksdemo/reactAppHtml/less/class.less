@@ -1,0 +1,103 @@
+@import '../less/common.less';
+
+.week(@url,@w:71,@h:28,@color:transparent){
+    background: @color url('../images/@{url}') no-repeat center ~'/' (@w / @rem) (@h / @rem); 
+}
+.class_box{
+    background: #3189ce url('../images/class_bg.jpg') no-repeat 0 0 ~'/' 100% 100%;
+    overflow: hidden;
+    padding: 0 20 / @rem;
+    height: 100%;
+    h2{
+        width: 284 / @rem;
+        height: 76 / @rem;
+        background: url('../images/class_week.png') no-repeat 0 0 ~'/' 100% 100%;
+        margin: 50 / @rem auto 62 / @rem;
+        span{
+            display: none;
+        }
+    }
+}
+.timetable{
+    width: 100%;
+    color: #3a3a3a;
+    font: (26 / @rem)  "宋体";
+    thead{
+        background: rgba(206,115,175,.5);
+        color: #fff;
+        font:(24 / @rem) fzlt;
+        th{
+            height: 52 / @rem;
+            &:nth-of-type(1){
+                width:139 / @rem;
+            }
+            &:nth-of-type(2){
+                width:196 / @rem;
+            }
+            &:nth-of-type(3){
+                width:379 / @rem;
+            }
+        }
+    }
+    tbody{
+        background: #fff;
+    }
+    td{
+        border: 2px solid #ce73af;
+        &[rowspan="2"]{
+            height: 116 / @rem;
+            text-align: center;
+            text-indent: -999px;
+            overflow: hidden;
+        }
+    }
+    .single{
+        td:nth-of-type(1){
+            height: 66 / @rem;
+            text-indent: -999px;
+            overflow: hidden;
+        }
+        
+    }
+}
+.center{
+    text-align: center;
+}
+.content_td{
+    text-indent: 57 / @rem;
+}
+.week1{
+    .week(@url:'week1.png',@color:#faf1f7);
+}
+.week2{
+    .week(@url:'week2.png',@color:#fcf8f2);
+}
+.week3{
+    .week(@url:'week3.png',@color:#f3f8ef);
+}
+.week4{
+    .week('week4.png',74,28,#f3f8ef);
+}
+.week5{
+    .week('week5.png',74,29,#f0f1fb);
+}
+.week6{
+    .week('week6.png',74,30,#fcf0f0);
+}
+.more_message{
+    text-align: center;
+    padding-top: 7 / @rem;
+    font: (26 / @rem) ~'/' (107 / @rem) fzlt;
+    color: #fff;
+    a{
+        display: inline-block;
+        width: 290 / @rem;
+        background: #fff;
+        color: #2f88cd;
+        font-size: 30 / @rem;
+        line-height: 50 / @rem;
+        border-radius: 30 / @rem;
+        vertical-align: top;
+        margin-top: 27 / @rem;
+    }
+}

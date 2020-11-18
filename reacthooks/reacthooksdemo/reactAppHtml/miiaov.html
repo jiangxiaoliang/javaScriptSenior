@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/miiaov.css" />
+    <title>开课吧-移动端企业站布局实战</title>
+</head>
+<body>
+    <header id="header">
+        <nav class="menu">
+            <a href="javascript:;">导航</a>
+        </nav>
+        <h1 class="logo">miaov.com</h1>
+        <a class="user" href="javascript:;"></a>
+    </header>
+    <div id="main">
+       <div class="miiaov_banner"></div>
+       <div class="miiaov_box">
+           <article class="miiaov_article">
+               <h3>
+                   <span>妙味JS班学员</span>
+                   <span>李敏【淡雅版CSS3+JS相册】作品</span>
+               </h3>
+               <div class="miiaov_txt">
+                   <p>现在的女生学习前端越来越多，技术也是巾帼不让须眉，技术宅男们，你们要继续提高水平啦，不然你和女生们的技术一样，然后都跑去面试的话哈哈，在招聘选择上你懂的！</p>
+                   <div class="miiaov_img"></div>
+                   <p>现在用CSS3完成各种小动画，来取代原有的GIF图，的确是方便许多~</p>
+                   <p>
+                    点击进入以后，就是一个向前翻动的动画方式，虽然弹性动画并不那么柔和不过学就用的感觉，应该是所有初学者的想法吧！
+                   </p>
+                   <div class="miiaov_img"></div>
+                   <p>虽然这个作品没有完成，但是从目前的状态来看，仍然不失为一件可被用于商用的作品，期待她完成以后的样子。</p>
+                   <p>在线地址：<a href="https://miaov.com/index.php/news/newsDetail/nid/215">https://miaov.com/index.php/news/newsDetail/nid/215</a> </p>
+               </div>
+           </article>
+           <article class="miiaov_comment">
+               <p class="miiaov_zan">
+                   <span>有10人学的很赞</span>
+                   <span>赞</span>
+               </p>
+               <div class="output">
+                   <input type="text" placeholder="发表评论......">
+               </div>
+               <ul class="comment_list">
+                   <li>
+                       <div class="user_comment clearfix">
+                           <img src="images/comment_photo.png" alt="">
+                           <span>xuezhige</span>
+                       </div>
+                       <div class="comment_txt">
+                        作品很棒，希望自己也能做出这么好的作品
+                       </div>
+                       <div class="comment_footer">
+                           <time>17分钟前</time>
+                           <button>编辑</button>
+                       </div>
+                   </li>
+                <li>
+                    <div class="user_comment clearfix">
+                        <img src="images/comment_photo.png" alt="">
+                        <span>雯雯</span>
+                    </div>
+                    <div class="comment_txt">
+                        作品很棒，希望自己也能做出这么好的作品
+                    </div>
+                    <div class="comment_footer">
+                        <time>17分钟前</time>
+                        <button>编辑</button>
+                    </div>
+                    <ul class="comment_list recomment">
+                        <li>
+                            <div class="user_comment clearfix">
+                                <img src="images/comment_photo.png" alt="">
+                                <span>wowo</span>
+                            </div>
+                            <div class="recomment_txt">
+                                回复 <span>雯雯</span>:
+                                <span>一起加油</span>
+                            </div>
+                            <div class="comment_footer">
+                                <time>17分钟前</time>
+                                <button>编辑</button>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+               </ul>
+           </article>
+       </div>
+    </div>
+    <footer class="miiapv_footer">
+        回复本帖
+    </footer>
+    <script>
+        (function(){
+            var html = document.documentElement;
+            var width = html.clientWidth;
+            var size = width / 10;
+            html.style.fontSize = size + 'px';
+        })();
+    </script>
+</body>
+</html>
